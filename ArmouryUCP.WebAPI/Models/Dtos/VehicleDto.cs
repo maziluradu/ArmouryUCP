@@ -17,7 +17,7 @@ namespace ArmouryUCP.WebAPI.Models.Dtos
         {
             get
             {
-                return "Test";
+                return SharedResources.VehicleNames[Model-400];
             }
         }
     }
