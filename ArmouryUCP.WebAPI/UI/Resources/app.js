@@ -66,6 +66,21 @@ app.controller('playerController', ['$scope', '$location', function ($scope, $lo
         });
     }
 
+    var businessRequest = new XMLHttpRequest();
+    businessRequest.onreadystatechange = function () {
+        $scope.$apply(function () {
+            if (businessRequest.readyState == 4 && businessRequest.status == 200) {
+                $scope.businessInfos = JSON.parse(businessRequest.responseText);
+
+                $scope.businessesValue = 0;
+                $scope.businessesCount = $scope.businessInfos.length;
+                $scope.businessInfos.forEach(function (element) {
+                    $scope.businessesValue += element['Value'];
+                });
+            }
+        });
+    }
+
     var playerRequest = new XMLHttpRequest();
     playerRequest.onreadystatechange = function () {
         $scope.$apply(function () {
@@ -78,6 +93,9 @@ app.controller('playerController', ['$scope', '$location', function ($scope, $lo
 
                 vehicleRequest.open("GET", $location.protocol() + '://' + $location.host() + ':' + ($location.port() !== 80 ? $location.port() : '') + "/api/vehicle/" + $scope.playerInfos['Name']);
                 vehicleRequest.send();
+
+                businessRequest.open("GET", $location.protocol() + '://' + $location.host() + ':' + ($location.port() !== 80 ? $location.port() : '') + "/api/business/" + $scope.playerInfos['Name']);
+                businessRequest.send();
             }
         });
     }

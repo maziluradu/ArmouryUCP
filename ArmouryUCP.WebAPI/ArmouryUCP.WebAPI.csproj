@@ -470,6 +470,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="UI\Images\mini-nav\" />
+    <Folder Include="UI\Images\vehicles\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

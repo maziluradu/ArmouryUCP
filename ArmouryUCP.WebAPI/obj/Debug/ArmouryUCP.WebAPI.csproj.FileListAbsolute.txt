@@ -83,8 +83,6 @@ E:\Visual Studio\Projects\ArmouryUCP\ArmouryUCP.WebAPI\obj\Debug\ArmouryUCP.WebA
 E:\Visual Studio\Projects\ArmouryUCP\ArmouryUCP.WebAPI\obj\Debug\ArmouryUCP.WebAPI.pdb
 E:\Visual Studio\Projects\ArmouryUCP\ArmouryUCP.WebAPI\obj\Debug\ArmouryUCP.WebAPI.csprojAssemblyReference.cache
 <<<<<<< HEAD
-E:\Visual Studio\Projects\ArmouryUCP\ArmouryUCP.WebAPI\bin\DSharpPlus.dll
-E:\Visual Studio\Projects\ArmouryUCP\ArmouryUCP.WebAPI\bin\DSharpPlus.xml
 E:\ArmouryUCP\ArmouryUCP.WebAPI\bin\ArmouryUCP.WebAPI.dll.config
 E:\ArmouryUCP\ArmouryUCP.WebAPI\bin\ArmouryUCP.WebAPI.dll
 E:\ArmouryUCP\ArmouryUCP.WebAPI\bin\ArmouryUCP.WebAPI.pdb
