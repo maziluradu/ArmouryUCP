@@ -35,7 +35,8 @@ namespace ArmouryUCP.WebAPI.Services
                             Level = Convert.ToInt32(reader["bLevel"]),
                             Name = reader["bMessage"].ToString(),
                             Owner = reader["bOwner"].ToString(),
-                            Value = Convert.ToInt32(reader["bValue"])
+                            Value = Convert.ToInt32(reader["bValue"]),
+                            Type = Convert.ToInt32(reader["bType"])
                         });
                     }
                 }

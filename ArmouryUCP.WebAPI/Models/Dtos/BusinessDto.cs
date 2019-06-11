@@ -13,5 +13,6 @@ namespace ArmouryUCP.WebAPI.Models.Dtos
         public string Name { get; set; }
         public int Level { get; set; }
         public int Value { get; set; }
+        public int Type { get; set; }
     }
 }
