@@ -1,5 +1,7 @@
 
 .vs/ArmouryUCP/v16/Server/sqlite3/db.lock
+ArmouryUCP.WebAPI/bin/
+ArmouryUCP.WebAPI/obj/
 ArmouryUCP.WebAPI/bin/ArmouryUCP.WebAPI.pdb
 ArmouryUCP.WebAPI/bin/ArmouryUCP.WebAPI.dll
 ArmouryUCP.WebAPI/obj/Debug/ArmouryUCP.WebAPI.csproj.CoreCompileInputs.cache
