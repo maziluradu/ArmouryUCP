@@ -469,6 +469,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="UI\Images\businesses\" />
     <Folder Include="UI\Images\mini-nav\" />
   </ItemGroup>
   <PropertyGroup>
