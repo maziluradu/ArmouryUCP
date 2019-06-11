@@ -51,6 +51,21 @@ app.controller('playerController', ['$scope', '$location', function ($scope, $lo
         });
     }
 
+    var vehicleRequest = new XMLHttpRequest();
+    vehicleRequest.onreadystatechange = function () {
+        $scope.$apply(function () {
+            if (vehicleRequest.readyState == 4 && vehicleRequest.status == 200) {
+                $scope.vehicleInfos = JSON.parse(vehicleRequest.responseText);
+
+                $scope.vehiclesValue = 0;
+                $scope.vehiclesCount = $scope.vehicleInfos.length;
+                $scope.vehicleInfos.forEach(function (element) {
+                    $scope.vehiclesValue += element['Value'];
+                });
+            }
+        });
+    }
+
     var playerRequest = new XMLHttpRequest();
     playerRequest.onreadystatechange = function () {
         $scope.$apply(function () {
@@ -60,6 +75,9 @@ app.controller('playerController', ['$scope', '$location', function ($scope, $lo
 
                 houseRequest.open("GET", $location.protocol() + '://' + $location.host() + ':' + ($location.port() !== 80 ? $location.port() : '') + "/api/house/" + $scope.playerInfos['Name']);
                 houseRequest.send();
+
+                vehicleRequest.open("GET", $location.protocol() + '://' + $location.host() + ':' + ($location.port() !== 80 ? $location.port() : '') + "/api/vehicle/" + $scope.playerInfos['Name']);
+                vehicleRequest.send();
             }
         });
     }

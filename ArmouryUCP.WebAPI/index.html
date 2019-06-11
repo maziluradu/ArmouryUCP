@@ -196,13 +196,32 @@
                                                 <tr ng-repeat="house in houseInfos">
                                                     <td><img src="UI/Images/houses/small/{{house.InteriorIndexNice}}_0.jpg" /></td>
                                                     <td style="width: 70%;">
-                                                        <span class="top-info"><i class="fas fa-star"></i>Level {{ house.Level }} house</span><br />
+                                                        <span class="top-info"><i class="fas fa-money-check-alt"></i>Level {{ house.Level }} house</span><br />
                                                         <span class="middle-info">{{ house.NameNice }}</span><br />
                                                         <span class="bottom-info">Purchased on {{ house.DateOfPurchaseNice }}</span>
                                                     </td>
                                                     <td style="width: 30%;">
                                                         <a href="#">More info <i class="fas fa-angle-right"></i></a>
                                                     </td>
+                                                </tr>
+                                                <tr class="spacer"><td></td></tr>
+                                            </table>
+                                        </div>
+                                        <div class="profile-info" ng-if="profilePropertiesTabSelector=='vehicles'">
+                                            The account ,,{{ playerInfos.Name }}” owns {{ vehiclesCount }} vehicles, with a total value of ${{ vehiclesValue | number : fractionSize }}. {{ vehiclesCount > 0 ? playerInfos.Name + "’s first vehicle was bought on the date of " + vehicleInfos[0].DateOfPurchaseNice + "." : ""}}
+                                            <br /><br />
+                                            <table>
+                                                <tr ng-repeat="vehicle in vehicleInfos">
+                                                    <td><img src="UI/Images/houses/small/{{house.InteriorIndexNice}}_0.jpg" /></td>
+                                                    <td style="width: 70%;">
+                                                        <span class="top-info"><i class="fas fa-dollar-sign"></i>Price {{ vehicle.Price | number : fractionSize }}</span><br />
+                                                        <span class="middle-info">{{ house.NameNice }}</span><br />
+                                                        <span class="bottom-info">Purchased on {{ house.DateOfPurchaseNice }}</span>
+                                                    </td>
+                                                    <td style="width: 30%;">
+                                                        <a href="#">More info <i class="fas fa-angle-right"></i></a>
+                                                    </td>
+                                                    
                                                 </tr>
                                                 <tr class="spacer"><td></td></tr>
                                             </table>
