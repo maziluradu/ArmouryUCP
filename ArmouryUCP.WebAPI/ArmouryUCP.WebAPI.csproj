@@ -430,16 +430,26 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\BusinessController.cs" />
+    <Compile Include="Controllers\VehicleController.cs" />
     <Compile Include="Controllers\HouseController.cs" />
     <Compile Include="Controllers\PlayerController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Dtos\BusinessDto.cs" />
+    <Compile Include="Models\Dtos\VehicleDto.cs" />
     <Compile Include="Models\Dtos\HouseDto.cs" />
     <Compile Include="Models\Dtos\PlayerDto.cs" />
+    <Compile Include="Models\Business.cs" />
+    <Compile Include="Models\Vehicle.cs" />
     <Compile Include="Models\House.cs" />
     <Compile Include="Models\Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\BusinessService.cs" />
+    <Compile Include="Services\Interfaces\IBusinessService.cs" />
+    <Compile Include="Services\Interfaces\IVehicleService.cs" />
+    <Compile Include="Services\VehicleService.cs" />
     <Compile Include="Services\Interfaces\IHouseService.cs" />
     <Compile Include="Services\Interfaces\IPlayerService.cs" />
     <Compile Include="Services\HouseService.cs" />
