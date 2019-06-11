@@ -1,0 +1,139 @@
+
+<div class="container-fluid">
+  <div class="row">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark col-md-12">
+      <div class="col-md-3" style="padding: 0">
+        <div class="row" style="margin: 0">
+          <div class="col-md-2 armoury-menu">
+            <font color="#1f2830"><i class="fas fa-bars fa-lg"></i></font>
+          </div>
+          <a class="col-md-10 armoury-logo" href="http://armoury.ro">
+            <img src="assets/Images/extra-nav/logo-small.png" />
+            <h4>
+              Armoury<span class="domain">.ro</span>
+              <span class="slogan">Forge your legacy</span>
+            </h4>
+          </a>
+        </div>
+      </div>
+    </nav>
+    <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+      <div class="sidebar-sticky" style="height: 100%">
+        <div class="row" style="height: 100%">
+          <nav id="sidebar-mini" class="col-md-3" ng-controller="mainNavController as mainItems" align="center">
+            <br />
+            <img src="assets/Images/avatar.png" style="width:85%; height: auto; margin-left: auto; margin-right: auto;" /><br /><br />
+            <ul>
+              <li ng-repeat="item in mainItems.items" style="font-size: 1.33em">
+                <a href="{{ item.link }}">
+                  <i class="fas fa-{{ item.faItem }}"></i>
+                  <i class="fas fa-{{ item.faItem }}"></i>
+                </a>
+              </li>
+            </ul>
+          </nav>
+          <div id="sidebar-extra" class="col-md-9">
+            <br />
+            <ul ng-controller="secondaryNavController as secondaryItems" class="nav flex-column">
+              <li class="nav-item" ng-repeat="item in secondaryItems.items[0]">
+                <a class="nav-link active" href="#">
+                  <span data-feather="home"></span>
+                  {{ item }} <span class="sr-only">(current)</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <main role="main" ng-controller="playerController" class="col-md-10 ml-sm-auto px-4" style="padding: 0 !important">
+
+      <div class="col-md-12 profile-header">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Panel</a></li>
+            <li class="breadcrumb-item"><a href="#">Profile</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{ playerInfos.Name }}</li>
+          </ol>
+        </nav>
+        <br />
+        <div class="c100 p{{ playerInfos.LevelProgress }} skin{{ playerInfos.Model }} avatar-wrapper" style="-webkit-transform: rotate(-150deg);-moz-transform: rotate(-150deg);-ms-transform: rotate(-150deg);-o-transform: rotate(-150deg);transform: rotate(-150deg);">
+          <div class="avatar-level"><span>{{ playerInfos.Level }}</span></div>
+          <span></span>
+          <div class="slice">
+            <div class="bar"></div>
+            <div class="fill"></div>
+          </div>
+        </div>
+        <h3 class="large">
+          <i ng-show="playerInfos.DonateRank > 0" class="fas fa-star premium-user"></i>{{ playerInfos.Name }}
+          <span ng-show="playerInfos.AdminLevel > 0" class="badge badge-secondary armoury-green">{{ adminLevelName }}</span>
+          <span ng-show="playerInfos.Member2 == 7" class="badge badge-secondary armoury-green">Governor</span>
+          <span ng-show="playerInfos.DonateRank > 0" class="badge badge-secondary armoury-yellow">Premium User</span>
+        </h3>
+        <div class="small-details">
+          <span>Member since: {{ playerInfos.LastLoginNice }}</span>&nbsp;&nbsp;&nbsp;<span>Last Login: {{ playerInfos.LastLoginNice }}</span>
+        </div>
+      </div>
+      <div class="profile-underheader">
+        <span class="badge badge-secondary armoury-green"><i class="fas fa-coins"></i>${{ playerInfos.Cash | number:0 }}</span>
+        <span class="badge badge-secondary armoury-green"><i class="fas fa-users"></i>{{ playerInfos.Faction }}</span>
+        <span class="badge badge-secondary armoury-green"><i class="fas fa-percentage"></i>{{ playerInfos.LevelProgress }}% level progress</span>
+      </div>
+      <br /><br />
+      <div class="container-fluid" id="page">
+        <div class="row">
+          <div class="page-secondaryboard col-md-6">
+            <div class="content">
+              <h4 class="title">General Statistics</h4>
+              <div class="page-body profile-stats">
+                <div class="graph-holder wrapper">
+                  <div class="graph-holder connected-hours">
+                    <br /><ol class="legend"><li class="gray">Average number</li><li class="green">Your current hours</li><li class="cyan">Last week's hours</li></ol><br />
+                    <div id="line_top_x" style="width: 114%; margin-left: -4%; max-height: 260px;"></div>
+                  </div>
+                </div>
+                <br />
+                <div class="row" style="margin: 0;">
+                  <div class="col-md-6" style="padding-left: 0;">
+                    <ul>
+                      <li>Level<span>{{ playerInfos.Level }}</span></li>
+                      <li>Respect Points<span>{{ playerInfos.Respect }}</span></li>
+                      <li>Playing Hours<span>{{ playerInfos.ConnectedTime }}</span></li>
+                      <li>Age<span>{{ playerInfos.Age }}</span></li>
+                      <li>Sex<span>{{ playerInfos.SexNice }}</span></li>
+                      <li>Warnings<span>{{ playerInfos.Warnings }}</span></li>
+                      <li>Job<span>{{ playerInfos.JobNice }}</span></li>
+                      <li>Last Login<span>{{ playerInfos.LastLoginNice }}</span></li>
+                    </ul>
+                  </div>
+                  <div class="col-md-6" style="padding-right: 0;">
+                    <ul>
+                      <li>Faction<span>{{ playerInfos.Faction }}</span></li>
+                      <li>Faction Rank<span>{{ playerInfos.FactionRank }}</span></li>
+                      <li>Faction Warnings<span>{{ playerInfos.FactionWarnings }}</span></li>
+                      <li>Faction Punish<span>{{ playerInfos.FactionPunish }}</span></li>
+                      <li>Faction Activity<span>{{ playerInfos.FactionActivity }}</span></li>
+                      <li>Member Since<span>{{ playerInfos.FactionMemberSinceNice }}</span></li>
+                      <li>Family<span>{{ playerInfos.Faction }}</span></li>
+                      <li>Family Rank<span>{{ playerInfos.FactionRank }}</span></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="page-secondaryboard col-md-5">
+            <div class="content">
+              <h4 class="title">General Statistics</h4>
+              <div class="page-body">
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>

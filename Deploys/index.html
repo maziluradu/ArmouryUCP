@@ -1,0 +1,103 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Armoury.ro SA:MP RPG Server - User Control Panel</title>
+    <script src="UI/Resources/angular.js"></script>
+    <script src="UI/Resources/app.js"></script>
+    <link href="UI/Resources/bootstrap.min.css" rel="stylesheet" />
+    <link href="UI/Stylesheets/style.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" href="UI/Stylesheets/progresscircles.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700,800,900" rel="stylesheet">
+</head>
+<body>
+    <div ng-app="armouryPanel" ng-controller="mainController">
+        <div class="container-fluid">
+            <div class="row">
+                <nav class="navbar navbar-expand-lg navbar-dark bg-dark col-md-12">
+                    <div class="col-md-3" style="padding: 0">
+                        <div class="row" style="margin: 0">
+                            <div class="col-md-2 armoury-menu">
+                                <font color="#1f2830"><i class="fas fa-bars fa-lg"></i></font>
+                            </div>
+                            <a class="col-md-10 armoury-logo" href="http://armoury.ro">
+                                <img src="UI/Images/extra-nav/logo-small.png" />
+                                <h4>
+                                    Armoury<span class="domain">.ro</span>
+                                    <span class="slogan">Forge your legacy</span>
+                                </h4>
+                            </a>
+                        </div>
+                    </div>
+                </nav>
+                <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+                    <div class="sidebar-sticky" style="height: 100%">
+                        <div class="row" style="height: 100%">
+                            <nav id="sidebar-mini" class="col-md-3" ng-controller="mainNavController as mainItems" align="center">
+                                <br />
+                                <img src="UI/Images/avatar.png" style="width:85%; height: auto; margin-left: auto; margin-right: auto;" /><br/><br/>
+                                <ul>
+                                    <li ng-repeat="item in mainItems.items" style="font-size: 1.33em">
+                                        <a href="{{ item.link }}">
+                                            <i class="fas fa-{{ item.faItem }}"></i>
+                                            <i class="fas fa-{{ item.faItem }}"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </nav>
+                            <div id="sidebar-extra" class="col-md-9">
+                                <br />
+                                <ul ng-controller="secondaryNavController as secondaryItems" class="nav flex-column">
+                                    <li class="nav-item" ng-repeat="item in secondaryItems.items[0]">
+                                        <a class="nav-link active" href="#">
+                                            <span data-feather="home"></span>
+                                            {{ item }} <span class="sr-only">(current)</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+
+                <main role="main" class="col-md-10 ml-sm-auto px-4" style="padding: 0 !important">
+                    
+                    <div class="col-md-12 profile-header">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="#">Panel</a></li>
+                                <li class="breadcrumb-item"><a href="#">Profile</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Radu</li>
+                            </ol>
+                        </nav>
+                        <br />
+                        <div class="c100 p50 avatar-wrapper" style="-webkit-transform: rotate(-150deg);-moz-transform: rotate(-150deg);-ms-transform: rotate(-150deg);-o-transform: rotate(-150deg);transform: rotate(-150deg);">
+                            <div class="avatar-level"><span>16</span></div>
+                            <span></span>
+                            <div class="slice">
+                                <div class="bar"></div>
+                                <div class="fill"></div>
+                            </div>
+                        </div>
+                        <h3 class="large">
+                            <i class="fas fa-star premium-user"></i>Radu
+                            <span class="badge badge-secondary armoury-green">Admin 5</span>
+                            <span class="badge badge-secondary armoury-green">Leaders Manager</span>
+                            <span class="badge badge-secondary armoury-yellow">Premium User</span>
+                        </h3>
+                        <div class="small-details">
+                            <span>Member since: 24 Mar 2019</span>&nbsp;&nbsp;&nbsp;<span>Last Login: 24 Mar 2019</span>
+                        </div>
+                    </div>
+                    <div class="profile-underheader">
+                        <span class="badge badge-secondary armoury-green"><i class="fas fa-coins"></i>$100,000,000</span>
+                        <span class="badge badge-secondary armoury-green"><i class="fas fa-users"></i>Federal Bureau of Investigations</span>
+                        <span class="badge badge-secondary armoury-green"><i class="fas fa-percentage"></i>50% level progress</span>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

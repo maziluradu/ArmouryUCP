@@ -1,0 +1,684 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
+    <TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
+    <IsPackable>false</IsPackable>
+    <SpaRoot>ClientApp\</SpaRoot>
+    <DefaultItemExcludes>$(DefaultItemExcludes);$(SpaRoot)node_modules\**</DefaultItemExcludes>
+
+    <!-- Set this to true if you enable server-side prerendering -->
+    <BuildServerSideRenderer>false</BuildServerSideRenderer>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="2.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Don't publish the SPA source files, but do show them in the project files list -->
+    <Content Remove="$(SpaRoot)**" />
+    <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="ClientApp\src\assets\Images\avatar.png" />
+    <None Remove="ClientApp\src\assets\Images\extra-nav\logo-small.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\000.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\001.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\002.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\003.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\004.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\005.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\006.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\007.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\008.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\009.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\010.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\011.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\012.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\013.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\014.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\015.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\016.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\017.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\018.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\019.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\020.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\021.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\022.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\023.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\024.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\025.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\026.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\027.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\028.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\029.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\030.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\031.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\032.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\033.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\034.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\035.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\036.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\037.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\038.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\039.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\040.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\041.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\042.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\043.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\044.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\045.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\046.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\047.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\048.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\049.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\050.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\051.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\052.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\053.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\054.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\055.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\056.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\057.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\058.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\059.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\060.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\061.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\062.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\063.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\064.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\065.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\066.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\067.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\068.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\069.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\070.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\071.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\072.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\073.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\074.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\075.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\076.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\077.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\078.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\079.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\080.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\081.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\082.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\083.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\084.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\085.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\086.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\087.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\088.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\089.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\090.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\091.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\092.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\093.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\094.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\095.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\096.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\097.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\098.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\099.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\100.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\101.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\102.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\103.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\104.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\105.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\106.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\107.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\108.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\109.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\110.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\111.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\112.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\113.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\114.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\115.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\116.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\117.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\118.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\119.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\120.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\121.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\122.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\123.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\124.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\125.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\126.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\127.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\128.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\129.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\130.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\131.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\132.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\133.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\134.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\135.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\136.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\137.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\138.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\139.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\140.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\141.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\142.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\143.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\144.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\145.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\146.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\147.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\148.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\149.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\150.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\151.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\152.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\153.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\154.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\155.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\156.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\157.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\158.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\159.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\160.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\161.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\162.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\163.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\164.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\165.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\166.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\167.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\168.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\169.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\170.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\171.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\172.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\173.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\174.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\175.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\176.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\177.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\178.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\179.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\180.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\181.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\182.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\183.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\184.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\185.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\186.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\187.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\188.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\189.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\190.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\191.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\192.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\193.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\194.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\195.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\196.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\197.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\198.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\199.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\200.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\201.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\202.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\203.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\204.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\205.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\206.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\207.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\208.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\209.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\210.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\211.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\212.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\213.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\214.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\215.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\216.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\217.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\218.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\219.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\220.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\221.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\222.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\223.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\224.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\225.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\226.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\227.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\228.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\229.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\230.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\231.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\232.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\233.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\234.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\235.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\236.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\237.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\238.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\239.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\240.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\241.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\242.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\243.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\244.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\245.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\246.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\247.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\248.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\249.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\250.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\251.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\252.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\253.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\254.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\255.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\256.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\257.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\258.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\259.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\260.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\261.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\262.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\263.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\264.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\265.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\266.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\267.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\268.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\269.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\270.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\271.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\272.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\273.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\274.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\275.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\276.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\277.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\278.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\279.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\280.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\281.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\282.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\283.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\284.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\285.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\286.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\287.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\288.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\289.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\290.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\291.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\292.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\293.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\294.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\295.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\296.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\297.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\298.png" />
+    <None Remove="ClientApp\src\assets\Images\skins\medium-thumbnail\299.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="ClientApp\src\assets\Images\avatar.png" />
+    <Content Include="ClientApp\src\assets\Images\extra-nav\logo-small.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\000.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\001.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\002.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\003.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\004.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\005.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\006.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\007.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\008.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\009.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\010.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\011.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\012.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\013.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\014.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\015.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\016.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\017.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\018.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\019.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\020.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\021.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\022.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\023.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\024.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\025.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\026.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\027.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\028.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\029.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\030.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\031.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\032.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\033.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\034.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\035.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\036.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\037.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\038.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\039.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\040.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\041.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\042.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\043.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\044.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\045.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\046.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\047.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\048.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\049.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\050.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\051.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\052.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\053.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\054.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\055.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\056.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\057.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\058.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\059.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\060.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\061.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\062.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\063.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\064.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\065.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\066.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\067.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\068.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\069.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\070.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\071.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\072.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\073.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\074.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\075.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\076.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\077.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\078.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\079.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\080.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\081.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\082.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\083.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\084.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\085.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\086.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\087.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\088.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\089.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\090.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\091.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\092.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\093.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\094.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\095.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\096.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\097.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\098.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\099.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\100.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\101.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\102.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\103.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\104.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\105.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\106.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\107.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\108.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\109.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\110.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\111.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\112.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\113.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\114.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\115.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\116.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\117.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\118.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\119.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\120.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\121.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\122.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\123.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\124.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\125.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\126.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\127.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\128.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\129.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\130.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\131.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\132.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\133.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\134.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\135.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\136.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\137.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\138.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\139.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\140.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\141.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\142.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\143.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\144.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\145.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\146.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\147.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\148.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\149.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\150.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\151.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\152.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\153.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\154.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\155.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\156.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\157.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\158.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\159.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\160.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\161.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\162.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\163.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\164.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\165.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\166.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\167.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\168.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\169.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\170.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\171.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\172.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\173.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\174.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\175.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\176.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\177.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\178.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\179.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\180.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\181.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\182.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\183.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\184.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\185.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\186.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\187.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\188.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\189.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\190.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\191.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\192.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\193.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\194.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\195.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\196.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\197.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\198.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\199.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\200.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\201.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\202.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\203.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\204.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\205.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\206.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\207.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\208.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\209.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\210.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\211.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\212.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\213.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\214.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\215.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\216.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\217.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\218.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\219.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\220.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\221.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\222.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\223.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\224.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\225.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\226.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\227.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\228.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\229.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\230.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\231.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\232.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\233.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\234.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\235.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\236.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\237.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\238.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\239.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\240.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\241.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\242.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\243.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\244.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\245.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\246.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\247.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\248.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\249.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\250.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\251.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\252.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\253.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\254.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\255.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\256.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\257.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\258.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\259.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\260.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\261.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\262.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\263.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\264.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\265.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\266.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\267.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\268.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\269.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\270.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\271.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\272.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\273.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\274.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\275.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\276.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\277.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\278.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\279.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\280.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\281.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\282.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\283.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\284.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\285.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\286.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\287.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\288.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\289.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\290.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\291.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\292.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\293.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\294.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\295.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\296.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\297.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\298.png" />
+    <Content Include="ClientApp\src\assets\Images\skins\medium-thumbnail\299.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ClientApp\src\assets\Images\mini-nav\" />
+  </ItemGroup>
+
+  <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
+    <!-- Ensure Node.js is installed -->
+    <Exec Command="node --version" ContinueOnError="true">
+      <Output TaskParameter="ExitCode" PropertyName="ErrorCode" />
+    </Exec>
+    <Error Condition="'$(ErrorCode)' != '0'" Text="Node.js is required to build and run this project. To continue, please install Node.js from https://nodejs.org/, and then restart your command prompt or IDE." />
+    <Message Importance="high" Text="Restoring dependencies using 'npm'. This may take several minutes..." />
+    <Exec WorkingDirectory="$(SpaRoot)" Command="npm install" />
+  </Target>
+
+  <Target Name="PublishRunWebpack" AfterTargets="ComputeFilesToPublish">
+    <!-- As part of publishing, ensure the JS resources are freshly built in production mode -->
+    <Exec WorkingDirectory="$(SpaRoot)" Command="npm install" />
+    <Exec WorkingDirectory="$(SpaRoot)" Command="npm run build -- --prod" />
+    <Exec WorkingDirectory="$(SpaRoot)" Command="npm run build:ssr -- --prod" Condition=" '$(BuildServerSideRenderer)' == 'true' " />
+
+    <!-- Include the newly-built files in the publish output -->
+    <ItemGroup>
+      <DistFiles Include="$(SpaRoot)dist\**; $(SpaRoot)dist-server\**" />
+      <DistFiles Include="$(SpaRoot)node_modules\**" Condition="'$(BuildServerSideRenderer)' == 'true'" />
+      <ResolvedFileToPublish Include="@(DistFiles->'%(FullPath)')" Exclude="@(ResolvedFileToPublish)">
+        <RelativePath>%(DistFiles.Identity)</RelativePath>
+        <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      </ResolvedFileToPublish>
+    </ItemGroup>
+  </Target>
+
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+    <TypeScriptTarget>ES5</TypeScriptTarget>
+    <TypeScriptJSXEmit>None</TypeScriptJSXEmit>
+    <TypeScriptModuleKind />
+    <TypeScriptCompileOnSaveEnabled>True</TypeScriptCompileOnSaveEnabled>
+    <TypeScriptNoImplicitAny>False</TypeScriptNoImplicitAny>
+    <TypeScriptRemoveComments>False</TypeScriptRemoveComments>
+    <TypeScriptOutFile />
+    <TypeScriptOutDir />
+    <TypeScriptGeneratesDeclarations>False</TypeScriptGeneratesDeclarations>
+    <TypeScriptNoEmitOnError>True</TypeScriptNoEmitOnError>
+    <TypeScriptSourceMap>True</TypeScriptSourceMap>
+    <TypeScriptMapRoot />
+    <TypeScriptSourceRoot />
+  </PropertyGroup>
+
+</Project>

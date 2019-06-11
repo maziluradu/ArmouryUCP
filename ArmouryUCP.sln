@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.421
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArmouryUCP.WebAPI", "ArmouryUCP.WebAPI\ArmouryUCP.WebAPI.csproj", "{E6F9C0A2-E239-4101-A6D0-BBBA855D4E97}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArmouryUCP.Panel", "ArmouryUCP.Panel\ArmouryUCP.Panel.csproj", "{589D3041-3A82-4955-9ED5-A2A14CE1E8A3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E6F9C0A2-E239-4101-A6D0-BBBA855D4E97}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6F9C0A2-E239-4101-A6D0-BBBA855D4E97}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6F9C0A2-E239-4101-A6D0-BBBA855D4E97}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E6F9C0A2-E239-4101-A6D0-BBBA855D4E97}.Release|Any CPU.Build.0 = Release|Any CPU
+		{589D3041-3A82-4955-9ED5-A2A14CE1E8A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{589D3041-3A82-4955-9ED5-A2A14CE1E8A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{589D3041-3A82-4955-9ED5-A2A14CE1E8A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{589D3041-3A82-4955-9ED5-A2A14CE1E8A3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EE545960-944F-4D63-8645-A33271F7314E}
+	EndGlobalSection
+EndGlobal
