@@ -36,6 +36,8 @@ namespace ArmouryUCP.WebAPI
             var container = new UnityContainer();
             container.RegisterType<IPlayerService, PlayerService>();
             container.RegisterType<IHouseService, HouseService>();
+            container.RegisterType<IVehicleService, VehicleService>();
+            container.RegisterType<IBusinessService, BusinessService>();
             config.DependencyResolver = new UnityResolver(container);
             config.Formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/html"));
 

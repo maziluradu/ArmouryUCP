@@ -48,6 +48,7 @@ E:\Visual Studio\Projects\ArmouryUCP\ArmouryUCP.WebAPI\bin\roslyn\vbc.rsp
 E:\Visual Studio\Projects\ArmouryUCP\ArmouryUCP.WebAPI\bin\roslyn\VBCSCompiler.exe
 E:\Visual Studio\Projects\ArmouryUCP\ArmouryUCP.WebAPI\bin\roslyn\VBCSCompiler.exe.config
 E:\Visual Studio\Projects\ArmouryUCP\ArmouryUCP.WebAPI\bin\AutoMapper.dll
+E:\Visual Studio\Projects\ArmouryUCP\ArmouryUCP.WebAPI\bin\DSharpPlus.dll
 E:\Visual Studio\Projects\ArmouryUCP\ArmouryUCP.WebAPI\bin\Google.Protobuf.dll
 E:\Visual Studio\Projects\ArmouryUCP\ArmouryUCP.WebAPI\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
 E:\Visual Studio\Projects\ArmouryUCP\ArmouryUCP.WebAPI\bin\MySql.Data.dll
@@ -63,6 +64,7 @@ E:\Visual Studio\Projects\ArmouryUCP\ArmouryUCP.WebAPI\bin\Unity.Abstractions.dl
 E:\Visual Studio\Projects\ArmouryUCP\ArmouryUCP.WebAPI\bin\Unity.Container.dll
 E:\Visual Studio\Projects\ArmouryUCP\ArmouryUCP.WebAPI\bin\AutoMapper.pdb
 E:\Visual Studio\Projects\ArmouryUCP\ArmouryUCP.WebAPI\bin\AutoMapper.xml
+E:\Visual Studio\Projects\ArmouryUCP\ArmouryUCP.WebAPI\bin\DSharpPlus.xml
 E:\Visual Studio\Projects\ArmouryUCP\ArmouryUCP.WebAPI\bin\Google.Protobuf.xml
 E:\Visual Studio\Projects\ArmouryUCP\ArmouryUCP.WebAPI\bin\MySql.Data.xml
 E:\Visual Studio\Projects\ArmouryUCP\ArmouryUCP.WebAPI\bin\System.Net.Http.Formatting.xml
@@ -80,5 +82,3 @@ E:\Visual Studio\Projects\ArmouryUCP\ArmouryUCP.WebAPI\obj\Debug\ArmouryUCP.WebA
 E:\Visual Studio\Projects\ArmouryUCP\ArmouryUCP.WebAPI\obj\Debug\ArmouryUCP.WebAPI.dll
 E:\Visual Studio\Projects\ArmouryUCP\ArmouryUCP.WebAPI\obj\Debug\ArmouryUCP.WebAPI.pdb
 E:\Visual Studio\Projects\ArmouryUCP\ArmouryUCP.WebAPI\obj\Debug\ArmouryUCP.WebAPI.csprojAssemblyReference.cache
-E:\Visual Studio\Projects\ArmouryUCP\ArmouryUCP.WebAPI\bin\DSharpPlus.dll
-E:\Visual Studio\Projects\ArmouryUCP\ArmouryUCP.WebAPI\bin\DSharpPlus.xml
