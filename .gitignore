@@ -140,3 +140,7 @@ ArmouryUCP.WebAPI/obj/Debug/ArmouryUCP.WebAPI.csprojAssemblyReference.cache
 ArmouryUCP.WebAPI/obj/Debug/ArmouryUCP.WebAPI.dll
 ArmouryUCP.WebAPI/obj/Debug/ArmouryUCP.WebAPI.pdb
 .vs/ArmouryUCP/v16/.suo
+ArmouryUCP.WebAPI/Properties/PublishProfiles/FolderProfile.pubxml.user
+.vs/ArmouryUCP/v15/Server/sqlite3/storage.ide-wal
+.vs/ArmouryUCP/v15/Server/sqlite3/storage.ide-shm
+.vs/ArmouryUCP/v15/.suo
