@@ -3,6 +3,11 @@
         background: radial-gradient(#00001e, #000013);
     }
 
+    ul {
+        list-style: none;
+        margin: 0; padding: 0;
+    }
+
     a {
         color: initial;
         text-decoration: none;
@@ -637,4 +642,69 @@
 .header-tabs a:hover::before, .header-tabs a.selected::before {
     color: #fff;
     opacity: 1;
+}
+
+.skill {
+    display: inline-block;
+}
+
+.hexagon {
+    width: 60px;
+    height: 60px;
+    transform: rotate(90deg);
+    line-height: 60px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 0.7em;
+}
+
+.hexagon::before {
+    content: ' ';
+    position: absolute;
+    width: 87%; height: 87%; top: 6%; left: 6.5%;
+    background: url('../Images/hexagon_black.svg') no-repeat center;
+    background-size: cover;
+}
+
+.hexagon i {
+    transform: rotate(90deg);
+    z-index: 100;
+    position: relative;
+    color: #fff;
+}
+
+.hexagon > .hexagon-inner {
+    position: absolute;
+    top: 15px;
+    left: 13.5px;
+    width: 34px;
+    height: 34px;
+    background: url("../Images/hexagon_darker.svg") no-repeat center;
+    background-size: cover;
+    transform: rotate(180deg);
+    line-height: 36px;
+    text-align: center;
+}
+
+.hexagon span.skill-level {
+    position: absolute;
+    font-size: 1.3em;
+    font-weight: 800;
+    left: 60%;
+    bottom: 55%;
+    transform: rotate(-90deg);
+    background: #05051e;
+    display: inline-block;
+    line-height: 1.6em;
+    padding-left: 0.45em;
+    padding-right: 0.45em;
+    border-radius: 50%;
+}
+
+ul#skills li {
+    width: 19%;
+    display: inline-block;
+    text-align: center;
+    margin-bottom: 1em;
 }
