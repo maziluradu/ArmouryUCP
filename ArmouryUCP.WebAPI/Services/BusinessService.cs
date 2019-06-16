@@ -36,7 +36,8 @@ namespace ArmouryUCP.WebAPI.Services
                             Name = reader["bMessage"].ToString(),
                             Owner = reader["bOwner"].ToString(),
                             Value = Convert.ToInt32(reader["bValue"]),
-                            Type = Convert.ToInt32(reader["bType"])
+                            Type = Convert.ToInt32(reader["bType"]),
+                            DateOfPurchase = DateTime.Parse(reader["DateOfPurchase"].ToString())
                         });
                     }
                 }

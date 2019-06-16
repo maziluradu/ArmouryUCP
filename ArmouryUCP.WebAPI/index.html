@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <title>Armoury.ro SA:MP RPG Server - User Control Panel</title>
     <script src="UI/Resources/angular.js"></script>
+    <script src="https://code.angularjs.org/snapshot/angular-sanitize.min.js"></script>
     <script src="UI/Resources/app.js"></script>
     <link href="UI/Resources/bootstrap.min.css" rel="stylesheet" />
     <link href="UI/Stylesheets/style.css" rel="stylesheet" />
@@ -138,10 +139,16 @@
                     <br /><br />
                     <div class="container-fluid" id="page">
                         <div class="row">
-                            <div class="page-secondaryboard col-md-6">
+                            <div class="page-secondaryboard col-md-6" ng-init="profileStatisticsTabSelector='general'">
                                 <div class="content">
-                                    <h4 class="title">General Statistics</h4>
-                                    <div class="page-body profile-stats">
+                                    <div class="tabbed-content" style="margin-bottom: 0.75em;">
+                                        <h4 class="title">General Statistics</h4>
+                                        <div class="header-tabs">
+                                            <a href="" ng-click="profileStatisticsTabSelector='general'" ng-class="{'selected' : profileStatisticsTabSelector == 'general'}">General</a>
+                                            <a href="" ng-click="profileStatisticsTabSelector='faction'" ng-class="{'selected' : profileStatisticsTabSelector == 'faction'}">Faction History</a>
+                                        </div>
+                                    </div>
+                                    <div class="page-body profile-stats" ng-show="profileStatisticsTabSelector=='general'">
                                         <div class="graph-holder wrapper">
                                             <div class="graph-holder connected-hours">
                                                 <br /><ol class="legend"><li class="gray">Average number</li><li class="green">Your current hours</li><li class="cyan">Last week's hours</li></ol><br />
@@ -176,107 +183,43 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="page-body" ng-show="profileStatisticsTabSelector=='faction'">
+                                        <ul class="faction-history list-normal">
+                                            <li class="item" ng-repeat="factionHistoryEntry in factionHistory">
+                                                <table>
+                                                    <tr>
+                                                        <td><div class="avatar-holder"><img src="UI/Images/skins/small-thumbnail/{{modelPadded}}.png" /></div></td>
+                                                        <td ng-bind-html="factionHistoryEntry.Content" style="width: 90%;"></td>
+                                                        <td class="time">{{ factionHistoryEntry.DateNice }}</td>
+                                                    </tr>
+                                                </table>
+                                            </li>
+                                        </ul>
+                                        <br />
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="page-secondaryboard col-md-5" ng-init="profilePropertiesTabSelector='houses'">
+                                <br />
                                 <div class="content">
                                     <h4 class="title">Skills</h4>
                                     <div class="page-body profile-info">
                                         <ul id="skills">
-                                            <li class="skill">
+                                            <li class="skill" ng-repeat="skill in playerInfos.Skills">
                                                 <div class="hexagon" style="background: url('UI/Images/hexagon.svg') no-repeat center; background-size: cover;">
                                                     <div class="hexagon-inner">
-                                                        <i class="fas fa-bomb"></i>
+                                                        <i class="fas {{ skill.Icon }}"></i>
                                                     </div>
-                                                    <span class="skill-level">5</span>
+                                                    <span class="skill-level">{{ skill.ProgressLevel }}</span>
                                                 </div>
-                                                Arms Dealer
-                                            </li>
-                                            <li class="skill">
-                                                <div class="hexagon" style="background: url('UI/Images/hexagon.svg') no-repeat center; background-size: cover;">
-                                                    <div class="hexagon-inner">
-                                                        <i class="fas fa-bomb"></i>
-                                                    </div>
-                                                    <span class="skill-level">5</span>
-                                                </div>
-                                                Arms Dealer
-                                            </li>
-                                            <li class="skill">
-                                                <div class="hexagon" style="background: url('UI/Images/hexagon.svg') no-repeat center; background-size: cover;">
-                                                    <div class="hexagon-inner">
-                                                        <i class="fas fa-bomb"></i>
-                                                    </div>
-                                                    <span class="skill-level">5</span>
-                                                </div>
-                                                Arms Dealer
-                                            </li>
-                                            <li class="skill">
-                                                <div class="hexagon" style="background: url('UI/Images/hexagon.svg') no-repeat center; background-size: cover;">
-                                                    <div class="hexagon-inner">
-                                                        <i class="fas fa-bomb"></i>
-                                                    </div>
-                                                    <span class="skill-level">5</span>
-                                                </div>
-                                                Arms Dealer
-                                            </li>
-                                            <li class="skill">
-                                                <div class="hexagon" style="background: url('UI/Images/hexagon.svg') no-repeat center; background-size: cover;">
-                                                    <div class="hexagon-inner">
-                                                        <i class="fas fa-bomb"></i>
-                                                    </div>
-                                                    <span class="skill-level">5</span>
-                                                </div>
-                                                Arms Dealer
-                                            </li>
-                                            <li class="skill">
-                                                <div class="hexagon" style="background: url('UI/Images/hexagon.svg') no-repeat center; background-size: cover;">
-                                                    <div class="hexagon-inner">
-                                                        <i class="fas fa-bomb"></i>
-                                                    </div>
-                                                    <span class="skill-level">5</span>
-                                                </div>
-                                                Arms Dealer
-                                            </li>
-                                            <li class="skill">
-                                                <div class="hexagon" style="background: url('UI/Images/hexagon.svg') no-repeat center; background-size: cover;">
-                                                    <div class="hexagon-inner">
-                                                        <i class="fas fa-bomb"></i>
-                                                    </div>
-                                                    <span class="skill-level">5</span>
-                                                </div>
-                                                Arms Dealer
-                                            </li>
-                                            <li class="skill">
-                                                <div class="hexagon" style="background: url('UI/Images/hexagon.svg') no-repeat center; background-size: cover;">
-                                                    <div class="hexagon-inner">
-                                                        <i class="fas fa-bomb"></i>
-                                                    </div>
-                                                    <span class="skill-level">5</span>
-                                                </div>
-                                                Arms Dealer
-                                            </li>
-                                            <li class="skill">
-                                                <div class="hexagon" style="background: url('UI/Images/hexagon.svg') no-repeat center; background-size: cover;">
-                                                    <div class="hexagon-inner">
-                                                        <i class="fas fa-bomb"></i>
-                                                    </div>
-                                                    <span class="skill-level">5</span>
-                                                </div>
-                                                Arms Dealer
-                                            </li>
-                                            <li class="skill">
-                                                <div class="hexagon" style="background: url('UI/Images/hexagon.svg') no-repeat center; background-size: cover;">
-                                                    <div class="hexagon-inner">
-                                                        <i class="fas fa-bomb"></i>
-                                                    </div>
-                                                    <span class="skill-level">5</span>
-                                                </div>
-                                                Arms Dealer
+                                                {{ skill.NameNice }}
                                             </li>
                                         </ul>
+                                        <br />
+                                        <p ng-if="playerInfos.Skills.length > 0" align="center">Only skills with a minimum of skill level 1 are being shown.</p>
+                                        <p ng-if="playerInfos.Skills.length == 0" align="center">This player has no skill leveled up at least above skill level 1.</p>
                                     </div>
                                 </div>
-                                <br />
+                            </div>
+                            <div class="page-secondaryboard col-md-5" ng-init="profilePropertiesTabSelector='houses'">
                                 <div class="content">
                                     <div class="tabbed-content">
                                         <h4 class="title">Properties</h4>
@@ -288,8 +231,8 @@
                                     </div>
                                     <div class="page-body">
                                         <div class="profile-info" ng-if="profilePropertiesTabSelector=='houses'">
-                                            The account ,,{{ playerInfos.Name }}” owns {{ housesCount }} houses, with a total value of ${{ housesValue | number : fractionSize }}. {{ housesCount > 0 ? playerInfos.Name + "’s first house was bought on the date of " + houseInfos[0].DateOfPurchaseNice + "." : ""}}
-                                            <br /><br />
+                                            <p ng-if="houseInfos.length > 0">The player ,,{{ playerInfos.Name }}” owns {{ housesCount }} houses, with a total value of ${{ housesValue | number : fractionSize }}. {{ housesCount > 0 ? playerInfos.Name + "’s first house was bought on the date of " + houseInfos[0].DateOfPurchaseNice + "." : ""}}<br /><br /></p>
+                                            <p align="center" ng-if="houseInfos.length == 0"><br />This player owns no houses.</p>
                                             <table>
                                                 <tr ng-repeat="house in houseInfos">
                                                     <td><img src="UI/Images/houses/small/{{house.InteriorIndexNice}}_0.jpg" /></td>
@@ -302,12 +245,11 @@
                                                         <a href="#">More info <i class="fas fa-angle-right"></i></a>
                                                     </td>
                                                 </tr>
-                                                <tr class="spacer"><td></td></tr>
                                             </table>
                                         </div>
                                         <div class="profile-info" ng-if="profilePropertiesTabSelector=='vehicles'">
-                                            The account ,,{{ playerInfos.Name }}” owns {{ vehiclesCount }} vehicles, with a total value of ${{ vehiclesValue | number : fractionSize }}. {{ vehiclesCount > 0 ? playerInfos.Name + "’s first vehicle was bought on the date of " + vehicleInfos[0].DateOfPurchaseNice + "." : ""}}
-                                            <br /><br />
+                                            <p ng-if="vehicleInfos.length > 0">The player ,,{{ playerInfos.Name }}” owns {{ vehiclesCount }} vehicles, with a total value of ${{ vehiclesValue | number : fractionSize }}. {{ vehiclesCount > 0 ? playerInfos.Name + "’s first vehicle was bought on the date of " + vehicleInfos[0].DateOfPurchaseNice + "." : ""}}<br /><br /></p>
+                                            <p align="center" ng-if="vehicleInfos.length == 0"><br />This player owns no vehicles.</p>
                                             <table>
                                                 <tr ng-repeat="vehicle in vehicleInfos">
                                                     <td><img src="UI/Images/vehicles/small/{{vehicle.Model}}.png" /></td>
@@ -321,12 +263,11 @@
                                                     </td>
 
                                                 </tr>
-                                                <tr class="spacer"><td></td></tr>
                                             </table>
                                         </div>
                                         <div class="profile-info" ng-if="profilePropertiesTabSelector=='businesses'">
-                                            The account ,,{{ playerInfos.Name }}” owns {{ businessesCount }} businesses, with a total value of ${{ businessesValue | number : fractionSize }}. {{ businessesCount > 0 ? playerInfos.Name + "’s first business was bought on the date of " + businessInfos[0].DateOfPurchaseNice + "." : ""}}
-                                            <br /><br />
+                                            <p ng-if="businessInfos.length > 0">The player ,,{{ playerInfos.Name }}” owns {{ businessesCount }} businesses, with a total value of ${{ businessesValue | number : fractionSize }}. {{ businessesCount > 0 ? playerInfos.Name + "’s first business was bought on the date of " + businessInfos[0].DateOfPurchaseNice + "." : ""}}<br /><br /></p>
+                                            <p align="center" ng-if="businessInfos.length == 0"><br />This player owns no businesses.</p>
                                             <table>
                                                 <tr ng-repeat="business in businessInfos">
                                                     <td><img src="UI/Images/businesses/small/{{business.Type}}.jpg" /></td>
@@ -340,14 +281,75 @@
                                                     </td>
 
                                                 </tr>
-                                                <tr class="spacer"><td></td></tr>
                                             </table>
                                         </div>
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="content combat-info">
+                                    <h4 class="title">Combat Information</h4>
+                                    <div class="page-body">
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    <div class="hexagon-big" style="background: url('UI/Images/hexagon.svg') no-repeat center; background-size: cover;">
+                                                        <div class="hexagon-inner">
+                                                            <div class="weapon">
+                                                                <span>AK47</span>
+                                                                <img src="UI/Images/weapons/ak47.svg" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td style="width: 50%">
+                                                    <table style="width: 90%">
+                                                        <tr><td><i class="fas fa-star"></i> Preferred gun</td></tr>
+                                                        <tr class="item"><td>Name</td><td>AK47</td></tr>
+                                                        <tr class="item"><td>Usage</td><td>87.4%</td></tr>
+                                                        <tr class="item"><td>Kills</td><td>1024</td></tr>
+                                                        <tr class="item"><td>Accuracy</td><td>69.7%</td></tr>
+                                                    </table>
+                                                </td>
+                                                <td style="width: 50%">
+                                                    <table>
+                                                        <tr><td><i class="fas fa-star"></i> 2nd Preferred gun</td></tr>
+                                                        <tr class="item"><td>Name</td><td>AK47</td></tr>
+                                                        <tr class="item"><td>Usage</td><td>87.4%</td></tr>
+                                                        <tr class="item"><td>Kills</td><td>1024</td></tr>
+                                                        <tr class="item"><td>Accuracy</td><td>69.7%</td></tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-top: 2em; text-align: center; position: relative; right: 0.6em;">
+                                                    <img style="width: 40%; height: auto; margin-left: auto; margin-right: auto" src="UI/Images/skins/body-shape.png" />
+                                                    <div class="accuracy head"><span>12%</span></div>
+                                                    <div class="accuracy torso"><span>23%</span></div>
+                                                    <div class="accuracy groin"><span>34%</span></div>
+                                                    <div class="accuracy leftarm"><span>45%</span></div>
+                                                    <div class="accuracy rightarm"><span>56%</span></div>
+                                                    <div class="accuracy leftleg"><span>67%</span></div>
+                                                    <div class="accuracy rightleg"><span>78%</span></div>
+                                                </td>
+                                                <td colspan="2" style="width: 100%; padding-top: 1em">
+                                                    <table>
+                                                        <tr><td><i class="fas fa-star"></i> General combat information</td></tr>
+                                                        <tr class="item"><td>Weapon accuracy</td><td>AK47</td></tr>
+                                                        <tr class="item"><td>Wars participated</td><td>87.4%</td></tr>
+                                                        <tr class="item"><td>Total kills</td><td>1024</td></tr>
+                                                        <tr class="item"><td>Average kills per war</td><td>69.7%</td></tr>
+                                                        <tr class="item"><td>Average war kill participation</td><td>69.7%</td></tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <br />
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <br />
                 </main>
             </div>
         </div>

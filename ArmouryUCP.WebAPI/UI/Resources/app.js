@@ -1,4 +1,4 @@
-﻿var app = angular.module('armouryPanel', []);
+﻿var app = angular.module('armouryPanel', ['ngSanitize']);
 
 /*app.config(function ($routeProvider) {
 
@@ -36,6 +36,15 @@ app.controller('secondaryNavController', ['$scope', function ($scope) {
 }]);
 
 app.controller('playerController', ['$scope', '$location', function ($scope, $location) {
+    var factionHistoryRequest = new XMLHttpRequest();
+    factionHistoryRequest.onreadystatechange = function () {
+        $scope.$apply(function () {
+            if (factionHistoryRequest.readyState == 4 && factionHistoryRequest.status == 200) {
+                $scope.factionHistory = JSON.parse(factionHistoryRequest.responseText);
+            }
+        });
+    }
+
     var houseRequest = new XMLHttpRequest();
     houseRequest.onreadystatechange = function () {
         $scope.$apply(function () {
@@ -86,6 +95,7 @@ app.controller('playerController', ['$scope', '$location', function ($scope, $lo
         $scope.$apply(function () {
             if (playerRequest.readyState == 4 && playerRequest.status == 200) {
                 $scope.playerInfos = JSON.parse(playerRequest.responseText);
+                $scope.modelPadded = ("00" + $scope.playerInfos.Model).slice(-3);
                 $scope.adminLevelName = getAdminLevel($scope.playerInfos['AdminLevel']);
 
                 houseRequest.open("GET", $location.protocol() + '://' + $location.host() + ':' + ($location.port() !== 80 ? $location.port() : '') + "/api/house/" + $scope.playerInfos['Name']);
@@ -96,6 +106,9 @@ app.controller('playerController', ['$scope', '$location', function ($scope, $lo
 
                 businessRequest.open("GET", $location.protocol() + '://' + $location.host() + ':' + ($location.port() !== 80 ? $location.port() : '') + "/api/business/" + $scope.playerInfos['Name']);
                 businessRequest.send();
+
+                factionHistoryRequest.open("GET", $location.protocol() + '://' + $location.host() + ':' + ($location.port() !== 80 ? $location.port() : '') + "/api/player/" + $location.path().split('/').pop() + "/factionhistory");
+                factionHistoryRequest.send();
             }
         });
     }

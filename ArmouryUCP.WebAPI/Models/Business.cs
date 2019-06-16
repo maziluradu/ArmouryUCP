@@ -10,5 +10,6 @@ namespace ArmouryUCP.WebAPI.Models
         public int Level { get; set; }
         public int Value { get; set; }
         public int Type { get; set; }
+        public DateTime DateOfPurchase { get; set; }
     }
 }

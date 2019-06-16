@@ -43,6 +43,7 @@ namespace ArmouryUCP.WebAPI.Services
         public Player GetPlayer(int id)
         {
             Player player = null;
+            List<Skill> skills = new List<Skill>();
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
                 connection.Open();
@@ -52,6 +53,17 @@ namespace ArmouryUCP.WebAPI.Services
                 {
                     while (reader.Read())
                     {
+                        foreach (var skill in SharedResources.Skills)
+                        {
+                            if (Convert.ToInt32(reader[skill]) >= 100)
+                                skills.Add(new Skill {
+                                    Name = skill,
+                                    Progress = Convert.ToInt32(reader[skill]) > 500 ? 500 : Convert.ToInt32(reader[skill]),
+                                    NameNice = SharedResources.SkillNiceNames[SharedResources.Skills.IndexOf(skill)],
+                                    Icon = SharedResources.SkillIcons[SharedResources.Skills.IndexOf(skill)]
+                                });
+                        }
+
                         player = new Player()
                         {
                             ID = Convert.ToInt32(reader["ID"]),
@@ -77,12 +89,44 @@ namespace ArmouryUCP.WebAPI.Services
                             FactionWarnings = Convert.ToInt32(reader["Fwarn"]),
                             FactionPunish = Convert.ToInt32(reader["Punish"]),
                             FactionActivity = 0,
-                            FactionMemberSince = DateTime.Parse(reader["LastLogin"].ToString())
+                            FactionMemberSince = DateTime.Parse(reader["LastLogin"].ToString()),
+                            Skills = skills
                         };
                     }
                 }
             }
             return player;
+        }
+
+        public List<FactionHistory> GetFactionHistory(int id)
+        {
+            var factionHistory = new List<FactionHistory>();
+            var sql = string.Empty;
+            for (int i = 1; i < SharedResources.Factions.Count; i++)
+            {
+                if (i > 1)
+                    sql += " UNION ";
+                sql += $"SELECT * FROM log{i} WHERE Continut LIKE '%/{id}>%'";
+            }
+
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                connection.Open();
+                MySqlCommand cmd = new MySqlCommand($"{sql} ORDER BY Data DESC LIMIT 20", connection);
+
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        factionHistory.Add(new FactionHistory()
+                        {
+                            Content = reader["Continut"].ToString(),
+                            Date = DateTime.Parse(reader["Data"].ToString())
+                        });
+                    }
+                }
+            }
+            return factionHistory;
         }
     }
 }

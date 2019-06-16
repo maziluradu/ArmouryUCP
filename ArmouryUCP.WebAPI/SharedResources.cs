@@ -6,6 +6,60 @@ namespace ArmouryUCP.WebAPI
 {
     public static class SharedResources
     {
+        public static List<string> Skills = new List<string> {
+            "DetSkill",
+            "SexSkill",
+            "LawSkill",
+            "MechSkill",
+            "JackSkill",
+            "NewsSkill",
+            "DrugsSkill",
+            "FishSkill",
+            "TruckerSkill",
+            "BoxingSkill",
+            "KarateSkill",
+            "GrabkickSkill",
+            "MatsSkill",
+            "ArmsSkill",
+            "RepairSkill"
+        };
+
+        public static List<string> SkillNiceNames = new List<string> {
+            "Detective",
+            "Prostitute",
+            "Lawyer",
+            "Mechanic",
+            "Car Jacker",
+            "News Reporter",
+            "Drugs Dealer",
+            "Fisher",
+            "Trucker",
+            "Boxer",
+            "Karate",
+            "Grabkick",
+            "Materials",
+            "Arms Dealer",
+            "Repair"
+        };
+
+        public static List<string> SkillIcons = new List<string> {
+            "fa-user-secret",
+            "fa-glass-martini-alt",
+            "fa-gavel",
+            "fa-tools",
+            "fa-screwdriver",
+            "fa-bullhorn",
+            "fa-cannabis",
+            "fa-fish",
+            "fa-truck-moving",
+            "fa-fist-raised",
+            "fa-praying-hands",
+            "fa-sign-language",
+            "fa-box-open",
+            "fa-bomb",
+            "fa-wrench"
+        };
+
         public static List<string> VehicleNames = new List<string> {
 	        "Landstalker",
 	        "Bravura",

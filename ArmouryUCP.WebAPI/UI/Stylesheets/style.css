@@ -703,8 +703,251 @@
 }
 
 ul#skills li {
-    width: 19%;
+    width: 20%;
     display: inline-block;
     text-align: center;
+    margin-bottom: 2em;
+}
+
+ul.faction-history {
+    width: 100%;
+}
+
+ul.list-normal li {
+    color: #a8accb;
+    font-size: 0.65em;
+    font-weight: 600;
+    background: #01011a;
+    border: 2px solid #13142e;
+    border-radius: 4px;
     margin-bottom: 1em;
+    padding: 1.5em;
+}
+
+ul.list-normal li a {
+    color: #aa2526;
+}
+
+ul.list-normal td {
+    position: relative;
+}
+
+ul.list-normal td.time {
+    color: #2a6dc8;
+    font-size: 0.8em;
+}
+
+ul.list-normal td.time::after {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: -10px;
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    content: "\f017";
+}
+
+.list-normal .avatar-holder {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid #161631;
+    overflow: hidden;
+    margin-right: 1em;
+}
+
+.list-normal .avatar-holder img {
+    width: 100%;
+    height: auto;
+}
+
+.hexagon-big {
+    width: 101.25px;
+    height: 101.25px;
+    transform: rotate(90deg);
+    line-height: 101.25px;
+    text-align: center;
+    margin-bottom: 0.7em;
+}
+
+.hexagon-big::before {
+    content: ' ';
+    position: absolute;
+    width: 87%;
+    height: 87%;
+    top: 7%;
+    left: 6.9%;
+    background: url('../Images/hexagon_black.svg') no-repeat center;
+    background-size: cover;
+}
+
+.hexagon-big > .hexagon-inner {
+    position: absolute;
+    top: 22.5px;
+    left: 18.56px;
+    width: 64.68px;
+    height: 64.68px;
+    background: url("../Images/hexagon_darker.svg") no-repeat center;
+    background-size: cover;
+    transform: rotate(180deg);
+    line-height: 36px;
+    text-align: center;
+}
+
+.hexagon-big .weapon {
+    transform: rotate(90deg);
+}
+
+.hexagon-big .weapon span {
+    position: absolute;
+    display: inline-block;
+    width: 100%;
+    left: 0;
+    top: 5px;
+    color: #b3b8d8;
+    font-weight: 600;
+    font-size: 0.4em;
+}
+
+.hexagon-big img {
+    margin-top: 25% !important;
+    width: 65%;
+    height: auto;
+}
+
+.combat-info table table {
+    font-size: 0.6em;
+}
+
+.combat-info table table td {
+    padding: 0.5em;
+}
+
+.combat-info table table tr:first-child i {
+    font-size: 0.75em;
+    margin-right: 0.5em;
+}
+
+.combat-info table table tr:nth-child(2n) td {
+    background: #0f0f27;
+}
+
+.combat-info table table tr.item td:last-child {
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.combat-info table table tr.item td:first-child {
+    color: #becdff;
+    font-weight: 600;
+}
+
+.combat-info table table tr:first-child {
+    color: #20539d !important;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 0.95em;
+}
+
+.combat-info table table tr:first-child td {
+    padding: 0 0 1em 0 !important;
+}
+
+.combat-info .page-body {
+    padding-left: 1em;
+    padding-right: 1.25em;
+}
+
+.combat-info table {
+    width: 100%;
+}
+
+.accuracy {
+    width: 20px;
+    height: 20px;
+    border-top: 1.2px solid #343456;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+}
+
+.accuracy.head {
+    margin-top: -41px;
+    margin-left: 17px;
+}
+
+.accuracy.rightarm {
+    margin-top: -19px;
+    margin-left: 31px;
+}
+
+.accuracy.rightleg {
+    margin-top: 44px;
+    margin-left: 23px;
+}
+
+.accuracy.leftarm {
+    margin-left: -52px;
+    margin-top: -9px;
+}
+
+.accuracy.leftleg {
+    margin-left: -47px;
+    margin-top: 33px;
+}
+
+.accuracy.torso {
+    margin-left: -39px;
+    margin-top: -33px;
+}
+
+.accuracy.groin {
+    margin-left: 18px;
+    margin-top: 25px;
+    width: 29px;
+}
+
+.accuracy::after {
+    content: ' ';
+    position: absolute;
+}
+
+.accuracy.head::after, .accuracy.rightleg::after, .accuracy.rightarm::after {
+    top: 3px;
+    left: -7px;
+    border-left: 1.2px solid #343456;
+    width: 16px;
+    height: 14px;
+    transform: rotate(45deg);
+}
+
+.accuracy.leftarm::after, .accuracy.leftleg::after, .accuracy.torso::after {
+    top: -8px;
+    right: -17px;
+    border-left: 1.2px solid #343456;
+    width: 16px;
+    height: 14px;
+    transform: rotate(-45deg);
+}
+
+.accuracy.groin::after {
+    top: -18px;
+    right: 21px;
+    border-left: 1.2px solid #343456;
+    width: 16px;
+    height: 14px;
+    transform: rotate(-45deg);
+}
+
+.accuracy > span {
+    position: absolute;
+    top: -14px;
+    left: 1px;
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    font-size: 0.55em;
+    color: #fff;
+    font-weight: 800;
 }

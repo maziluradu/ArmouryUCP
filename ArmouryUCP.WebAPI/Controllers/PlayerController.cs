@@ -54,5 +54,23 @@ namespace ArmouryUCP.WebAPI.Controllers
 
             return NotFound();
         }
+
+        /// <summary>
+        /// Gets faction history of a certain player
+        /// </summary>
+        /// <param name="id">SQL ID of the user</param>
+        /// <returns>JSON containing the player's faction history</returns>
+        [HttpGet]
+        [Route("api/player/{id}/factionhistory")]
+        public IHttpActionResult GetFactionHistory(int id)
+        {
+            var factionHistory = Mapper.Map<List<FactionHistoryDto>>(playerService.GetFactionHistory(id));
+
+            if (factionHistory != null)
+
+                return Ok(factionHistory);
+
+            return NotFound();
+        }
     }
 }

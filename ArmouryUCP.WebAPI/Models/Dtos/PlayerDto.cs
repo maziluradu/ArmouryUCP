@@ -32,6 +32,7 @@ namespace ArmouryUCP.WebAPI.Models.Dtos
         public int FactionPunish { get; set; }
         public int FactionActivity { get; set; }
         public DateTime FactionMemberSince { get; set; }
+        public List<Skill> Skills { get; set; }
 
         public int LevelProgress
         {

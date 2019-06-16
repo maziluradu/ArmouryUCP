@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace ArmouryUCP.WebAPI.Models
 {
@@ -28,5 +29,6 @@ namespace ArmouryUCP.WebAPI.Models
         public int FactionActivity { get; set; }
         public DateTime FactionMemberSince { get; set; }
         public DateTime LastLogin { get; set; }
+        public List<Skill> Skills { get; set; }
     }
 }

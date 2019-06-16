@@ -34,7 +34,8 @@ namespace ArmouryUCP.WebAPI.Services
                             Id = Convert.ToInt32(reader["id"]),
                             Model = Convert.ToInt32(reader["Model"]),
                             Owner = reader["Owner"].ToString(),
-                            Value = Convert.ToInt32(reader["Price"])
+                            Value = Convert.ToInt32(reader["Price"]),
+                            DateOfPurchase = DateTime.Parse(reader["vLastBought"].ToString())
                         });
                     }
                 }

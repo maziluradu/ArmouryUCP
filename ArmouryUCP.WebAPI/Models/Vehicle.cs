@@ -8,5 +8,6 @@ namespace ArmouryUCP.WebAPI.Models
         public string Owner { get; set; }
         public int Model { get; set; }
         public int Value { get; set; }
+        public DateTime DateOfPurchase { get; set; }
     }
 }
