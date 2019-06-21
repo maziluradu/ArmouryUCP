@@ -1,18 +1,72 @@
-﻿var app = angular.module('armouryPanel', ['ngSanitize']);
+﻿var app = angular.module('armouryPanel', ['ngRoute', 'ngSanitize']);
 
-/*app.config(function ($routeProvider) {
+app.config(function ($routeProvider) {
 
     $routeProvider.
-
         when('/', {
-            templateUrl: 'index.html',
+            templateUrl: 'main.html',
+            controller: 'frontPageController'
+        })
+        .when('/player/:id', {
+            templateUrl: 'profile.html',
             controller: 'playerController'
+        })
+        .otherwise({
+            templateUrl: '404.html'
         });
 
-});*/
-
-app.controller('mainController', function ($scope) {
 });
+
+app.controller('mainController', ['$scope', function ($scope) {
+
+}]);
+
+app.controller('frontPageController', ['$scope', '$location', function ($scope, $location) {
+    var serverInfoRequest = new XMLHttpRequest();
+    serverInfoRequest.onreadystatechange = function () {
+        $scope.$apply(function () {
+            if (serverInfoRequest.readyState == 4 && serverInfoRequest.status == 200) {
+                $scope.serverInfo = JSON.parse(serverInfoRequest.responseText);
+            }
+        });
+    }
+
+    var serverNewsRequest = new XMLHttpRequest();
+    serverNewsRequest.onreadystatechange = function () {
+        $scope.$apply(function () {
+            if (serverNewsRequest.readyState == 4 && serverNewsRequest.status == 200) {
+                $scope.serverNews = JSON.parse(serverNewsRequest.responseText);
+            }
+        });
+    }
+
+    $scope.onlinePlayersNumber = 0;
+
+    var onlinePlayersRequest = new XMLHttpRequest();
+    onlinePlayersRequest.onreadystatechange = function () {
+        $scope.$apply(function () {
+            if (onlinePlayersRequest.readyState == 4 && onlinePlayersRequest.status == 200) {
+                $scope.onlinePlayers = JSON.parse(onlinePlayersRequest.responseText);
+                if ($scope.onlinePlayers.length > 0) {
+                    $scope.onlinePlayersNumber = $scope.onlinePlayers[0]['TotalPlayers'];
+
+                    $scope.onlinePlayers.forEach(function (element) {
+                        element['profileUrl'] = $location.protocol() + '://' + $location.host() + ':' + ($location.port() !== 80 ? $location.port() : '') + "/#!/player/" + element['ID'];
+                    });
+                }
+            }
+        });
+    }
+
+    onlinePlayersRequest.open("GET", $location.protocol() + '://' + $location.host() + ':' + ($location.port() !== 80 ? $location.port() : '') + "/api/player/briefonline");
+    onlinePlayersRequest.send();
+
+    serverInfoRequest.open("GET", $location.protocol() + '://' + $location.host() + ':' + ($location.port() !== 80 ? $location.port() : '') + "/api/server");
+    serverInfoRequest.send();
+
+    serverNewsRequest.open("GET", $location.protocol() + '://' + $location.host() + ':' + ($location.port() !== 80 ? $location.port() : '') + "/api/server/news");
+    serverNewsRequest.send();
+}]);
 
 app.controller('mainNavController', ['$scope', function ($scope) {
     var mainItems = this;

@@ -11,6 +11,7 @@ namespace ArmouryUCP.WebAPI.Services.Interfaces
     {
         List<Player> GetPlayers(int playersToReturn = 10);
         Player GetPlayer(int id);
+        List<Player> GetOnlinePlayers(bool showFull = false);
         List<FactionHistory> GetFactionHistory(int id);
     }
 }

@@ -49,7 +49,6 @@ namespace ArmouryUCP.WebAPI.Controllers
             var player = Mapper.Map<PlayerDto>(playerService.GetPlayer(id));
 
             if (player != null)
-
                 return Ok(player);
 
             return NotFound();
@@ -67,8 +66,23 @@ namespace ArmouryUCP.WebAPI.Controllers
             var factionHistory = Mapper.Map<List<FactionHistoryDto>>(playerService.GetFactionHistory(id));
 
             if (factionHistory != null)
-
                 return Ok(factionHistory);
+
+            return NotFound();
+        }
+
+        /// <summary>
+        /// Gets online players
+        /// </summary>
+        /// <returns>JSON containing few players data</returns>
+        [HttpGet]
+        [Route("api/player/briefonline")]
+        public IHttpActionResult GetBriefOnlinePlayers()
+        {
+            var players = Mapper.Map<List<PlayerShortDto>>(playerService.GetOnlinePlayers());
+
+            if (players != null)
+                return Ok(players);
 
             return NotFound();
         }

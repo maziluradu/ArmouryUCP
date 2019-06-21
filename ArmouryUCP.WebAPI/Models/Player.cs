@@ -30,5 +30,7 @@ namespace ArmouryUCP.WebAPI.Models
         public DateTime FactionMemberSince { get; set; }
         public DateTime LastLogin { get; set; }
         public List<Skill> Skills { get; set; }
+
+        public int TotalPlayers { get; set; }
     }
 }

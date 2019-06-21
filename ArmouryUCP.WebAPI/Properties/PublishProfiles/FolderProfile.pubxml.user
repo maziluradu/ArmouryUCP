@@ -10,17 +10,20 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAfMEThYMt10O35chsLmyXxAAAAAACAAAAAAAQZgAAAAEAACAAAABjNdVZ5XQsQMWAZ6uiDerFcAK2rq6U1DbbM7LTdyBu2QAAAAAOgAAAAAIAACAAAAD3vkZtDN4iSic7A1fcIH80Br23qNcBlLoose1Cue/H7yAAAABZld3h9q1ApyJW41lzwy+JHCmvkis7HAWPNo1LZi63qkAAAADp4ozDKhPy6ICXcXD2bvhaEVoY1/cK6AXXoVWhsA/M8nSKxSwtNmYvg5RANEkCSaaIjqvL4KYTH7p1cViKREdR</EncryptedPassword>
   </PropertyGroup>
   <ItemGroup>
+    <File Include="404.html">
+      <publishTime>06/16/2019 20:34:50</publishTime>
+    </File>
     <File Include="bin/App_global.asax.compiled">
-      <publishTime>06/14/2019 10:05:35</publishTime>
+      <publishTime>06/20/2019 02:01:52</publishTime>
     </File>
     <File Include="bin/App_global.asax.dll">
-      <publishTime>06/14/2019 10:05:35</publishTime>
+      <publishTime>06/20/2019 02:01:52</publishTime>
     </File>
     <File Include="bin/ArmouryUCP.WebAPI.dll">
-      <publishTime>06/14/2019 10:05:24</publishTime>
+      <publishTime>06/20/2019 02:01:41</publishTime>
     </File>
     <File Include="bin/ArmouryUCP.WebAPI.pdb">
-      <publishTime>06/14/2019 10:05:24</publishTime>
+      <publishTime>06/20/2019 02:01:41</publishTime>
     </File>
     <File Include="bin/AutoMapper.dll">
       <publishTime>11/17/2018 09:14:56</publishTime>
@@ -34,14 +37,41 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="bin/Google.Protobuf.dll">
       <publishTime>12/21/2017 19:23:44</publishTime>
     </File>
+    <File Include="bin/Microsoft.AspNet.Identity.Core.dll">
+      <publishTime>04/24/2018 12:47:38</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AspNet.Identity.Owin.dll">
+      <publishTime>04/24/2018 12:47:40</publishTime>
+    </File>
     <File Include="bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll">
       <publishTime>03/29/2019 09:51:48</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Owin.Cors.dll">
+      <publishTime>01/18/2019 20:50:50</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Owin.dll">
+      <publishTime>01/18/2019 20:50:30</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Owin.Host.SystemWeb.dll">
+      <publishTime>01/18/2019 20:50:50</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Owin.Security.Cookies.dll">
+      <publishTime>02/13/2015 13:16:38</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Owin.Security.dll">
+      <publishTime>01/18/2019 20:51:10</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Owin.Security.OAuth.dll">
+      <publishTime>01/18/2019 20:51:00</publishTime>
     </File>
     <File Include="bin/MySql.Data.dll">
       <publishTime>01/28/2019 06:41:58</publishTime>
     </File>
     <File Include="bin/Newtonsoft.Json.dll">
       <publishTime>03/29/2019 09:51:54</publishTime>
+    </File>
+    <File Include="bin/Owin.dll">
+      <publishTime>11/13/2012 11:19:34</publishTime>
     </File>
     <File Include="bin/roslyn/csc.exe">
       <publishTime>03/29/2019 09:51:52</publishTime>
@@ -199,6 +229,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="bin/System.Web.Http.dll">
       <publishTime>11/28/2018 12:01:00</publishTime>
     </File>
+    <File Include="bin/System.Web.Http.Owin.dll">
+      <publishTime>11/28/2018 13:01:48</publishTime>
+    </File>
     <File Include="bin/System.Web.Http.WebHost.dll">
       <publishTime>03/29/2019 09:51:46</publishTime>
     </File>
@@ -218,10 +251,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/29/2019 10:51:40</publishTime>
     </File>
     <File Include="index.html">
-      <publishTime>06/13/2019 23:35:34</publishTime>
+      <publishTime>06/20/2019 00:44:04</publishTime>
+    </File>
+    <File Include="main.html">
+      <publishTime>06/20/2019 01:14:37</publishTime>
     </File>
     <File Include="PrecompiledApp.config">
-      <publishTime>06/14/2019 10:05:28</publishTime>
+      <publishTime>06/20/2019 02:01:45</publishTime>
+    </File>
+    <File Include="profile.html">
+      <publishTime>06/16/2019 20:32:31</publishTime>
     </File>
     <File Include="UI/Images/avatar.png">
       <publishTime>03/29/2019 12:39:23</publishTime>
@@ -405,6 +444,18 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="UI/Images/businesses/small/9.jpg">
       <publishTime>06/11/2019 22:56:24</publishTime>
+    </File>
+    <File Include="UI/Images/etc/1.png">
+      <publishTime>06/17/2019 19:17:10</publishTime>
+    </File>
+    <File Include="UI/Images/etc/2.png">
+      <publishTime>06/17/2019 23:52:46</publishTime>
+    </File>
+    <File Include="UI/Images/etc/3.png">
+      <publishTime>06/18/2019 00:13:53</publishTime>
+    </File>
+    <File Include="UI/Images/etc/4.png">
+      <publishTime>06/18/2019 00:15:49</publishTime>
     </File>
     <File Include="UI/Images/extra-nav/logo-small.png">
       <publishTime>03/29/2019 15:00:20</publishTime>
@@ -798,6 +849,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="UI/Images/houses/small/9_3.jpg">
       <publishTime>06/11/2019 00:03:20</publishTime>
+    </File>
+    <File Include="UI/Images/skins/body-shape.png">
+      <publishTime>06/16/2019 00:20:40</publishTime>
     </File>
     <File Include="UI/Images/skins/medium-thumbnail/000.png">
       <publishTime>04/06/2019 23:47:25</publishTime>
@@ -3655,11 +3709,14 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="UI/Images/vehicles/small/609.png">
       <publishTime>06/11/2019 23:49:32</publishTime>
     </File>
+    <File Include="UI/Images/weapons/ak47.svg">
+      <publishTime>06/15/2019 20:56:19</publishTime>
+    </File>
     <File Include="UI/Resources/angular.js">
       <publishTime>03/29/2019 09:51:46</publishTime>
     </File>
     <File Include="UI/Resources/app.js">
-      <publishTime>06/13/2019 23:35:23</publishTime>
+      <publishTime>06/20/2019 01:08:59</publishTime>
     </File>
     <File Include="UI/Resources/bootstrap.min.css">
       <publishTime>03/29/2019 09:51:46</publishTime>
@@ -3671,10 +3728,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/07/2019 00:13:06</publishTime>
     </File>
     <File Include="UI/Stylesheets/style.css">
-      <publishTime>06/13/2019 23:36:18</publishTime>
+      <publishTime>06/19/2019 21:04:06</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>06/12/2019 02:42:46</publishTime>
+      <publishTime>06/17/2019 02:33:29</publishTime>
     </File>
   </ItemGroup>
 </Project>

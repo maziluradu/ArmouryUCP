@@ -2,6 +2,7 @@
 using ArmouryUCP.WebAPI.Services.Interfaces;
 using DSharpPlus;
 using DSharpPlus.EventArgs;
+using Microsoft.Owin.Security.OAuth;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +25,11 @@ namespace ArmouryUCP.WebAPI
         {
             config.EnableCors();
 
+            // Web API configuration and services  
+            // Configure Web API to use only bearer token authentication.  
+            config.SuppressDefaultHostAuthentication();
+            config.Filters.Add(new HostAuthenticationFilter(OAuthDefaults.AuthenticationType));
+
             // Web API configuration and services
             AutoMapper.Mapper.Initialize(cfg =>
             {
@@ -38,6 +44,7 @@ namespace ArmouryUCP.WebAPI
             container.RegisterType<IHouseService, HouseService>();
             container.RegisterType<IVehicleService, VehicleService>();
             container.RegisterType<IBusinessService, BusinessService>();
+            container.RegisterType<IServerService, ServerService>();
             config.DependencyResolver = new UnityResolver(container);
             config.Formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/html"));
 

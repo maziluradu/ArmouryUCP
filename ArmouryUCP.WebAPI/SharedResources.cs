@@ -324,7 +324,7 @@ namespace ArmouryUCP.WebAPI
             "Truck Driver",
             "Courier",
             "Garbage Man",
-            "Duneride Driver",
+            "Miner",
             "Farmer",
             "Street Sweeper"
         };

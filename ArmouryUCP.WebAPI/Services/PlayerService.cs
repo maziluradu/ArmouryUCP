@@ -128,5 +128,48 @@ namespace ArmouryUCP.WebAPI.Services
             }
             return factionHistory;
         }
+
+        public Player LoginUser(string username, string password)
+        {
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                connection.Open();
+                MySqlCommand cmd = new MySqlCommand($"SELECT ID FROM wp_users WHERE user_login='{username}' AND user_pass='6E6D898C6392E28F4A03A93CC14A0D095FC46793B2D8FE03E14A711B3508249B401D0478AACAD6874D237B82F0D21310E3276F7327E18EE74677D71E164E7179' LIMIT 1", connection);
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        return GetPlayer(Convert.ToInt32(reader["ID"]));
+                    }
+                }
+            }
+
+            return null;
+        }
+
+        public List<Player> GetOnlinePlayers(bool showFull = false)
+        {
+            var players = new List<Player>();
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                connection.Open();
+                MySqlCommand cmd = new MySqlCommand($"SELECT x.countt, ID, Model, user_login FROM wp_users, (select count(*) as countt FROM wp_users WHERE Connected=1) as x WHERE Connected=1 ORDER BY AdminLevel DESC LIMIT 4", connection);
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        players.Add(new Player()
+                        {
+                            Model = Convert.ToInt32(reader["Model"]),
+                            ID = Convert.ToInt32(reader["ID"]),
+                            Name = reader["user_login"].ToString(),
+                            TotalPlayers = Convert.ToInt32(reader["countt"])
+                        });
+                    }
+                }
+            }
+
+            return players;
+        }
     }
 }

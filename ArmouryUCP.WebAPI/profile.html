@@ -1,0 +1,248 @@
+﻿<div ng-controller="playerController">
+    <div class="col-md-12 profile-header">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">Panel</a></li>
+                <li class="breadcrumb-item"><a href="#">Profile</a></li>
+                <li class="breadcrumb-item active" aria-current="page">{{ playerInfos.Name }}</li>
+            </ol>
+        </nav>
+        <br />
+        <div class="c100 p{{ playerInfos.LevelProgress }} skin{{ playerInfos.Model }} avatar-wrapper" style="-webkit-transform: rotate(-150deg);-moz-transform: rotate(-150deg);-ms-transform: rotate(-150deg);-o-transform: rotate(-150deg);transform: rotate(-150deg);">
+            <div class="avatar-level"><span>{{ playerInfos.Level }}</span></div>
+            <span></span>
+            <div class="slice">
+                <div class="bar"></div>
+                <div class="fill"></div>
+            </div>
+        </div>
+        <h3 class="large">
+            <i ng-show="playerInfos.DonateRank > 0" class="fas fa-star premium-user"></i>{{ playerInfos.Name }}
+            <span ng-show="playerInfos.AdminLevel > 0" class="badge badge-secondary armoury-green">{{ adminLevelName }}</span>
+            <span ng-show="playerInfos.Member2 == 7" class="badge badge-secondary armoury-green">Governor</span>
+            <span ng-show="playerInfos.DonateRank > 0" class="badge badge-secondary armoury-yellow">Premium User</span>
+        </h3>
+        <div class="small-details">
+            <span>Member since: {{ playerInfos.LastLoginNice }}</span>&nbsp;&nbsp;&nbsp;<span>Last Login: {{ playerInfos.LastLoginNice }}</span>
+        </div>
+    </div>
+    <div class="profile-underheader">
+        <span class="badge badge-secondary armoury-green"><i class="fas fa-coins"></i>${{ playerInfos.Cash | number:0 }}</span>
+        <span class="badge badge-secondary armoury-green"><i class="fas fa-users"></i>{{ playerInfos.Faction }}</span>
+        <span class="badge badge-secondary armoury-green"><i class="fas fa-percentage"></i>{{ playerInfos.LevelProgress }}% level progress</span>
+    </div>
+    <br /><br />
+    <div class="container-fluid" id="page">
+        <div class="row">
+            <div class="page-secondaryboard col-md-6" ng-init="profileStatisticsTabSelector='general'">
+                <div class="content">
+                    <div class="tabbed-content" style="margin-bottom: 0.75em;">
+                        <h4 class="title">General Statistics</h4>
+                        <div class="header-tabs">
+                            <a href="" ng-click="profileStatisticsTabSelector='general'" ng-class="{'selected' : profileStatisticsTabSelector == 'general'}">General</a>
+                            <a href="" ng-click="profileStatisticsTabSelector='faction'" ng-class="{'selected' : profileStatisticsTabSelector == 'faction'}">Faction History</a>
+                        </div>
+                    </div>
+                    <div class="page-body profile-stats" ng-show="profileStatisticsTabSelector=='general'">
+                        <div class="graph-holder wrapper">
+                            <div class="graph-holder connected-hours">
+                                <br /><ol class="legend"><li class="gray">Average number</li><li class="green">Your current hours</li><li class="cyan">Last week's hours</li></ol><br />
+                                <div id="line_top_x" style="width: 114%; margin-left: -4%; max-height: 260px;"></div>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row" style="margin: 0;">
+                            <div class="col-md-6" style="padding-left: 0;">
+                                <ul>
+                                    <li>Level<span>{{ playerInfos.Level }}</span></li>
+                                    <li>Respect Points<span>{{ playerInfos.Respect }}</span></li>
+                                    <li>Playing Hours<span>{{ playerInfos.ConnectedTime }}</span></li>
+                                    <li>Age<span>{{ playerInfos.Age }}</span></li>
+                                    <li>Sex<span>{{ playerInfos.SexNice }}</span></li>
+                                    <li>Warnings<span>{{ playerInfos.Warnings }}</span></li>
+                                    <li>Job<span>{{ playerInfos.JobNice }}</span></li>
+                                    <li>Last Login<span>{{ playerInfos.LastLoginNice }}</span></li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6" style="padding-right: 0;">
+                                <ul>
+                                    <li>Faction<span>{{ playerInfos.Faction }}</span></li>
+                                    <li>Faction Rank<span>{{ playerInfos.FactionRank }}</span></li>
+                                    <li>Faction Warnings<span>{{ playerInfos.FactionWarnings }}</span></li>
+                                    <li>Faction Punish<span>{{ playerInfos.FactionPunish }}</span></li>
+                                    <li>Faction Activity<span>{{ playerInfos.FactionActivity }}</span></li>
+                                    <li>Member Since<span>{{ playerInfos.FactionMemberSinceNice }}</span></li>
+                                    <li>Family<span>{{ playerInfos.Faction }}</span></li>
+                                    <li>Family Rank<span>{{ playerInfos.FactionRank }}</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="page-body" ng-show="profileStatisticsTabSelector=='faction'">
+                        <ul class="faction-history list-normal">
+                            <li class="item" ng-repeat="factionHistoryEntry in factionHistory">
+                                <table>
+                                    <tr>
+                                        <td><div class="avatar-holder"><img src="UI/Images/skins/small-thumbnail/{{modelPadded}}.png" /></div></td>
+                                        <td ng-bind-html="factionHistoryEntry.Content" style="width: 90%;"></td>
+                                        <td class="time">{{ factionHistoryEntry.DateNice }}</td>
+                                    </tr>
+                                </table>
+                            </li>
+                        </ul>
+                        <br />
+                    </div>
+                </div>
+                <br />
+                <div class="content">
+                    <h4 class="title">Skills</h4>
+                    <div class="page-body profile-info">
+                        <ul id="skills">
+                            <li class="skill" ng-repeat="skill in playerInfos.Skills">
+                                <div class="hexagon" style="background: url('UI/Images/hexagon.svg') no-repeat center; background-size: cover;">
+                                    <div class="hexagon-inner">
+                                        <i class="fas {{ skill.Icon }}"></i>
+                                    </div>
+                                    <span class="skill-level">{{ skill.ProgressLevel }}</span>
+                                </div>
+                                {{ skill.NameNice }}
+                            </li>
+                        </ul>
+                        <br />
+                        <p ng-if="playerInfos.Skills.length > 0" align="center">Only skills with a minimum of skill level 1 are being shown.</p>
+                        <p ng-if="playerInfos.Skills.length == 0" align="center">This player has no skill leveled up at least above skill level 1.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="page-secondaryboard col-md-5" ng-init="profilePropertiesTabSelector='houses'">
+                <div class="content">
+                    <div class="tabbed-content">
+                        <h4 class="title">Properties</h4>
+                        <div class="header-tabs">
+                            <a href="" ng-click="profilePropertiesTabSelector='houses'" ng-class="{'selected' : profilePropertiesTabSelector == 'houses'}">Houses</a>
+                            <a href="" ng-click="profilePropertiesTabSelector='vehicles'" ng-class="{'selected' : profilePropertiesTabSelector == 'vehicles'}">Vehicles</a>
+                            <a href="" ng-click="profilePropertiesTabSelector='businesses'" ng-class="{'selected' : profilePropertiesTabSelector == 'businesses'}">Businesses</a>
+                        </div>
+                    </div>
+                    <div class="page-body">
+                        <div class="profile-info" ng-if="profilePropertiesTabSelector=='houses'">
+                            <p ng-if="houseInfos.length > 0">The player ,,{{ playerInfos.Name }}” owns {{ housesCount }} houses, with a total value of ${{ housesValue | number : fractionSize }}. {{ housesCount > 0 ? playerInfos.Name + "’s first house was bought on the date of " + houseInfos[0].DateOfPurchaseNice + "." : ""}}<br /><br /></p>
+                            <p align="center" ng-if="houseInfos.length == 0"><br />This player owns no houses.</p>
+                            <table>
+                                <tr ng-repeat="house in houseInfos">
+                                    <td><img src="UI/Images/houses/small/{{house.InteriorIndexNice}}_0.jpg" /></td>
+                                    <td style="width: 70%;">
+                                        <span class="top-info"><i class="fas fa-star"></i>Level {{ house.Level }} house</span><br />
+                                        <span class="middle-info">{{ house.NameNice }}</span><br />
+                                        <span class="bottom-info">Purchased on {{ house.DateOfPurchaseNice }}</span>
+                                    </td>
+                                    <td style="width: 30%;">
+                                        <a href="#">More info <i class="fas fa-angle-right"></i></a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="profile-info" ng-if="profilePropertiesTabSelector=='vehicles'">
+                            <p ng-if="vehicleInfos.length > 0">The player ,,{{ playerInfos.Name }}” owns {{ vehiclesCount }} vehicles, with a total value of ${{ vehiclesValue | number : fractionSize }}. {{ vehiclesCount > 0 ? playerInfos.Name + "’s first vehicle was bought on the date of " + vehicleInfos[0].DateOfPurchaseNice + "." : ""}}<br /><br /></p>
+                            <p align="center" ng-if="vehicleInfos.length == 0"><br />This player owns no vehicles.</p>
+                            <table>
+                                <tr ng-repeat="vehicle in vehicleInfos">
+                                    <td><img src="UI/Images/vehicles/small/{{vehicle.Model}}.png" /></td>
+                                    <td style="width: 70%;">
+                                        <span class="top-info"><i class="fas fa-dollar-sign"></i>{{ vehicle.Value | number : fractionSize }}</span><br />
+                                        <span class="middle-info">{{ vehicle.Name }}</span><br />
+                                        <span class="bottom-info">Purchased on {{ vehicle.DateOfPurchaseNice }}</span>
+                                    </td>
+                                    <td style="width: 30%;">
+                                        <a href="#">More info <i class="fas fa-angle-right"></i></a>
+                                    </td>
+
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="profile-info" ng-if="profilePropertiesTabSelector=='businesses'">
+                            <p ng-if="businessInfos.length > 0">The player ,,{{ playerInfos.Name }}” owns {{ businessesCount }} businesses, with a total value of ${{ businessesValue | number : fractionSize }}. {{ businessesCount > 0 ? playerInfos.Name + "’s first business was bought on the date of " + businessInfos[0].DateOfPurchaseNice + "." : ""}}<br /><br /></p>
+                            <p align="center" ng-if="businessInfos.length == 0"><br />This player owns no businesses.</p>
+                            <table>
+                                <tr ng-repeat="business in businessInfos">
+                                    <td><img src="UI/Images/businesses/small/{{business.Type}}.jpg" /></td>
+                                    <td style="width: 70%;">
+                                        <span class="top-info"><i class="fas fa-star"></i>Level {{ business.Level }} business</span><br />
+                                        <span class="middle-info">{{ business.Name }}</span><br />
+                                        <span class="bottom-info">Purchased on {{ business.DateOfPurchaseNice }}</span>
+                                    </td>
+                                    <td style="width: 30%;">
+                                        <a href="#">More info <i class="fas fa-angle-right"></i></a>
+                                    </td>
+
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="content combat-info">
+                    <h4 class="title">Combat Information</h4>
+                    <div class="page-body">
+                        <table>
+                            <tr>
+                                <td>
+                                    <div class="hexagon-big" style="background: url('UI/Images/hexagon.svg') no-repeat center; background-size: cover;">
+                                        <div class="hexagon-inner">
+                                            <div class="weapon">
+                                                <span>AK47</span>
+                                                <img src="UI/Images/weapons/ak47.svg" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td style="width: 50%">
+                                    <table style="width: 90%">
+                                        <tr><td><i class="fas fa-star"></i> Preferred gun</td></tr>
+                                        <tr class="item"><td>Name</td><td>AK47</td></tr>
+                                        <tr class="item"><td>Usage</td><td>87.4%</td></tr>
+                                        <tr class="item"><td>Kills</td><td>1024</td></tr>
+                                        <tr class="item"><td>Accuracy</td><td>69.7%</td></tr>
+                                    </table>
+                                </td>
+                                <td style="width: 50%">
+                                    <table>
+                                        <tr><td><i class="fas fa-star"></i> 2nd Preferred gun</td></tr>
+                                        <tr class="item"><td>Name</td><td>AK47</td></tr>
+                                        <tr class="item"><td>Usage</td><td>87.4%</td></tr>
+                                        <tr class="item"><td>Kills</td><td>1024</td></tr>
+                                        <tr class="item"><td>Accuracy</td><td>69.7%</td></tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding-top: 2em; text-align: center; position: relative; right: 0.6em;">
+                                    <img style="width: 40%; height: auto; margin-left: auto; margin-right: auto" src="UI/Images/skins/body-shape.png" />
+                                    <div class="accuracy head"><span>12%</span></div>
+                                    <div class="accuracy torso"><span>23%</span></div>
+                                    <div class="accuracy groin"><span>34%</span></div>
+                                    <div class="accuracy leftarm"><span>45%</span></div>
+                                    <div class="accuracy rightarm"><span>56%</span></div>
+                                    <div class="accuracy leftleg"><span>67%</span></div>
+                                    <div class="accuracy rightleg"><span>78%</span></div>
+                                </td>
+                                <td colspan="2" style="width: 100%; padding-top: 1em">
+                                    <table>
+                                        <tr><td><i class="fas fa-star"></i> General combat information</td></tr>
+                                        <tr class="item"><td>Weapon accuracy</td><td>AK47</td></tr>
+                                        <tr class="item"><td>Wars participated</td><td>87.4%</td></tr>
+                                        <tr class="item"><td>Total kills</td><td>1024</td></tr>
+                                        <tr class="item"><td>Average kills per war</td><td>69.7%</td></tr>
+                                        <tr class="item"><td>Average war kill participation</td><td>69.7%</td></tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                        <br />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+</div>

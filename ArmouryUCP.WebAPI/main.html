@@ -1,0 +1,119 @@
+﻿<div class="col-md-12 profile-header">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-9">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Panel</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Frontpage</li>
+                    </ol>
+                </nav>
+                <h3 class="large">Frontpage</h3>
+                <div class="small-details">
+                    <span>The server has been running for {{serverInfo.Uptime}} days, with an uptime of 99.9%.</span>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <img src="UI/Images/etc/1.png" />
+            </div>
+        </div>
+    </div>
+</div>
+<div class="profile-underheader general">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8">
+                <span class="badge badge-secondary armoury-green"><i class="fas fa-coins"></i>${{serverInfo.TotalPlayerMoney | number:fractionSize}} Total player money</span>
+                <span class="badge badge-secondary armoury-green"><i class="fas fa-trophy"></i>{{serverInfo.HighestLevel}} Highest level</span>
+                <span class="badge badge-secondary armoury-green"><i class="fas fa-sync-alt"></i>v1.0.0 Latest update</span>
+            </div>
+            <div class="col-md-4">
+                <div class="players-online">
+                    Players online<br /><span>{{onlinePlayersNumber}}</span>
+                </div>
+                <a href="{{onlinePlayers[0]['profileUrl']}}" class="avatar-holder first" ng-if="onlinePlayers[0]">
+                    <img src="UI/Images/skins/small-thumbnail/{{('000'+onlinePlayers[0]['Model']).slice(-3)}}.png" />
+                </a>
+                <a href="{{onlinePlayers[1]['profileUrl']}}" class="avatar-holder" ng-if="onlinePlayers[1]">
+                    <img src="UI/Images/skins/small-thumbnail/{{('000'+onlinePlayers[1]['Model']).slice(-3)}}.png" />
+                </a>
+                <a href="{{onlinePlayers[2]['profileUrl']}}" class="avatar-holder" ng-if="onlinePlayers[2]">
+                    <img src="UI/Images/skins/small-thumbnail/{{('000'+onlinePlayers[2]['Model']).slice(-3)}}.png" />
+                </a>
+                <a href="{{onlinePlayers[3]['profileUrl']}}" class="avatar-holder" ng-if="onlinePlayers[3]">
+                    <img src="UI/Images/skins/small-thumbnail/{{('000'+onlinePlayers[3]['Model']).slice(-3)}}.png" />
+                </a>
+                <a href="" class="avatar-holder last" ng-if="onlinePlayersNumber > 4">
+                    <span>+{{ onlinePlayersNumber-4 }}</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<br /><br />
+<div class="container-fluid" style="padding: 0 3em 0 3em;">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="big-square-ad growth">
+                <div class="head">
+                    <h5><i class="fas fa-caret-{{serverInfo.TotalPlayerMoney-serverInfo.PreviousDayTotalMoney > 0 ? 'up' : 'down'}}"></i> {{serverInfo.TotalMoneyModifyPercentage}}%</h5>
+                    <span>${{serverInfo.TotalPlayerMoney-serverInfo.PreviousDayTotalMoney | number:fractionSize}} {{serverInfo.TotalPlayerMoney-serverInfo.PreviousDayTotalMoney > 0 ? 'more' : 'less'}} money than yesterday</span>
+                </div>
+                <div class="foot">
+                    <h4>Today's economic growth</h4>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5">
+            <div class="big-square-ad earner">
+                <div class="head">
+                    <h5>{{serverInfo.HighestEarner}}</h5>
+                    <span>They earned ${{serverInfo.HighestEarnerMoney | number:fractionSize}} today</span>
+                </div>
+                <div class="foot">
+                    <h4>Today's highest earner</h4>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="big-square-ad bestjob">
+                <div class="head">
+                    <h5>{{serverInfo.MostPopularJob}}</h5>
+                    <span>Used by {{serverInfo.MostPopularJobPercentage | number:2}}% of our players</span>
+                </div>
+                <div class="foot">
+                    <h4>Most popular job</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br /><br />
+<div class="container-fluid" id="page" style="padding: 0 3em 0 3em;">
+    <div class="row">
+        <div class="page-secondaryboard col-md-7">
+            <div class="content">
+                <h4 class="title">Server News</h4>
+                <br />
+                <ul class="faction-history list-normal" style="padding: 0 1.5em">
+                    <li class="item" ng-repeat="serverNewsEntry in serverNews">
+                        <table>
+                            <tr>
+                                <td><div class="avatar-holder"><img src="UI/Images/skins/small-thumbnail/{{('000'+serverNewsEntry.Skin).slice(-3)}}.png" /></div></td>
+                                <td ng-bind-html="serverNewsEntry.Content" style="width: 90%;"></td>
+                                <td class="time">{{ serverNewsEntry.DateNice }}</td>
+                            </tr>
+                        </table>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="page-secondaryboard col-md-4">
+            <div class="content">
+                <h4 class="title">Other Information</h4>
+                <br /><br /><br />
+            </div>
+        </div>
+    </div>
+</div>
+<br /><br />

@@ -226,6 +226,13 @@
     border-bottom: 2px solid #0f0f27;
 }
 
+.profile-header .col-md-3 > img {
+    position: absolute;
+    bottom: -0.45em;
+    width: 170px;
+    left: 0;
+}
+
     .avatar-wrapper::before {
         content: ' ';
         position: absolute;
@@ -340,6 +347,10 @@
     padding: 1em 0;
 }
 
+.profile-underheader.general {
+    padding: 1em 2em;
+}
+
 .profile-underheader .badge {
     position: relative;
     background: #000015;
@@ -368,6 +379,56 @@
     text-align: left;
     font-size: 1.25em;
     vertical-align: middle;
+}
+
+.profile-underheader .players-online {
+    color: #fff;
+    font-size: 0.65em;
+    font-weight: 800;
+    margin-top: -5px;
+    text-align: right;
+    display: inline-block;
+    float: left;
+}
+
+.profile-underheader .players-online > span {
+    font-size: 1.75em;
+    color: #cd2342;
+}
+
+.profile-underheader .col-md-4 .avatar-holder {
+    width: 39px;
+    height: 39px;
+    border-radius: 50%;
+    overflow: hidden;
+    float: left;
+    border: 3px solid #0f0f24;
+    margin-top: -5px;
+    margin-left: -1em;
+}
+
+.profile-underheader .col-md-4 .avatar-holder.first {
+    margin-left: 0.4em;
+}
+
+.profile-underheader .col-md-4 .avatar-holder.last {
+    border: 0;
+    background-image: linear-gradient(#7d1b1f, #cd2342);
+}
+
+.profile-underheader .col-md-4 .avatar-holder.last > span {
+    line-height: 40px;
+    color: #fff;
+    font-size: 0.7em;
+    font-weight: 700;
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+}
+
+.profile-underheader .col-md-4 .avatar-holder > img {
+    margin-left: -26%;
+    margin-top: -15%;
 }
 
 #page {
@@ -950,4 +1011,85 @@ ul.list-normal td.time::after {
     font-size: 0.55em;
     color: #fff;
     font-weight: 800;
+}
+
+.big-square-ad {
+    height: 250px;
+    padding: 0 16px 0 0;
+    border-radius: 4px;
+    color: #fff;
+    font-family: Montserrat, sans-serif;
+}
+
+.big-square-ad.growth {
+    background-image: linear-gradient(to right, #2b2e86, #46488f);
+}
+
+.big-square-ad.earner, .big-square-ad.bestjob {
+    background-image: linear-gradient(to right, #020228, #000017);
+}
+
+.big-square-ad::before {
+    content: ' ';
+    position: absolute;
+    width: 100%;
+    height: 110%;
+    bottom: 0; left: -15px;
+}
+
+.big-square-ad.growth::before {
+    background: url('../Images/etc/2.png') no-repeat right;
+    background-size: auto 100%;
+}
+
+.big-square-ad.earner::before {
+    background: url('../Images/etc/3.png') no-repeat right;
+    background-size: auto 100%;
+}
+
+.big-square-ad.bestjob::before {
+    background: url('../Images/etc/4.png') no-repeat right;
+    background-size: auto 100%;
+}
+
+.big-square-ad > .head {
+    position: absolute;
+    content: ' ';
+    left: 0;
+    top: 0;
+    height: 50%;
+    width: 100%;
+    padding: 0.8em 2em;
+}
+
+.big-square-ad > .head > h5 {
+    font-weight: 800;
+    margin-bottom: 0;
+    padding-bottom: 0.15em;
+    text-shadow: 0px 2px 2px rgba(0,0,0,0.21);
+}
+
+.big-square-ad > .head > span {
+    font-size: 0.6em;
+    line-height: 1.3em;
+    display: inline-block;
+    width: 60%;
+    font-weight: 800;
+}
+
+.big-square-ad > .foot {
+    position: absolute;
+    content: ' ';
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    padding: 0.3em 2em;
+}
+
+.big-square-ad > .foot > h4 {
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: 1.2em;
+    text-shadow: 0px 2px 2px rgba(0,0,0,0.21);
+    width: 70%;
 }

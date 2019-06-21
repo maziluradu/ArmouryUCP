@@ -52,9 +52,36 @@
     <Reference Include="Google.Protobuf, Version=3.5.1.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
       <HintPath>..\packages\Google.Protobuf.3.5.1\lib\net45\Google.Protobuf.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.2\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.2\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Owin, Version=4.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.4.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Cors, Version=4.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Cors.4.0.1\lib\net45\Microsoft.Owin.Cors.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=4.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.4.0.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=4.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.4.0.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.3.0.1\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth, Version=4.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.4.0.1\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
     <Reference Include="MySql.Data, Version=8.0.15.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <HintPath>..\packages\MySql.Data.8.0.15\lib\net452\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
     </Reference>
     <Reference Include="System.ComponentModel" />
     <Reference Include="System.Configuration.Install" />
@@ -89,6 +116,9 @@
     <Reference Include="System.Web.Http.Cors, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Cors.5.2.7\lib\net45\System.Web.Http.Cors.dll</HintPath>
     </Reference>
+    <Reference Include="System.Web.Http.Owin, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Owin.5.2.7\lib\net45\System.Web.Http.Owin.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
@@ -115,8 +145,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="404.html" />
     <Content Include="Global.asax" />
     <Content Include="index.html" />
+    <Content Include="main.html" />
+    <Content Include="profile.html" />
     <Content Include="UI\Images\avatar.png" />
     <Content Include="UI\Images\businesses\1.jpg" />
     <Content Include="UI\Images\businesses\10.jpg" />
@@ -178,6 +211,10 @@
     <Content Include="UI\Images\businesses\small\7.jpg" />
     <Content Include="UI\Images\businesses\small\8.jpg" />
     <Content Include="UI\Images\businesses\small\9.jpg" />
+    <Content Include="UI\Images\etc\1.png" />
+    <Content Include="UI\Images\etc\2.png" />
+    <Content Include="UI\Images\etc\3.png" />
+    <Content Include="UI\Images\etc\4.png" />
     <Content Include="UI\Images\extra-nav\logo-small.png" />
     <Content Include="UI\Images\hexagon.svg" />
     <Content Include="UI\Images\hexagon_black.svg" />
@@ -308,6 +345,7 @@
     <Content Include="UI\Images\houses\small\9_1.jpg" />
     <Content Include="UI\Images\houses\small\9_2.jpg" />
     <Content Include="UI\Images\houses\small\9_3.jpg" />
+    <Content Include="UI\Images\skins\body-shape.png" />
     <Content Include="UI\Images\skins\medium-thumbnail\000.png" />
     <Content Include="UI\Images\skins\medium-thumbnail\001.png" />
     <Content Include="UI\Images\skins\medium-thumbnail\002.png" />
@@ -1270,28 +1308,36 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\BusinessController.cs" />
+    <Compile Include="Controllers\ServerController.cs" />
     <Compile Include="Controllers\VehicleController.cs" />
     <Compile Include="Controllers\HouseController.cs" />
     <Compile Include="Controllers\PlayerController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\OAuth2\AppOAuthProvider.cs" />
     <Compile Include="Models\Dtos\BusinessDto.cs" />
+    <Compile Include="Models\Dtos\PlayerShortDto.cs" />
     <Compile Include="Models\Dtos\VehicleDto.cs" />
     <Compile Include="Models\Dtos\HouseDto.cs" />
     <Compile Include="Models\Dtos\PlayerDto.cs" />
     <Compile Include="Models\Business.cs" />
     <Compile Include="Models\Dtos\FactionHistoryDto.cs" />
     <Compile Include="Models\FactionHistory.cs" />
+    <Compile Include="Models\LogEntry.cs" />
+    <Compile Include="Models\ServerInformation.cs" />
     <Compile Include="Models\Skill.cs" />
     <Compile Include="Models\Vehicle.cs" />
     <Compile Include="Models\House.cs" />
     <Compile Include="Models\Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\BusinessService.cs" />
+    <Compile Include="Services\ServerService.cs" />
     <Compile Include="Services\Interfaces\IBusinessService.cs" />
+    <Compile Include="Services\Interfaces\IServerService.cs" />
     <Compile Include="Services\Interfaces\IVehicleService.cs" />
     <Compile Include="Services\VehicleService.cs" />
     <Compile Include="Services\Interfaces\IHouseService.cs" />

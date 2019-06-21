@@ -34,6 +34,8 @@ namespace ArmouryUCP.WebAPI.Models.Dtos
         public DateTime FactionMemberSince { get; set; }
         public List<Skill> Skills { get; set; }
 
+        public int TotalPlayers { get; set; }
+
         public int LevelProgress
         {
             get
