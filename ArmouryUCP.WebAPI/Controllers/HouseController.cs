@@ -24,16 +24,31 @@ namespace ArmouryUCP.WebAPI.Controllers
         }
 
         /// <summary>
-        /// Gets whole information about multiple players. Extremely inefficient. Only use this in
-        /// critical cases - it outputs huge blocks of data.
+        /// Gets house information for a specific owner
         /// </summary>
-        /// <returns>JSON containing information about multiple players</returns>
+        /// <returns>JSON containing information about house for the specific owner</returns>
         [HttpGet]
         [Route("api/house/{owner}")]
         public IHttpActionResult GetHouseByOwner(string owner)
         {
             var houses = Mapper.Map<List<HouseDto>>(houseService.GetHouses(owner));
             return Ok(houses);
+        }
+
+        /// <summary>
+        /// Gets partial information about houses on the server
+        /// </summary>
+        /// <returns>JSON containing information about multiple houses</returns>
+        [HttpGet]
+        [Route("api/house")]
+        public IHttpActionResult GetHouses(int number = 10)
+        {
+            var initialHouses = houseService.GetHouses(number);
+            var houses = Mapper.Map<List<HouseDto>>(initialHouses);
+            var information = houseService.GetGlobalInformationForHouses();
+            var result = new { houses, information };
+
+            return Ok(result);
         }
 
         /// <summary>

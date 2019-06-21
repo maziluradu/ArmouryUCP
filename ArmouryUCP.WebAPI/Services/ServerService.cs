@@ -63,13 +63,14 @@ namespace ArmouryUCP.WebAPI.Services
                     }
                 }
 
-                cmd = new MySqlCommand($"SELECT user_login FROM wp_users WHERE PreviousDayMoney = {serverInformation.HighestEarnerMoney} LIMIT 1", connection);
+                cmd = new MySqlCommand($"SELECT ID,user_login FROM wp_users WHERE PreviousDayMoney = {serverInformation.HighestEarnerMoney} LIMIT 1", connection);
 
                 using (var reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
                     {
                         serverInformation.HighestEarner = reader["user_login"].ToString();
+                        serverInformation.HighestEarnerId = Convert.ToInt32(reader["ID"]);
                     }
                 }
             }

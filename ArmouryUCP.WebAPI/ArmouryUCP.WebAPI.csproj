@@ -148,6 +148,7 @@
     <Content Include="404.html" />
     <Content Include="Global.asax" />
     <Content Include="index.html" />
+    <Content Include="houses.html" />
     <Content Include="main.html" />
     <Content Include="profile.html" />
     <Content Include="UI\Images\avatar.png" />
@@ -1327,6 +1328,7 @@
     <Compile Include="Models\Business.cs" />
     <Compile Include="Models\Dtos\FactionHistoryDto.cs" />
     <Compile Include="Models\FactionHistory.cs" />
+    <Compile Include="Models\GlobalHouseInformation.cs" />
     <Compile Include="Models\LogEntry.cs" />
     <Compile Include="Models\ServerInformation.cs" />
     <Compile Include="Models\Skill.cs" />

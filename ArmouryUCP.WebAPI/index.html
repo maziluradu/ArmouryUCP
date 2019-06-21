@@ -92,9 +92,9 @@
                                 <br />
                                 <ul ng-controller="secondaryNavController as secondaryItems" class="nav flex-column">
                                     <li class="nav-item" ng-repeat="item in secondaryItems.items[0]">
-                                        <a class="nav-link active" href="#">
+                                        <a class="nav-link active" href="{{item[1]}}">
                                             <span data-feather="home"></span>
-                                            {{ item }} <span class="sr-only">(current)</span>
+                                            {{ item[0] }} <span class="sr-only">(current)</span>
                                         </a>
                                     </li>
                                 </ul>

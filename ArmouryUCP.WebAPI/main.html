@@ -67,7 +67,7 @@
         <div class="col-md-5">
             <div class="big-square-ad earner">
                 <div class="head">
-                    <h5>{{serverInfo.HighestEarner}}</h5>
+                    <h5><a href="{{mainLocation + 'player/' + serverInfo.HighestEarnerId}}">{{serverInfo.HighestEarner}}</a></h5>
                     <span>They earned ${{serverInfo.HighestEarnerMoney | number:fractionSize}} today</span>
                 </div>
                 <div class="foot">

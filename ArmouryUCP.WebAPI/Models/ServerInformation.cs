@@ -12,6 +12,7 @@ namespace ArmouryUCP.WebAPI.Models
         public float MostPopularJobPercentage { get; set; }
         public long PreviousDayTotalMoney { get; set; }
         public string HighestEarner { get; set; }
+        public int HighestEarnerId { get; set; }
         public long HighestEarnerMoney { get; set; }
 
         public int TotalMoneyModifyPercentage

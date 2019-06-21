@@ -11,6 +11,10 @@ app.config(function ($routeProvider) {
             templateUrl: 'profile.html',
             controller: 'playerController'
         })
+        .when('/houses', {
+            templateUrl: 'houses.html',
+            controller: 'housesController'
+        })
         .otherwise({
             templateUrl: '404.html'
         });
@@ -21,7 +25,25 @@ app.controller('mainController', ['$scope', function ($scope) {
 
 }]);
 
+app.controller('housesController', ['$scope', '$location', function ($scope, $location) {
+    $scope.mainLocation = $location.protocol() + '://' + $location.host() + ':' + ($location.port() !== 80 ? $location.port() : '') + '/#!/';
+
+    var houseRequest = new XMLHttpRequest();
+    houseRequest.onreadystatechange = function () {
+        $scope.$apply(function () {
+            if (houseRequest.readyState == 4 && houseRequest.status == 200) {
+                $scope.houseInfos = JSON.parse(houseRequest.responseText);
+            }
+        });
+    }
+
+    houseRequest.open("GET", $location.protocol() + '://' + $location.host() + ':' + ($location.port() !== 80 ? $location.port() : '') + "/api/house");
+    houseRequest.send();
+}]);
+
 app.controller('frontPageController', ['$scope', '$location', function ($scope, $location) {
+    $scope.mainLocation = $location.protocol() + '://' + $location.host() + ':' + ($location.port() !== 80 ? $location.port() : '') + '/#!/';
+
     var serverInfoRequest = new XMLHttpRequest();
     serverInfoRequest.onreadystatechange = function () {
         $scope.$apply(function () {
@@ -80,12 +102,20 @@ app.controller('mainNavController', ['$scope', function ($scope) {
     ];
 }]);
 
-app.controller('secondaryNavController', ['$scope', function ($scope) {
+app.controller('secondaryNavController', ['$scope', '$location', function ($scope, $location) {
     var secondaryItems = this;
 
     secondaryItems.items = [
-        [ 'General', 'Properties', 'Businesses', 'Vehicles', 'Clan', 'Faction History', 'War Info', 'Stats' ],
-        [ 'General', 'Properties', 'Businesses', 'Vehicles', 'Clan', 'Faction History', 'War Info', 'Stats' ]
+        [
+            ['General', ''],
+            ['Houses', '/#!/houses'],
+            ['Businesses', 'businesses'],
+            ['Vehicles', ''],
+            ['Clan', ''],
+            ['Faction History', ''],
+            ['War Info', ''],
+            ['Stats', ''],
+        ]
     ];
 }]);
 
