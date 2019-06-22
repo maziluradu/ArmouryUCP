@@ -42,5 +42,52 @@ namespace ArmouryUCP.WebAPI.Services
             }
             return vehicles;
         }
+
+        public List<Vehicle> GetVehicles(int number = 0, int start = 0)
+        {
+            var vehicles = new List<Vehicle>();
+
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                connection.Open();
+                MySqlCommand cmd = new MySqlCommand($"select * from vehicles where id >= {start} limit {number}", connection);
+
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        vehicles.Add(new Vehicle()
+                        {
+                            Id = Convert.ToInt32(reader["id"]),
+                            Model = Convert.ToInt32(reader["Model"]),
+                            Owner = reader["Owner"].ToString(),
+                            Value = Convert.ToInt32(reader["Price"]),
+                            DateOfPurchase = DateTime.Parse(reader["vLastBought"].ToString())
+                        });
+                    }
+                }
+            }
+            return vehicles;
+        }
+
+        public GlobalVehicleInformation GetGlobalInformationForVehicles()
+        {
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                connection.Open();
+                MySqlCommand cmd = new MySqlCommand($"SELECT count(*) as Total FROM vehicles", connection);
+
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        return new GlobalVehicleInformation() {
+                            Total = Convert.ToInt32(reader["Total"])
+                        };
+                    }
+                }
+            }
+            return null;
+        }
     }
 }

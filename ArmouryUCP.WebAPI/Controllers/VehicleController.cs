@@ -35,5 +35,37 @@ namespace ArmouryUCP.WebAPI.Controllers
             var vehicles = Mapper.Map<List<VehicleDto>>(vehicleService.GetVehicles(owner));
             return Ok(vehicles);
         }
+
+        /// <summary>
+        /// Gets partial information about vehicles on the server
+        /// </summary>
+        /// <returns>JSON containing information about multiple vehicles</returns>
+        [HttpGet]
+        [Route("api/vehicle")]
+        public IHttpActionResult GetVehicles(int number = 10)
+        {
+            var initialVehicles = vehicleService.GetVehicles(number, 0);
+            var vehicles = Mapper.Map<List<VehicleDto>>(initialVehicles);
+            var information = vehicleService.GetGlobalInformationForVehicles();
+            var result = new { vehicles, information };
+
+            return Ok(result);
+        }
+
+        /// <summary>
+        /// Same as Route: api/vehicle, but can start from specific page
+        /// </summary>
+        /// <returns>JSON containing information about multiple vehicles</returns>
+        [HttpGet]
+        [Route("api/vehicle/paging/{page}")]
+        public IHttpActionResult GetVehiclesStartingFromPage(int page, int number = 10)
+        {
+            var initialVehicles = vehicleService.GetVehicles(number, number * page);
+            var vehicles = Mapper.Map<List<VehicleDto>>(initialVehicles);
+            var information = vehicleService.GetGlobalInformationForVehicles();
+            var result = new { vehicles, information };
+
+            return Ok(result);
+        }
     }
 }
