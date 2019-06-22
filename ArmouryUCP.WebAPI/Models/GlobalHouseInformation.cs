@@ -7,15 +7,6 @@
         public int TotalForSale { get; set; }
         public int TotalTenants { get; set; }
 
-        public int TotalPages
-        {
-            get
-            {
-                return Total/10;
-            }
-        }
-
-
         public GlobalHouseInformation()
         {
 
