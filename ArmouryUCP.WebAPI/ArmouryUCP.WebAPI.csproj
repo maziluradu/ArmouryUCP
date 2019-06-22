@@ -147,6 +147,7 @@
   <ItemGroup>
     <Content Include="404.html" />
     <Content Include="Global.asax" />
+    <Content Include="vehicles.html" />
     <Content Include="index.html" />
     <Content Include="houses.html" />
     <Content Include="main.html" />
@@ -1328,6 +1329,7 @@
     <Compile Include="Models\Business.cs" />
     <Compile Include="Models\Dtos\FactionHistoryDto.cs" />
     <Compile Include="Models\FactionHistory.cs" />
+    <Compile Include="Models\GlobalVehicleInformation.cs" />
     <Compile Include="Models\GlobalHouseInformation.cs" />
     <Compile Include="Models\LogEntry.cs" />
     <Compile Include="Models\ServerInformation.cs" />
