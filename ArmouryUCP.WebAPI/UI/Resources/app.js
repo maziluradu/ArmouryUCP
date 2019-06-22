@@ -28,14 +28,33 @@ app.controller('mainController', ['$scope', function ($scope) {
 app.controller('housesController', ['$scope', '$location', '$window', function ($scope, $location, $window) {
     $scope.mainLocation = $location.protocol() + '://' + $location.host() + ':' + ($location.port() !== 80 ? $location.port() : '') + '/#!/';
     $scope.loadingIconHeightOffset = $window.innerHeight;
+    $scope.switchingHousePage = false;
+    $scope.currentPage = 0;
+    $scope.housePages = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+    $scope.Math = $window.Math;
 
     var houseRequest = new XMLHttpRequest();
     houseRequest.onreadystatechange = function () {
         $scope.$apply(function () {
             if (houseRequest.readyState == 4 && houseRequest.status == 200) {
+                $houseIndex = 0;
                 $scope.houseInfos = JSON.parse(houseRequest.responseText);
+                $scope.switchingHousePage = false;
+
+                $scope.housePages = [];
+                for (var i = Math.max($scope.currentPage - 5, 0); i < Math.min($scope.currentPage + 5 + ($scope.currentPage < 5 ? 5 - $scope.currentPage : 0), $scope.houseInfos.information.Total/10); i++) {
+                    $scope.housePages.push(i);
+                }
             }
         });
+    }
+
+    $scope.switchToPage = function ($page) {
+        houseRequest.open("GET", $location.protocol() + '://' + $location.host() + ':' + ($location.port() !== 80 ? $location.port() : '') + "/api/house/paging/" + $page);
+        houseRequest.send();
+
+        $scope.switchingHousePage = true;
+        $scope.currentPage = $page;
     }
 
     houseRequest.open("GET", $location.protocol() + '://' + $location.host() + ':' + ($location.port() !== 80 ? $location.port() : '') + "/api/house");

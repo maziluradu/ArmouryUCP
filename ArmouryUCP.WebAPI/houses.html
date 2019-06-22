@@ -1,4 +1,4 @@
-﻿<div id="loadingsplash" ng-hide="houseInfos.information !== undefined"><div class="loader triangle" style="top: {{loadingIconHeightOffset/2}}px; margin-top: -80px;"><svg viewBox="0 0 86 80"><polygon points="43 8 79 72 7 72"></polygon></svg></div></div>
+﻿<div class="loadingsplash" ng-hide="houseInfos.information !== undefined"><div class="loader triangle" style="top: {{loadingIconHeightOffset/2}}px; margin-top: -80px;"><svg viewBox="0 0 86 80"><polygon points="43 8 79 72 7 72"></polygon></svg></div></div>
 <div class="col-md-12 profile-header">
     <div class="container-fluid">
         <div class="row">
@@ -11,7 +11,7 @@
                 </nav>
                 <h3 class="large">Houses</h3>
                 <div class="small-details">
-                    <span>The server contains {{houseInfos.information.Total}} houses, from which {{houseInfos.information.TotalOwned}} owned, and {{houseInfos.information.Total-housesInfo.TotalOwned}} unowned.</span>
+                    <span>The server contains {{houseInfos.information.Total}} houses, from which {{houseInfos.information.TotalOwned}} owned, and {{houseInfos.information.Total-houseInfos.information.TotalOwned}} unowned.</span>
                 </div>
             </div>
         </div>
@@ -22,7 +22,7 @@
         <div class="row">
             <div class="col-md-12">
                 <span class="badge badge-secondary armoury-green"><i class="fas fa-home"></i>{{houseInfos.information.Total}} Total houses</span>
-                <span class="badge badge-secondary armoury-green"><i class="fas fa-comment-dollar"></i>{{houseInfos.information.TotalForSale}} Houses for sale</span>
+                <span class="badge badge-secondary armoury-green"><i class="fas fa-comment-dollar"></i>{{houseInfos.information.TotalForSale+houseInfos.information.Total-houseInfos.information.TotalOwned}} Houses for sale</span>
                 <span class="badge badge-secondary armoury-green"><i class="fas fa-users"></i>{{houseInfos.information.TotalTenants}} Total tenants in houses</span>
             </div>
         </div>
@@ -35,7 +35,8 @@
             <div class="content">
                 <h4 class="title">Houses</h4>
                 <br />
-                <div class="profile-info" style="padding: 0 2em;">
+                <div class="profile-info" style="padding: 0 2em; position: relative;">
+                    <div class="loadingsplash separate" ng-hide="!switchingHousePage"><div class="loader triangle" style="top: {{loadingIconHeightOffset/1.5}}px;"><svg viewBox="0 0 86 80"><polygon points="43 8 79 72 7 72"></polygon></svg></div></div>
                     <table>
                         <tr ng-repeat="house in houseInfos.houses">
                             <td><img src="UI/Images/houses/small/{{house.InteriorIndexNice}}_0.jpg" /></td>
@@ -45,10 +46,29 @@
                                 <span class="bottom-info">Purchased on {{ house.DateOfPurchaseNice }}</span>
                             </td>
                             <td style="width: 30%;">
-                                <a href="#">More info <i class="fas fa-angle-right"></i></a>
+                                <a href="{{'/#!/house/' + house.Id}}">More info <i class="fas fa-angle-right"></i></a>
                             </td>
                         </tr>
                     </table>
+
+                    <br />
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination justify-content-center">
+                            <li class="page-item">
+                                <a class="page-link" href="" ng-click="switchToPage(Math.max(currentPage-1, 0))" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                            <li class="page-item" ng-if="currentPage-5 > 0"><a class="page-link" href="#">..</a></li>
+                            <li class="page-item" ng-repeat="housePage in housePages"><a class="page-link" ng-click="switchToPage(housePage)" href="">{{housePage+1}}</a></li>
+                            <li class="page-item" ng-if="houseInfos.information.Total/10 > currentPage+5"><a class="page-link" href="#">..</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="" ng-click="switchToPage(Math.min(currentPage+1, houseInfos.information.Total/10))" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
                 </div>
                 <br />
             </div>

@@ -43,7 +43,23 @@ namespace ArmouryUCP.WebAPI.Controllers
         [Route("api/house")]
         public IHttpActionResult GetHouses(int number = 10)
         {
-            var initialHouses = houseService.GetHouses(number);
+            var initialHouses = houseService.GetHouses(number, 0);
+            var houses = Mapper.Map<List<HouseDto>>(initialHouses);
+            var information = houseService.GetGlobalInformationForHouses();
+            var result = new { houses, information };
+
+            return Ok(result);
+        }
+
+        /// <summary>
+        /// Same as Route: api/house, but can start from specific page
+        /// </summary>
+        /// <returns>JSON containing information about multiple houses</returns>
+        [HttpGet]
+        [Route("api/house/paging/{page}")]
+        public IHttpActionResult GetHousesStartingFromPage(int page, int number = 10)
+        {
+            var initialHouses = houseService.GetHouses(number, number*page);
             var houses = Mapper.Map<List<HouseDto>>(initialHouses);
             var information = houseService.GetGlobalInformationForHouses();
             var result = new { houses, information };

@@ -1127,7 +1127,7 @@ ul.list-normal td.time::after {
 }
 
 /* Loading Splash */
-#loadingsplash {
+.loadingsplash {
     position: absolute;
     left: 0;
     top: 0;
@@ -1138,12 +1138,18 @@ ul.list-normal td.time::after {
     transition: all linear 0.5s;
 }
 
-#loadingsplash.ng-hide {
+.loadingsplash.separate {
+    background: #01011a;
+    height: 96%;
+    padding: 0 2em;
+}
+
+.loadingsplash.ng-hide {
     opacity: 0;
 }
 
-#loadingsplash.ng-hide-add,
-#loadingsplash.ng-hide-remove {
+.loadingsplash.ng-hide-add,
+.loadingsplash.ng-hide-remove {
     transition: all linear 0.5s;
 }
 
@@ -1306,4 +1312,25 @@ ul.list-normal td.time::after {
 
 html {
     -webkit-font-smoothing: antialiased;
+}
+
+/* Houses Page */
+.pagination a.page-link {
+    background: #000015;
+    border: 2px solid #0f0f27;
+    border-right: 0;
+
+    transition: color 0.25s;
+}
+
+.pagination li:last-child a.page-link {
+    border-right: 2px solid #0f0f27;
+}
+
+.pagination a.page-link:hover {
+    border-right: 0;
+}
+
+.pagination a.page-link:focus, .pagination a.page-link:active {
+    color: inherit;
 }
