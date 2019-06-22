@@ -32,7 +32,7 @@ namespace ArmouryUCP.WebAPI.Services
                 }
 
                 connection.Open();
-                MySqlCommand cmd = new MySqlCommand($"SELECT x.TotalEmployedPlayers, x.TotalPlayerMoney, x.HighestLevel, x.HighestEarnerMoney, y.UpTime, y.PreviousDayTotalMoney{selectAddition} FROM wp_users, stuff, (SELECT max(PreviousDayMoney) as HighestEarnerMoney, count(CASE WHEN Job > 0 THEN 1 ELSE NULL END) as TotalEmployedPlayers, sum(Bank) AS TotalPlayerMoney, max(Level) as HighestLevel{selectAddition2} FROM wp_users) as x, (SELECT DATEDIFF(NOW(), ServerOpening) as UpTime, PreviousDayTotalMoney as PreviousDayTotalMoney FROM stuff) as y LIMIT 1", connection);
+                MySqlCommand cmd = new MySqlCommand($"SELECT x.TotalEmployedPlayers, x.TotalPlayerMoney, x.HighestLevel, x.HighestEarnerMoney, y.UpTime, y.ScriptVersion, y.PreviousDayTotalMoney{selectAddition} FROM wp_users, stuff, (SELECT max(PreviousDayMoney) as HighestEarnerMoney, count(CASE WHEN Job > 0 THEN 1 ELSE NULL END) as TotalEmployedPlayers, sum(Bank) AS TotalPlayerMoney, max(Level) as HighestLevel{selectAddition2} FROM wp_users) as x, (SELECT DATEDIFF(NOW(), ServerOpening) as UpTime, PreviousDayTotalMoney as PreviousDayTotalMoney, ScriptVersion as ScriptVersion FROM stuff) as y LIMIT 1", connection);
 
                 using (var reader = cmd.ExecuteReader())
                 {
@@ -58,7 +58,8 @@ namespace ArmouryUCP.WebAPI.Services
                             PreviousDayTotalMoney = Convert.ToInt64(reader["PreviousDayTotalMoney"]),
                             MostPopularJob = jobDictionary.First().Value.Value,
                             MostPopularJobPercentage = jobDictionary.First().Value.Key * 100 / Convert.ToSingle(reader["TotalEmployedPlayers"]),
-                            HighestEarnerMoney = Convert.ToInt64(reader["HighestEarnerMoney"])
+                            HighestEarnerMoney = Convert.ToInt64(reader["HighestEarnerMoney"]),
+                            ScriptVersion = reader["ScriptVersion"].ToString()
                         };
                     }
                 }

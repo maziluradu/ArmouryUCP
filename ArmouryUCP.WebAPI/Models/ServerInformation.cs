@@ -14,6 +14,7 @@ namespace ArmouryUCP.WebAPI.Models
         public string HighestEarner { get; set; }
         public int HighestEarnerId { get; set; }
         public long HighestEarnerMoney { get; set; }
+        public string ScriptVersion { get; set; }
 
         public int TotalMoneyModifyPercentage
         {

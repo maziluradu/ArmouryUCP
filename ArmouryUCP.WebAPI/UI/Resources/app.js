@@ -1,4 +1,4 @@
-﻿var app = angular.module('armouryPanel', ['ngRoute', 'ngSanitize']);
+﻿var app = angular.module('armouryPanel', ['ngRoute', 'ngSanitize', 'ngAnimate']);
 
 app.config(function ($routeProvider) {
 
@@ -25,8 +25,9 @@ app.controller('mainController', ['$scope', function ($scope) {
 
 }]);
 
-app.controller('housesController', ['$scope', '$location', function ($scope, $location) {
+app.controller('housesController', ['$scope', '$location', '$window', function ($scope, $location, $window) {
     $scope.mainLocation = $location.protocol() + '://' + $location.host() + ':' + ($location.port() !== 80 ? $location.port() : '') + '/#!/';
+    $scope.loadingIconHeightOffset = $window.innerHeight;
 
     var houseRequest = new XMLHttpRequest();
     houseRequest.onreadystatechange = function () {
@@ -41,8 +42,9 @@ app.controller('housesController', ['$scope', '$location', function ($scope, $lo
     houseRequest.send();
 }]);
 
-app.controller('frontPageController', ['$scope', '$location', function ($scope, $location) {
+app.controller('frontPageController', ['$scope', '$location', '$window', function ($scope, $location, $window) {
     $scope.mainLocation = $location.protocol() + '://' + $location.host() + ':' + ($location.port() !== 80 ? $location.port() : '') + '/#!/';
+    $scope.loadingIconHeightOffset = $window.innerHeight;
 
     var serverInfoRequest = new XMLHttpRequest();
     serverInfoRequest.onreadystatechange = function () {
@@ -119,7 +121,9 @@ app.controller('secondaryNavController', ['$scope', '$location', function ($scop
     ];
 }]);
 
-app.controller('playerController', ['$scope', '$location', function ($scope, $location) {
+app.controller('playerController', ['$scope', '$location', '$window', function ($scope, $location, $window) {
+    $scope.loadingIconHeightOffset = $window.innerHeight;
+
     var factionHistoryRequest = new XMLHttpRequest();
     factionHistoryRequest.onreadystatechange = function () {
         $scope.$apply(function () {
