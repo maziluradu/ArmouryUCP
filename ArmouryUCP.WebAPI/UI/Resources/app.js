@@ -15,6 +15,10 @@ app.config(function ($routeProvider) {
             templateUrl: 'houses.html',
             controller: 'housesController'
         })
+        .when('/vehicles', {
+            templateUrl: 'vehicles.html',
+            controller: 'vehiclesController'
+        })
         .otherwise({
             templateUrl: '404.html',
             controller: '404Controller'
@@ -66,6 +70,44 @@ app.controller('housesController', ['$scope', '$location', '$window', function (
 
     houseRequest.open("GET", $location.protocol() + '://' + $location.host() + ':' + ($location.port() !== 80 ? $location.port() : '') + "/api/house");
     houseRequest.send();
+}]);
+
+app.controller('vehiclesController', ['$scope', '$location', '$window', function ($scope, $location, $window) {
+    $scope.mainLocation = $location.protocol() + '://' + $location.host() + ':' + ($location.port() !== 80 ? $location.port() : '') + '/#!/';
+    $scope.loadingIconHeightOffset = $window.innerHeight;
+    $scope.switchingVehiclePage = false;
+    $scope.currentPage = 0;
+    $scope.vehiclePages = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+    $scope.Math = $window.Math;
+
+    var vehicleRequest = new XMLHttpRequest();
+    vehicleRequest.onreadystatechange = function () {
+        $scope.$apply(function () {
+            if (vehicleRequest.readyState == 4 && vehicleRequest.status == 200) {
+                $vehicleIndex = 0;
+                $scope.vehicleInfos = JSON.parse(vehicleRequest.responseText);
+                $scope.switchingVehiclePage = false;
+
+                $scope.vehiclePages = [];
+                for (var i = Math.max($scope.currentPage - 5, 0); i < Math.min($scope.currentPage + 5 + ($scope.currentPage < 5 ? 5 - $scope.currentPage : 0), $scope.vehicleInfos.information.Total / 10); i++) {
+                    $scope.vehiclePages.push(i);
+                }
+            }
+        });
+    }
+
+    $scope.switchToPage = function ($page) {
+        vehicleRequest.open("GET", $location.protocol() + '://' + $location.host() + ':' + ($location.port() !== 80 ? $location.port() : '') + "/api/vehicle/paging/" + $page);
+        vehicleRequest.send();
+
+        $scope.switchingVehiclePage = true;
+        $scope.currentPage = $page;
+
+        $window.scrollTo(0, angular.element('#pagetitle').offsetTop);
+    }
+
+    vehicleRequest.open("GET", $location.protocol() + '://' + $location.host() + ':' + ($location.port() !== 80 ? $location.port() : '') + "/api/vehicle");
+    vehicleRequest.send();
 }]);
 
 app.controller('frontPageController', ['$scope', '$location', '$window', function ($scope, $location, $window) {
@@ -138,7 +180,7 @@ app.controller('secondaryNavController', ['$scope', '$location', function ($scop
             ['General', ''],
             ['Houses', '/#!/houses'],
             ['Businesses', 'businesses'],
-            ['Vehicles', ''],
+            ['Vehicles', '/#!/vehicles'],
             ['Clan', ''],
             ['Faction History', ''],
             ['War Info', ''],
