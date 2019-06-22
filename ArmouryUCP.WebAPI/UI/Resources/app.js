@@ -16,13 +16,20 @@ app.config(function ($routeProvider) {
             controller: 'housesController'
         })
         .otherwise({
-            templateUrl: '404.html'
+            templateUrl: '404.html',
+            controller: '404Controller'
         });
 
 });
 
 app.controller('mainController', ['$scope', function ($scope) {
 
+}]);
+
+app.controller('404Controller', ['$timeout', '$window', function ($timeout, $window) {
+    $timeout(function () {
+        $window.location.href = '/';
+    }, 3000);
 }]);
 
 app.controller('housesController', ['$scope', '$location', '$window', function ($scope, $location, $window) {
