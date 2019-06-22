@@ -59,7 +59,7 @@ namespace ArmouryUCP.WebAPI.Controllers
         [Route("api/house/paging/{page}")]
         public IHttpActionResult GetHousesStartingFromPage(int page, int number = 10)
         {
-            var initialHouses = houseService.GetHouses(number, number*page);
+            var initialHouses = houseService.GetHouses(number, page * number);
             var houses = Mapper.Map<List<HouseDto>>(initialHouses);
             var information = houseService.GetGlobalInformationForHouses();
             var result = new { houses, information };

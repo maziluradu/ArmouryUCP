@@ -15,6 +15,10 @@ app.config(function ($routeProvider) {
             templateUrl: 'houses.html',
             controller: 'housesController'
         })
+        .when('/businesses', {
+            templateUrl: 'businesses.html',
+            controller: 'businessesController'
+        })
         .otherwise({
             templateUrl: '404.html',
             controller: '404Controller'
@@ -30,6 +34,45 @@ app.controller('404Controller', ['$timeout', '$window', function ($timeout, $win
     $timeout(function () {
         $window.location.href = '/';
     }, 3000);
+}]);
+
+app.controller('businessesController', ['$scope', '$location', '$window', function ($scope, $location, $window) {
+    $scope.mainLocation = $location.protocol() + '://' + $location.host() + ':' + ($location.port() !== 80 ? $location.port() : '') + '/#!/';
+    $scope.loadingIconHeightOffset = $window.innerHeight;
+    $scope.switchingBusinessPage = false;
+    $scope.currentPage = 0;
+    $scope.businessPages = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+    $scope.Math = $window.Math;
+
+    var businessRequest = new XMLHttpRequest();
+    businessRequest.onreadystatechange = function () {
+        $scope.$apply(function () {
+            if (businessRequest.readyState == 4 && businessRequest.status == 200) {
+                $businessIndex = 0;
+                $scope.businessInfos = JSON.parse(businessRequest.responseText);
+                $scope.switchingBusinessPage = false;
+
+                $scope.businessPages = [];
+                for (var i = Math.max($scope.currentPage - 5, 0); i < Math.min($scope.currentPage + 5 + ($scope.currentPage < 5 ? 5 - $scope.currentPage : 0), $scope.businessInfos.information.Total / 10); i++) {
+                    $scope.businessPages.push(i);
+                }
+            }
+        });
+    }
+
+    $scope.switchToPage = function ($page) {
+        businessRequest.open("GET", $location.protocol() + '://' + $location.host() + ':' + ($location.port() !== 80 ? $location.port() : '') + "/api/business/paging/" + $page);
+        businessRequest.send();
+
+        $scope.switchingBusinessPage = true;
+        $scope.currentPage = $page;
+
+        $window.scrollTo(0, angular.element('#pagetitle').offsetTop);
+        console.log($window);
+    }
+
+    businessRequest.open("GET", $location.protocol() + '://' + $location.host() + ':' + ($location.port() !== 80 ? $location.port() : '') + "/api/business");
+    businessRequest.send();
 }]);
 
 app.controller('housesController', ['$scope', '$location', '$window', function ($scope, $location, $window) {
@@ -137,7 +180,7 @@ app.controller('secondaryNavController', ['$scope', '$location', function ($scop
         [
             ['General', ''],
             ['Houses', '/#!/houses'],
-            ['Businesses', 'businesses'],
+            ['Businesses', '/#!/businesses'],
             ['Vehicles', ''],
             ['Clan', ''],
             ['Faction History', ''],

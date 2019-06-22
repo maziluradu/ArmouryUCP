@@ -1,0 +1,83 @@
+﻿<div class="loadingsplash" ng-hide="businessInfos.information !== undefined"><div class="loader triangle" style="top: {{loadingIconHeightOffset/2}}px; margin-top: -80px;"><svg viewBox="0 0 86 80"><polygon points="43 8 79 72 7 72"></polygon></svg></div></div>
+<div class="col-md-12 profile-header">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Panel</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Businesses</li>
+                    </ol>
+                </nav>
+                <h3 class="large">Businesses</h3>
+                <div class="small-details">
+                    <span>The server contains {{businessInfos.information.Total}} businesses, from which {{businessInfos.information.TotalOwned}} owned, and {{businessInfos.information.Total-businessInfos.information.TotalOwned}} unowned.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="profile-underheader general">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <span class="badge badge-secondary armoury-green"><i class="fas fa-home"></i>{{businessInfos.information.Total}} Total businesses</span>
+                <span class="badge badge-secondary armoury-green"><i class="fas fa-comment-dollar"></i>{{businessInfos.information.TotalForSale+businessInfos.information.Total-businessInfos.information.TotalOwned}} Businesses for sale</span>
+            </div>
+        </div>
+    </div>
+</div>
+<br /><br />
+<div class="container-fluid" id="page" style="padding: 0 3em 0 3em;">
+    <div class="row">
+        <div class="page-secondaryboard col-md-7">
+            <div class="content">
+                <h4 class="title">Businesses</h4>
+                <br />
+                <div class="profile-info" style="padding: 0 2em; position: relative;">
+                    <div class="loadingsplash separate" ng-hide="!switchingBusinessPage"><div class="loader triangle" style="top: {{loadingIconHeightOffset/1.5}}px;"><svg viewBox="0 0 86 80"><polygon points="43 8 79 72 7 72"></polygon></svg></div></div>
+                    <table>
+                        <tr ng-repeat="business in businessInfos.businesses">
+                            <td><img src="UI/Images/businesses/small/{{business.Type}}.jpg" /></td>
+                            <td style="width: 70%;">
+                                <span class="top-info"><i class="fas fa-star"></i>Level {{ business.Level }} business</span><br />
+                                <span class="middle-info">{{ business.Name }}</span><br />
+                                <span class="bottom-info">Purchased on {{ business.DateOfPurchaseNice }}</span>
+                            </td>
+                            <td style="width: 30%;">
+                                <a href="{{'/#!/business/' + business.Id}}">More info <i class="fas fa-angle-right"></i></a>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <br />
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination justify-content-center">
+                            <li class="page-item">
+                                <a class="page-link" href="" ng-click="switchToPage(Math.max(currentPage-1, 0))" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                            <li class="page-item" ng-if="currentPage-5 > 0"><a class="page-link">..</a></li>
+                            <li class="page-item" ng-repeat="businessPage in businessPages" ng-class="businessPage == currentPage ? 'active' : ''"><a class="page-link" ng-click="switchToPage(businessPage)" href="">{{businessPage+1}}</a></li>
+                            <li class="page-item" ng-if="businessInfos.information.Total/10 > currentPage+5"><a class="page-link">..</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="" ng-click="switchToPage(Math.min(currentPage+1, Math.floor(businessInfos.information.Total/10)))" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+                <br />
+            </div>
+        </div>
+        <div class="page-secondaryboard col-md-4">
+            <div class="content">
+                <h4 class="title">Featured Business</h4>
+                <br /><br /><br />
+            </div>
+        </div>
+    </div>
+</div>
+<br /><br />

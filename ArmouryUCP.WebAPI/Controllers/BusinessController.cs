@@ -35,5 +35,37 @@ namespace ArmouryUCP.WebAPI.Controllers
             var businesses = Mapper.Map<List<BusinessDto>>(businessService.GetBusinesses(owner));
             return Ok(businesses);
         }
+
+        /// <summary>
+        /// Gets partial information about businesses on the server
+        /// </summary>
+        /// <returns>JSON containing information about multiple businesses</returns>
+        [HttpGet]
+        [Route("api/business")]
+        public IHttpActionResult GetBusinesses(int number = 10)
+        {
+            var initialBusinesses = businessService.GetBusinesses(number, 0);
+            var businesses = Mapper.Map<List<BusinessDto>>(initialBusinesses);
+            var information = businessService.GetGlobalInformationForBusinesses();
+            var result = new { businesses, information };
+
+            return Ok(result);
+        }
+
+        /// <summary>
+        /// Same as Route: api/business, but can start from specific page
+        /// </summary>
+        /// <returns>JSON containing information about multiple businesses</returns>
+        [HttpGet]
+        [Route("api/business/paging/{page}")]
+        public IHttpActionResult GetBusinessesStartingFromPage(int page, int number = 10)
+        {
+            var initialBusinesses = businessService.GetBusinesses(number, page * number);
+            var businesses = Mapper.Map<List<BusinessDto>>(initialBusinesses);
+            var information = businessService.GetGlobalInformationForBusinesses();
+            var result = new { businesses, information };
+
+            return Ok(result);
+        }
     }
 }
