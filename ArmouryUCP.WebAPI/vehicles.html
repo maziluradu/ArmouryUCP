@@ -21,7 +21,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
-                <span class="badge badge-secondary armoury-green"><i class="fas fa-home"></i>{{vehicleInfos.information.Total}} Total vehicles</span>
+                <span class="badge badge-secondary armoury-green"><i class="fas fa-car"></i>{{vehicleInfos.information.Total}} Total vehicles</span>
             </div>
         </div>
     </div>
@@ -58,7 +58,7 @@
                                 </a>
                             </li>
                             <li class="page-item" ng-if="currentPage-5 > 0"><a class="page-link">..</a></li>
-                            <li class="page-item" ng-repeat="vehiclePage in vehiclePages"><a class="page-link" ng-click="switchToPage(vehiclePage)" href="">{{vehiclePage+1}}</a></li>
+                            <li class="page-item" ng-repeat="vehiclePage in vehiclePages" ng-class="vehiclePage == currentPage ? 'active' : ''"><a class="page-link" ng-click="switchToPage(vehiclePage)" href="">{{vehiclePage+1}}</a></li>
                             <li class="page-item" ng-if="vehicleInfos.information.Total/10 > currentPage+5"><a class="page-link">..</a></li>
                             <li class="page-item">
                                 <a class="page-link" href="" ng-click="switchToPage(Math.min(currentPage+1, Math.floor(vehicleInfos.information.Total/10)))" aria-label="Next">
