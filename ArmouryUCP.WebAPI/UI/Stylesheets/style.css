@@ -1334,3 +1334,8 @@ html {
 .pagination a.page-link:focus, .pagination a.page-link:active {
     color: inherit;
 }
+
+.pagination .page-item.active .page-link {
+    background: initial;
+    border-color: #0f0f27;
+}

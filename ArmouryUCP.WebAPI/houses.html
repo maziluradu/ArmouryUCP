@@ -33,7 +33,7 @@
     <div class="row">
         <div class="page-secondaryboard col-md-7">
             <div class="content">
-                <h4 class="title">Houses</h4>
+                <h4 class="title" id="pagetitle">Houses</h4>
                 <br />
                 <div class="profile-info" style="padding: 0 2em; position: relative;">
                     <div class="loadingsplash separate" ng-hide="!switchingHousePage"><div class="loader triangle" style="top: {{loadingIconHeightOffset/1.5}}px;"><svg viewBox="0 0 86 80"><polygon points="43 8 79 72 7 72"></polygon></svg></div></div>
@@ -59,11 +59,11 @@
                                     <span aria-hidden="true">&laquo;</span>
                                 </a>
                             </li>
-                            <li class="page-item" ng-if="currentPage-5 > 0"><a class="page-link" href="#">..</a></li>
-                            <li class="page-item" ng-repeat="housePage in housePages"><a class="page-link" ng-click="switchToPage(housePage)" href="">{{housePage+1}}</a></li>
-                            <li class="page-item" ng-if="houseInfos.information.Total/10 > currentPage+5"><a class="page-link" href="#">..</a></li>
+                            <li class="page-item" ng-if="currentPage-5 > 0"><a class="page-link">..</a></li>
+                            <li class="page-item" ng-class="housePage == currentPage ? 'active' : ''" ng-repeat="housePage in housePages"><a class="page-link" ng-click="switchToPage(housePage)" href="">{{housePage+1}}</a></li>
+                            <li class="page-item" ng-if="houseInfos.information.Total/10 > currentPage+5"><a class="page-link">..</a></li>
                             <li class="page-item">
-                                <a class="page-link" href="" ng-click="switchToPage(Math.min(currentPage+1, houseInfos.information.Total/10))" aria-label="Next">
+                                <a class="page-link" href="" ng-click="switchToPage(Math.min(currentPage+1, Math.floor(houseInfos.information.Total/10)))" aria-label="Next">
                                     <span aria-hidden="true">&raquo;</span>
                                 </a>
                             </li>
