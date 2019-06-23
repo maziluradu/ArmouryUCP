@@ -81,6 +81,7 @@
         background: #00000d; /* blue-dark-high */
         padding: 0;
         border-right: 2px solid #0b0b1b;
+        text-align: center;
     }
 
     #sidebar-mini > ul {
