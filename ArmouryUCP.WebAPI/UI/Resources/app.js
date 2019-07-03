@@ -15,6 +15,10 @@ app.config(function ($routeProvider) {
             templateUrl: 'houses.html',
             controller: 'housesController'
         })
+        .when('/houses/:id', {
+            templateUrl: 'house.html',
+            controller: 'houseController'
+        })
         .when('/vehicles', {
             templateUrl: 'vehicles.html',
             controller: 'vehiclesController'
@@ -34,13 +38,43 @@ app.controller('mainController', ['$scope', function ($scope) {
 
 }]);
 
+app.controller('houseController', ['$scope', '$location', '$window', '$http', function ($scope, $location, $window, $http) {
+    $scope.loadingIconHeightOffset = $window.innerHeight;
+    $scope.Math = $window.Math;
+
+    $http({
+        method: 'GET',
+        url: $location.protocol() + '://' + $location.host() + ':' + ($location.port() !== 80 ? $location.port() : '') + "/api/house/" + $location.path().split('/').pop()
+    }).then(function successCallback(response) {
+        if (response.status == 200) {
+            $scope.houseInfos = response.data;
+
+            $http({
+                method: 'GET',
+                url: $location.protocol() + '://' + $location.host() + ':' + ($location.port() !== 80 ? $location.port() : '') + "/api/player/" + $scope.houseInfos['Owner'] + '/byname'
+            }).then(function successCallback(response) {
+                if (response.status == 200) {
+                    $scope.ownerInfos = response.data;
+                }
+            }, function errorCallback() {
+            });
+        }
+    }, function errorCallback() {
+        });
+
+    $scope.getDifferenceInDays = function (date) {
+        var parsedDate = new Date(date);
+        return parseInt(Math.abs(parsedDate.getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24));
+    }
+}]);
+
 app.controller('404Controller', ['$timeout', '$window', function ($timeout, $window) {
     $timeout(function () {
         $window.location.href = '/';
     }, 3000);
 }]);
 
-app.controller('businessesController', ['$scope', '$location', '$window', function ($scope, $location, $window) {
+app.controller('businessesController', ['$scope', '$location', '$window', '$http', function ($scope, $location, $window, $http) {
     $scope.mainLocation = $location.protocol() + '://' + $location.host() + ':' + ($location.port() !== 80 ? $location.port() : '') + '/#!/';
     $scope.loadingIconHeightOffset = $window.innerHeight;
     $scope.switchingBusinessPage = false;
@@ -48,38 +82,44 @@ app.controller('businessesController', ['$scope', '$location', '$window', functi
     $scope.businessPages = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
     $scope.Math = $window.Math;
 
-    var businessRequest = new XMLHttpRequest();
-    businessRequest.onreadystatechange = function () {
-        $scope.$apply(function () {
-            if (businessRequest.readyState == 4 && businessRequest.status == 200) {
-                $businessIndex = 0;
-                $scope.businessInfos = JSON.parse(businessRequest.responseText);
-                $scope.switchingBusinessPage = false;
+    var loadBusinesses = function (data) {
+        $businessIndex = 0;
+        $scope.businessInfos = data;
+        $scope.switchingBusinessPage = false;
 
-                $scope.businessPages = [];
-                for (var i = Math.max($scope.currentPage - 5, 0); i < Math.min($scope.currentPage + 5 + ($scope.currentPage < 5 ? 5 - $scope.currentPage : 0), $scope.businessInfos.information.Total / 10); i++) {
-                    $scope.businessPages.push(i);
-                }
-            }
-        });
+        $scope.businessPages = [];
+        for (var i = Math.max($scope.currentPage - 5, 0); i < Math.min($scope.currentPage + 5 + ($scope.currentPage < 5 ? 5 - $scope.currentPage : 0), $scope.businessInfos.information.Total / 10); i++) {
+            $scope.businessPages.push(i);
+        }
     }
 
     $scope.switchToPage = function ($page) {
-        businessRequest.open("GET", $location.protocol() + '://' + $location.host() + ':' + ($location.port() !== 80 ? $location.port() : '') + "/api/business/paging/" + $page);
-        businessRequest.send();
+        $http({
+            method: 'GET',
+            url: $location.protocol() + '://' + $location.host() + ':' + ($location.port() !== 80 ? $location.port() : '') + "/api/business/paging/" + $page
+        }).then(function successCallback(response) {
+            if (response.status == 200) {
+                loadBusinesses(response.data);
+            }
+        }, function errorCallback() {
+        });
 
         $scope.switchingBusinessPage = true;
         $scope.currentPage = $page;
-
-        $window.scrollTo(0, angular.element('#pagetitle').offsetTop);
-        console.log($window);
     }
 
-    businessRequest.open("GET", $location.protocol() + '://' + $location.host() + ':' + ($location.port() !== 80 ? $location.port() : '') + "/api/business");
-    businessRequest.send();
+    $http({
+        method: 'GET',
+        url: $location.protocol() + '://' + $location.host() + ':' + ($location.port() !== 80 ? $location.port() : '') + "/api/business"
+    }).then(function successCallback(response) {
+        if (response.status == 200) {
+            loadBusinesses(response.data);
+        }
+    }, function errorCallback() {
+    });
 }]);
 
-app.controller('housesController', ['$scope', '$location', '$window', function ($scope, $location, $window) {
+app.controller('housesController', ['$scope', '$location', '$window', '$http', function ($scope, $location, $window, $http) {
     $scope.mainLocation = $location.protocol() + '://' + $location.host() + ':' + ($location.port() !== 80 ? $location.port() : '') + '/#!/';
     $scope.loadingIconHeightOffset = $window.innerHeight;
     $scope.switchingHousePage = false;
@@ -87,35 +127,44 @@ app.controller('housesController', ['$scope', '$location', '$window', function (
     $scope.housePages = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
     $scope.Math = $window.Math;
 
-    var houseRequest = new XMLHttpRequest();
-    houseRequest.onreadystatechange = function () {
-        $scope.$apply(function () {
-            if (houseRequest.readyState == 4 && houseRequest.status == 200) {
-                $houseIndex = 0;
-                $scope.houseInfos = JSON.parse(houseRequest.responseText);
-                $scope.switchingHousePage = false;
+    var loadHouses = function (data) {
+        $houseIndex = 0;
+        $scope.houseInfos = data;
+        $scope.switchingHousePage = false;
 
-                $scope.housePages = [];
-                for (var i = Math.max($scope.currentPage - 5, 0); i < Math.min($scope.currentPage + 5 + ($scope.currentPage < 5 ? 5 - $scope.currentPage : 0), $scope.houseInfos.information.Total/10); i++) {
-                    $scope.housePages.push(i);
-                }
-            }
-        });
+        $scope.housePages = [];
+        for (var i = Math.max($scope.currentPage - 5, 0); i < Math.min($scope.currentPage + 5 + ($scope.currentPage < 5 ? 5 - $scope.currentPage : 0), $scope.houseInfos.information.Total / 10); i++) {
+            $scope.housePages.push(i);
+        }
     }
 
     $scope.switchToPage = function ($page) {
-        houseRequest.open("GET", $location.protocol() + '://' + $location.host() + ':' + ($location.port() !== 80 ? $location.port() : '') + "/api/house/paging/" + $page);
-        houseRequest.send();
+        $http({
+            method: 'GET',
+            url: $location.protocol() + '://' + $location.host() + ':' + ($location.port() !== 80 ? $location.port() : '') + "/api/house/paging/" + $page
+        }).then(function successCallback(response) {
+            if (response.status == 200) {
+                loadHouses(response.data);
+            }
+        }, function errorCallback() {
+        });
 
         $scope.switchingHousePage = true;
         $scope.currentPage = $page;
     }
 
-    houseRequest.open("GET", $location.protocol() + '://' + $location.host() + ':' + ($location.port() !== 80 ? $location.port() : '') + "/api/house");
-    houseRequest.send();
+    $http({
+        method: 'GET',
+        url: $location.protocol() + '://' + $location.host() + ':' + ($location.port() !== 80 ? $location.port() : '') + "/api/house"
+    }).then(function successCallback(response) {
+        if (response.status == 200) {
+            loadHouses(response.data);
+        }
+    }, function errorCallback() {
+    });
 }]);
 
-app.controller('vehiclesController', ['$scope', '$location', '$window', function ($scope, $location, $window) {
+app.controller('vehiclesController', ['$scope', '$location', '$window', '$http', function ($scope, $location, $window, $http) {
     $scope.mainLocation = $location.protocol() + '://' + $location.host() + ':' + ($location.port() !== 80 ? $location.port() : '') + '/#!/';
     $scope.loadingIconHeightOffset = $window.innerHeight;
     $scope.switchingVehiclePage = false;
@@ -123,84 +172,85 @@ app.controller('vehiclesController', ['$scope', '$location', '$window', function
     $scope.vehiclePages = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
     $scope.Math = $window.Math;
 
-    var vehicleRequest = new XMLHttpRequest();
-    vehicleRequest.onreadystatechange = function () {
-        $scope.$apply(function () {
-            if (vehicleRequest.readyState == 4 && vehicleRequest.status == 200) {
-                $vehicleIndex = 0;
-                $scope.vehicleInfos = JSON.parse(vehicleRequest.responseText);
-                $scope.switchingVehiclePage = false;
+    var loadVehicles = function (data) {
+        $vehicleIndex = 0;
+        $scope.vehicleInfos = data;
+        $scope.switchingVehiclePage = false;
 
-                $scope.vehiclePages = [];
-                for (var i = Math.max($scope.currentPage - 5, 0); i < Math.min($scope.currentPage + 5 + ($scope.currentPage < 5 ? 5 - $scope.currentPage : 0), $scope.vehicleInfos.information.Total / 10); i++) {
-                    $scope.vehiclePages.push(i);
-                }
-            }
-        });
+        $scope.vehiclePages = [];
+        for (var i = Math.max($scope.currentPage - 5, 0); i < Math.min($scope.currentPage + 5 + ($scope.currentPage < 5 ? 5 - $scope.currentPage : 0), $scope.vehicleInfos.information.Total / 10); i++) {
+            $scope.vehiclePages.push(i);
+        }
     }
 
     $scope.switchToPage = function ($page) {
-        vehicleRequest.open("GET", $location.protocol() + '://' + $location.host() + ':' + ($location.port() !== 80 ? $location.port() : '') + "/api/vehicle/paging/" + $page);
-        vehicleRequest.send();
+        $http({
+            method: 'GET',
+            url: $location.protocol() + '://' + $location.host() + ':' + ($location.port() !== 80 ? $location.port() : '') + "/api/vehicle/paging/" + $page
+        }).then(function successCallback(response) {
+            if (response.status == 200) {
+                loadVehicles(response.data);
+            }
+        }, function errorCallback() {
+        });
 
         $scope.switchingVehiclePage = true;
         $scope.currentPage = $page;
-
-        $window.scrollTo(0, angular.element('#pagetitle').offsetTop);
     }
 
-    vehicleRequest.open("GET", $location.protocol() + '://' + $location.host() + ':' + ($location.port() !== 80 ? $location.port() : '') + "/api/vehicle");
-    vehicleRequest.send();
+    $http({
+        method: 'GET',
+        url: $location.protocol() + '://' + $location.host() + ':' + ($location.port() !== 80 ? $location.port() : '') + "/api/vehicle"
+    }).then(function successCallback(response) {
+        if (response.status == 200) {
+            loadVehicles(response.data);
+        }
+    }, function errorCallback() {
+    });
 }]);
 
-app.controller('frontPageController', ['$scope', '$location', '$window', function ($scope, $location, $window) {
+app.controller('frontPageController', ['$scope', '$location', '$window', '$http', function ($scope, $location, $window, $http) {
     $scope.mainLocation = $location.protocol() + '://' + $location.host() + ':' + ($location.port() !== 80 ? $location.port() : '') + '/#!/';
     $scope.loadingIconHeightOffset = $window.innerHeight;
 
-    var serverInfoRequest = new XMLHttpRequest();
-    serverInfoRequest.onreadystatechange = function () {
-        $scope.$apply(function () {
-            if (serverInfoRequest.readyState == 4 && serverInfoRequest.status == 200) {
-                $scope.serverInfo = JSON.parse(serverInfoRequest.responseText);
-            }
-        });
-    }
-
-    var serverNewsRequest = new XMLHttpRequest();
-    serverNewsRequest.onreadystatechange = function () {
-        $scope.$apply(function () {
-            if (serverNewsRequest.readyState == 4 && serverNewsRequest.status == 200) {
-                $scope.serverNews = JSON.parse(serverNewsRequest.responseText);
-            }
-        });
-    }
-
     $scope.onlinePlayersNumber = 0;
 
-    var onlinePlayersRequest = new XMLHttpRequest();
-    onlinePlayersRequest.onreadystatechange = function () {
-        $scope.$apply(function () {
-            if (onlinePlayersRequest.readyState == 4 && onlinePlayersRequest.status == 200) {
-                $scope.onlinePlayers = JSON.parse(onlinePlayersRequest.responseText);
-                if ($scope.onlinePlayers.length > 0) {
-                    $scope.onlinePlayersNumber = $scope.onlinePlayers[0]['TotalPlayers'];
+    $http({
+        method: 'GET',
+        url: $location.protocol() + '://' + $location.host() + ':' + ($location.port() !== 80 ? $location.port() : '') + "/api/player/briefonline"
+    }).then(function successCallback(response) {
+        if (response.status == 200) {
+            $scope.onlinePlayers = response.data;
+            if ($scope.onlinePlayers.length > 0) {
+                $scope.onlinePlayersNumber = $scope.onlinePlayers[0]['TotalPlayers'];
 
-                    $scope.onlinePlayers.forEach(function (element) {
-                        element['profileUrl'] = $location.protocol() + '://' + $location.host() + ':' + ($location.port() !== 80 ? $location.port() : '') + "/#!/player/" + element['ID'];
-                    });
-                }
+                $scope.onlinePlayers.forEach(function (element) {
+                    element['profileUrl'] = $location.protocol() + '://' + $location.host() + ':' + ($location.port() !== 80 ? $location.port() : '') + "/#!/player/" + element['ID'];
+                });
             }
-        });
-    }
+        }
+    }, function errorCallback() {
+    });
 
-    onlinePlayersRequest.open("GET", $location.protocol() + '://' + $location.host() + ':' + ($location.port() !== 80 ? $location.port() : '') + "/api/player/briefonline");
-    onlinePlayersRequest.send();
+    $http({
+        method: 'GET',
+        url: $location.protocol() + '://' + $location.host() + ':' + ($location.port() !== 80 ? $location.port() : '') + "/api/server"
+    }).then(function successCallback(response) {
+        if (response.status == 200) {
+            $scope.serverInfo = response.data;
+        }
+    }, function errorCallback() {
+    });
 
-    serverInfoRequest.open("GET", $location.protocol() + '://' + $location.host() + ':' + ($location.port() !== 80 ? $location.port() : '') + "/api/server");
-    serverInfoRequest.send();
-
-    serverNewsRequest.open("GET", $location.protocol() + '://' + $location.host() + ':' + ($location.port() !== 80 ? $location.port() : '') + "/api/server/news");
-    serverNewsRequest.send();
+    $http({
+        method: 'GET',
+        url: $location.protocol() + '://' + $location.host() + ':' + ($location.port() !== 80 ? $location.port() : '') + "/api/server/news"
+    }).then(function successCallback(response) {
+        if (response.status == 200) {
+            $scope.serverNews = response.data;
+        }
+    }, function errorCallback() {
+    });
 }]);
 
 app.controller('mainNavController', ['$scope', function ($scope) {
@@ -224,93 +274,15 @@ app.controller('secondaryNavController', ['$scope', '$location', function ($scop
             ['Houses', '/#!/houses'],
             ['Vehicles', '/#!/vehicles'],
             ['Businesses', '/#!/businesses'],
-            ['Clan', ''],
-            ['Faction History', ''],
-            ['War Info', ''],
-            ['Stats', ''],
+            ['Clans', ''],
+            ['Factions', ''],
+            ['Wars', ''],
         ]
     ];
 }]);
 
-app.controller('playerController', ['$scope', '$location', '$window', function ($scope, $location, $window) {
+app.controller('playerController', ['$scope', '$location', '$window', '$http', function ($scope, $location, $window, $http) {
     $scope.loadingIconHeightOffset = $window.innerHeight;
-
-    var factionHistoryRequest = new XMLHttpRequest();
-    factionHistoryRequest.onreadystatechange = function () {
-        $scope.$apply(function () {
-            if (factionHistoryRequest.readyState == 4 && factionHistoryRequest.status == 200) {
-                $scope.factionHistory = JSON.parse(factionHistoryRequest.responseText);
-            }
-        });
-    }
-
-    var houseRequest = new XMLHttpRequest();
-    houseRequest.onreadystatechange = function () {
-        $scope.$apply(function () {
-            if (houseRequest.readyState == 4 && houseRequest.status == 200) {
-                $scope.houseInfos = JSON.parse(houseRequest.responseText);
-
-                $scope.housesValue = 0;
-                $scope.housesCount = $scope.houseInfos.length;
-                $scope.houseInfos.forEach(function (element) {
-                    $scope.housesValue += element['Value'];
-                });
-            }
-        });
-    }
-
-    var vehicleRequest = new XMLHttpRequest();
-    vehicleRequest.onreadystatechange = function () {
-        $scope.$apply(function () {
-            if (vehicleRequest.readyState == 4 && vehicleRequest.status == 200) {
-                $scope.vehicleInfos = JSON.parse(vehicleRequest.responseText);
-
-                $scope.vehiclesValue = 0;
-                $scope.vehiclesCount = $scope.vehicleInfos.length;
-                $scope.vehicleInfos.forEach(function (element) {
-                    $scope.vehiclesValue += element['Value'];
-                });
-            }
-        });
-    }
-
-    var businessRequest = new XMLHttpRequest();
-    businessRequest.onreadystatechange = function () {
-        $scope.$apply(function () {
-            if (businessRequest.readyState == 4 && businessRequest.status == 200) {
-                $scope.businessInfos = JSON.parse(businessRequest.responseText);
-
-                $scope.businessesValue = 0;
-                $scope.businessesCount = $scope.businessInfos.length;
-                $scope.businessInfos.forEach(function (element) {
-                    $scope.businessesValue += element['Value'];
-                });
-            }
-        });
-    }
-
-    var playerRequest = new XMLHttpRequest();
-    playerRequest.onreadystatechange = function () {
-        $scope.$apply(function () {
-            if (playerRequest.readyState == 4 && playerRequest.status == 200) {
-                $scope.playerInfos = JSON.parse(playerRequest.responseText);
-                $scope.modelPadded = ("00" + $scope.playerInfos.Model).slice(-3);
-                $scope.adminLevelName = getAdminLevel($scope.playerInfos['AdminLevel']);
-
-                houseRequest.open("GET", $location.protocol() + '://' + $location.host() + ':' + ($location.port() !== 80 ? $location.port() : '') + "/api/house/" + $scope.playerInfos['Name']);
-                houseRequest.send();
-
-                vehicleRequest.open("GET", $location.protocol() + '://' + $location.host() + ':' + ($location.port() !== 80 ? $location.port() : '') + "/api/vehicle/" + $scope.playerInfos['Name']);
-                vehicleRequest.send();
-
-                businessRequest.open("GET", $location.protocol() + '://' + $location.host() + ':' + ($location.port() !== 80 ? $location.port() : '') + "/api/business/" + $scope.playerInfos['Name']);
-                businessRequest.send();
-
-                factionHistoryRequest.open("GET", $location.protocol() + '://' + $location.host() + ':' + ($location.port() !== 80 ? $location.port() : '') + "/api/player/" + $location.path().split('/').pop() + "/factionhistory");
-                factionHistoryRequest.send();
-            }
-        });
-    }
 
     function getAdminLevel($adminLevel) {
         switch ($adminLevel) {
@@ -332,6 +304,73 @@ app.controller('playerController', ['$scope', '$location', '$window', function (
         }
     }
 
-    playerRequest.open("GET", $location.protocol() + '://' + $location.host() + ':' + ($location.port() !== 80 ? $location.port() : '') + "/api/player/" + $location.path().split('/').pop());
-    playerRequest.send();
+    $http({
+        method: 'GET',
+        url: $location.protocol() + '://' + $location.host() + ':' + ($location.port() !== 80 ? $location.port() : '') + "/api/player/" + $location.path().split('/').pop()
+    }).then(function successCallback(response) {
+        if (response.status == 200) {
+            $scope.playerInfos = response.data;
+            $scope.modelPadded = ("00" + $scope.playerInfos.Model).slice(-3);
+            $scope.adminLevelName = getAdminLevel($scope.playerInfos['AdminLevel']);
+
+            $http({
+                method: 'GET',
+                url: $location.protocol() + '://' + $location.host() + ':' + ($location.port() !== 80 ? $location.port() : '') + "/api/house/" + $scope.playerInfos['Name'] + '/multiple'
+            }).then(function successCallback(response) {
+                if (response.status == 200) {
+                    $scope.houseInfos = response.data;
+
+                    $scope.housesValue = 0;
+                    $scope.housesCount = $scope.houseInfos.length;
+                    $scope.houseInfos.forEach(function (element) {
+                        $scope.housesValue += element['Value'];
+                    });
+                }
+            }, function errorCallback() {
+            });
+
+            $http({
+                method: 'GET',
+                url: $location.protocol() + '://' + $location.host() + ':' + ($location.port() !== 80 ? $location.port() : '') + "/api/vehicle/" + $scope.playerInfos['Name']
+            }).then(function successCallback(response) {
+                if (response.status == 200) {
+                    $scope.vehicleInfos = response.data;
+
+                    $scope.vehiclesValue = 0;
+                    $scope.vehiclesCount = $scope.vehicleInfos.length;
+                    $scope.vehicleInfos.forEach(function (element) {
+                        $scope.vehiclesValue += element['Value'];
+                    });
+                }
+            }, function errorCallback() {
+            });
+
+            $http({
+                method: 'GET',
+                url: $location.protocol() + '://' + $location.host() + ':' + ($location.port() !== 80 ? $location.port() : '') + "/api/business/" + $scope.playerInfos['Name']
+            }).then(function successCallback(response) {
+                if (response.status == 200) {
+                    $scope.businessInfos = response.data;
+
+                    $scope.businessesValue = 0;
+                    $scope.businessesCount = $scope.businessInfos.length;
+                    $scope.businessInfos.forEach(function (element) {
+                        $scope.businessesValue += element['Value'];
+                    });
+                }
+            }, function errorCallback() {
+            });
+
+            $http({
+                method: 'GET',
+                url: $location.protocol() + '://' + $location.host() + ':' + ($location.port() !== 80 ? $location.port() : '') + "/api/player/" + $location.path().split('/').pop() + "/factionhistory"
+            }).then(function successCallback(response) {
+                if (response.status == 200) {
+                    $scope.factionHistory = response.data;
+                }
+            }, function errorCallback() {
+            });
+        }
+    }, function errorCallback() {
+    });
 }]);

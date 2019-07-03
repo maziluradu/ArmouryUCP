@@ -40,6 +40,24 @@ namespace ArmouryUCP.WebAPI.Controllers
         /// Gets whole information about certain player. Only use this in critical cases - it outputs
         /// a lot of data.
         /// </summary>
+        /// <param name="id">Username</param>
+        /// <returns>JSON containing information about the player</returns>
+        [HttpGet]
+        [Route("api/player/{name}/byname")]
+        public IHttpActionResult GetPlayer(string name)
+        {
+            var player = Mapper.Map<PlayerDto>(playerService.GetPlayer(name));
+
+            if (player != null)
+                return Ok(player);
+
+            return NotFound();
+        }
+
+        /// <summary>
+        /// Gets whole information about certain player. Only use this in critical cases - it outputs
+        /// a lot of data.
+        /// </summary>
         /// <param name="id">SQL ID of the user</param>
         /// <returns>JSON containing information about the player</returns>
         [HttpGet]

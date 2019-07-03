@@ -7,6 +7,7 @@ namespace ArmouryUCP.WebAPI.Services.Interfaces
     {
         List<House> GetHouses(string owner);
         List<House> GetHouses(int number = 0, int start = 0);
+        House GetHouse(int id);
         GlobalHouseInformation GetGlobalInformationForHouses();
     }
 }

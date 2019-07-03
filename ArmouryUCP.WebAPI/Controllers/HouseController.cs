@@ -28,11 +28,23 @@ namespace ArmouryUCP.WebAPI.Controllers
         /// </summary>
         /// <returns>JSON containing information about house for the specific owner</returns>
         [HttpGet]
-        [Route("api/house/{owner}")]
-        public IHttpActionResult GetHouseByOwner(string owner)
+        [Route("api/house/{owner}/multiple")]
+        public IHttpActionResult GetHousesByOwner(string owner)
         {
             var houses = Mapper.Map<List<HouseDto>>(houseService.GetHouses(owner));
             return Ok(houses);
+        }
+
+        /// <summary>
+        /// Gets house information for a specific owner
+        /// </summary>
+        /// <returns>JSON containing information about house for the specific owner</returns>
+        [HttpGet]
+        [Route("api/house/{id}")]
+        public IHttpActionResult GetHouseById(int id)
+        {
+            var house = Mapper.Map<HouseCompleteDto>(houseService.GetHouse(id));
+            return Ok(house);
         }
 
         /// <summary>

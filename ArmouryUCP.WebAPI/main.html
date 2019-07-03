@@ -33,16 +33,16 @@
                     Players online<br /><span>{{onlinePlayersNumber}}</span>
                 </div>
                 <a href="{{onlinePlayers[0]['profileUrl']}}" class="avatar-holder first" ng-if="onlinePlayers[0]">
-                    <img src="UI/Images/skins/small-thumbnail/{{('000'+onlinePlayers[0]['Model']).slice(-3)}}.png" />
+                    <img ng-src="UI/Images/skins/small-thumbnail/{{('000'+onlinePlayers[0]['Model']).slice(-3)}}.png" />
                 </a>
                 <a href="{{onlinePlayers[1]['profileUrl']}}" class="avatar-holder" ng-if="onlinePlayers[1]">
-                    <img src="UI/Images/skins/small-thumbnail/{{('000'+onlinePlayers[1]['Model']).slice(-3)}}.png" />
+                    <img ng-src="UI/Images/skins/small-thumbnail/{{('000'+onlinePlayers[1]['Model']).slice(-3)}}.png" />
                 </a>
                 <a href="{{onlinePlayers[2]['profileUrl']}}" class="avatar-holder" ng-if="onlinePlayers[2]">
-                    <img src="UI/Images/skins/small-thumbnail/{{('000'+onlinePlayers[2]['Model']).slice(-3)}}.png" />
+                    <img ng-src="UI/Images/skins/small-thumbnail/{{('000'+onlinePlayers[2]['Model']).slice(-3)}}.png" />
                 </a>
                 <a href="{{onlinePlayers[3]['profileUrl']}}" class="avatar-holder" ng-if="onlinePlayers[3]">
-                    <img src="UI/Images/skins/small-thumbnail/{{('000'+onlinePlayers[3]['Model']).slice(-3)}}.png" />
+                    <img ng-src="UI/Images/skins/small-thumbnail/{{('000'+onlinePlayers[3]['Model']).slice(-3)}}.png" />
                 </a>
                 <a href="" class="avatar-holder last" ng-if="onlinePlayersNumber > 4">
                     <span>+{{ onlinePlayersNumber-4 }}</span>
@@ -100,7 +100,7 @@
                     <li class="item" ng-repeat="serverNewsEntry in serverNews">
                         <table>
                             <tr>
-                                <td><div class="avatar-holder"><img src="UI/Images/skins/small-thumbnail/{{('000'+serverNewsEntry.Skin).slice(-3)}}.png" /></div></td>
+                                <td><div class="avatar-holder"><img ng-src="UI/Images/skins/small-thumbnail/{{('000'+serverNewsEntry.Skin).slice(-3)}}.png" /></div></td>
                                 <td ng-bind-html="serverNewsEntry.Content" style="width: 90%;"></td>
                                 <td class="time">{{ serverNewsEntry.DateNice }}</td>
                             </tr>

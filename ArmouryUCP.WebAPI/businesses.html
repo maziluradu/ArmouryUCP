@@ -38,7 +38,7 @@
                     <div class="loadingsplash separate" ng-hide="!switchingBusinessPage"><div class="loader triangle" style="top: {{loadingIconHeightOffset/1.5}}px;"><svg viewBox="0 0 86 80"><polygon points="43 8 79 72 7 72"></polygon></svg></div></div>
                     <table>
                         <tr ng-repeat="business in businessInfos.businesses">
-                            <td><img src="UI/Images/businesses/small/{{business.Type}}.jpg" /></td>
+                            <td><img ng-src="UI/Images/businesses/small/{{business.Type}}.jpg" /></td>
                             <td style="width: 70%;">
                                 <span class="top-info"><i class="fas fa-star"></i>Level {{ business.Level }} business</span><br />
                                 <span class="middle-info">{{ business.Name }}</span><br />

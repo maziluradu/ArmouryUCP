@@ -1,4 +1,4 @@
-﻿<div class="loadingsplash" ng-hide="playerInfos !== undefined"><div class="loader triangle" style="top: {{loadingIconHeightOffset/2}}px; margin-top: -80px;"><svg viewBox="0 0 86 80"><polygon points="43 8 79 72 7 72"></polygon></svg></div></div>
+﻿<div class="loadingsplash" ng-hide="factionHistory !== undefined"><div class="loader triangle" style="top: {{loadingIconHeightOffset/2}}px; margin-top: -80px;"><svg viewBox="0 0 86 80"><polygon points="43 8 79 72 7 72"></polygon></svg></div></div>
 <div ng-controller="playerController">
     <div class="col-md-12 profile-header">
         <nav aria-label="breadcrumb">
@@ -84,7 +84,7 @@
                             <li class="item" ng-repeat="factionHistoryEntry in factionHistory">
                                 <table>
                                     <tr>
-                                        <td><div class="avatar-holder"><img src="UI/Images/skins/small-thumbnail/{{modelPadded}}.png" /></div></td>
+                                        <td><div class="avatar-holder"><img ng-src="UI/Images/skins/small-thumbnail/{{modelPadded}}.png" /></div></td>
                                         <td ng-bind-html="factionHistoryEntry.Content" style="width: 90%;"></td>
                                         <td class="time">{{ factionHistoryEntry.DateNice }}</td>
                                     </tr>
@@ -131,14 +131,14 @@
                             <p align="center" ng-if="houseInfos.length == 0"><br />This player owns no houses.</p>
                             <table>
                                 <tr ng-repeat="house in houseInfos">
-                                    <td><img src="UI/Images/houses/small/{{house.InteriorIndexNice}}_0.jpg" /></td>
+                                    <td><img ng-src="UI/Images/houses/small/{{house.InteriorIndexNice}}_0.jpg" /></td>
                                     <td style="width: 70%;">
                                         <span class="top-info"><i class="fas fa-star"></i>Level {{ house.Level }} house</span><br />
                                         <span class="middle-info">{{ house.NameNice }}</span><br />
                                         <span class="bottom-info">Purchased on {{ house.DateOfPurchaseNice }}</span>
                                     </td>
                                     <td style="width: 30%;">
-                                        <a href="#">More info <i class="fas fa-angle-right"></i></a>
+                                        <a href="{{'/#!/houses/' + house.Id}}">More info <i class="fas fa-angle-right"></i></a>
                                     </td>
                                 </tr>
                             </table>
@@ -148,7 +148,7 @@
                             <p align="center" ng-if="vehicleInfos.length == 0"><br />This player owns no vehicles.</p>
                             <table>
                                 <tr ng-repeat="vehicle in vehicleInfos">
-                                    <td><img src="UI/Images/vehicles/small/{{vehicle.Model}}.png" /></td>
+                                    <td><img ng-src="UI/Images/vehicles/small/{{vehicle.Model}}.png" /></td>
                                     <td style="width: 70%;">
                                         <span class="top-info"><i class="fas fa-dollar-sign"></i>{{ vehicle.Value | number : fractionSize }}</span><br />
                                         <span class="middle-info">{{ vehicle.Name }}</span><br />
@@ -166,7 +166,7 @@
                             <p align="center" ng-if="businessInfos.length == 0"><br />This player owns no businesses.</p>
                             <table>
                                 <tr ng-repeat="business in businessInfos">
-                                    <td><img src="UI/Images/businesses/small/{{business.Type}}.jpg" /></td>
+                                    <td><img ng-src="UI/Images/businesses/small/{{business.Type}}.jpg" /></td>
                                     <td style="width: 70%;">
                                         <span class="top-info"><i class="fas fa-star"></i>Level {{ business.Level }} business</span><br />
                                         <span class="middle-info">{{ business.Name }}</span><br />

@@ -16,6 +16,41 @@ namespace ArmouryUCP.WebAPI.Services
             //this.connectionString = connectionString;
         }
 
+        public House GetHouse(int id)
+        {
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                connection.Open();
+                MySqlCommand cmd = new MySqlCommand($"select x.*, y.FurniturePieces, z.GarageSlots, w.TenantsNumber from houses, furniture, garages, wp_users, (SELECT * FROM houses WHERE hID={id}) as x, (SELECT count(*) as FurniturePieces FROM furniture WHERE frHouse={id}) as y, (SELECT SUM(gSlots) as GarageSlots FROM garages WHERE gHouse={id} limit 1) as z, (SELECT count(CASE WHEN House={id} THEN 1 ELSE NULL END) as TenantsNumber FROM wp_users) as w limit 1", connection);
+
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        return new House()
+                        {
+                            Id = Convert.ToInt32(reader["hID"]),
+                            Level = Convert.ToInt32(reader["Level"]),
+                            Name = reader["Name"].ToString(),
+                            Owner = reader["Owner"].ToString(),
+                            Value = Convert.ToInt32(reader["Value"]),
+                            InteriorIndex = Convert.ToInt32(reader["UpgradeLock"]),
+                            DateOfPurchase = DateTime.Parse(reader["DateOfPurchase"].ToString()),
+                            Locked = Convert.ToInt32(reader["Lock"]) > 0 ? "Yes" : "No",
+                            Rentable = Convert.ToInt32(reader["Dog"]) == 1,
+                            RentPrice = Convert.ToInt32(reader["Privacy"]),
+                            FurniturePieces = Convert.ToInt32(reader["FurniturePieces"]),
+                            HealthUpgrade = Convert.ToInt32(reader["HealU"]) == 1,
+                            ArmourUpgrade = Convert.ToInt32(reader["ArmorU"]) == 1,
+                            GarageSlots = reader["GarageSlots"] != DBNull.Value ? Convert.ToInt32(reader["GarageSlots"]) : 0,
+                            TenantsNumber = Convert.ToInt32(reader["TenantsNumber"])
+                        };
+                    }
+                }
+            }
+            return null;
+        }
+
         public List<House> GetHouses(string owner)
         {
             var houses = new List<House>();

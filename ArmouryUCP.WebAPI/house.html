@@ -1,0 +1,102 @@
+﻿<div class="loadingsplash" ng-hide="houseInfos !== undefined"><div class="loader triangle" style="top: {{loadingIconHeightOffset/2}}px; margin-top: -80px;"><svg viewBox="0 0 86 80"><polygon points="43 8 79 72 7 72"></polygon></svg></div></div>
+<div class="col-md-12 profile-header">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Panel</a></li>
+                        <li class="breadcrumb-item active" aria-current="page"><a href="/#!/houses/">Houses</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">{{houseInfos.NameNice}} (ID: {{houseInfos.Id}})</li>
+                    </ol>
+                </nav>
+                <h3 class="large">House: "{{houseInfos.NameNice}}"</h3>
+                <div class="small-details">
+                    <span ng-if="ownerInfos != undefined">This house has been owned by {{houseInfos.Owner}} for {{getDifferenceInDays(houseInfos.DateOfPurchase)}} days.</span>
+                    <span ng-if="ownerInfos == undefined">This house is for sale!</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="profile-underheader general">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <span class="badge badge-secondary armoury-green"><i class="fas fa-home"></i>Level {{houseInfos.Level}} House</span>
+                <span class="badge badge-secondary armoury-green"><i class="fas fa-comment-dollar"></i>${{houseInfos.Value | number : fractionSize}} Original Value</span>
+                <span class="badge badge-secondary armoury-green"><i class="fas fa-users"></i>{{Math.max(houseInfos.TenantsNumber-1, 0)}} House tenants</span>
+            </div>
+        </div>
+    </div>
+</div>
+<br /><br />
+<div class="container-fluid" id="page" style="padding: 0 3em 0 3em;">
+    <div class="row">
+        <div class="page-secondaryboard col-md-7">
+            <div class="content">
+                <h4 class="title" id="pagetitle">House Preview</h4>
+                <br />
+                <div class="profile-info" style="padding: 0 2em; position: relative;">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-12 house-image">
+                                <img style="width: 100%; height: auto;" ng-src="UI/Images/houses/{{houseInfos.InteriorIndexNice}}_0.jpg" />
+                            </div>
+                            <div class="col-md-3 house-image" ng-repeat="x in [].constructor(houseInfos.ImagesNumber) track by $index">
+                                <img style="width: 100%; height: auto;" ng-src="UI/Images/houses/{{houseInfos.InteriorIndexNice}}_{{$index}}.jpg" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="row page-body profile-stats" style="margin: 0;">
+                    <div class="col-md-6" style="padding-left: 0;">
+                        <ul>
+                            <li>Name<span>{{ houseInfos.NameNice }}</span></li>
+                            <li>Owner<span>{{ houseInfos.Owner }}</span></li>
+                            <li>Level<span>{{ houseInfos.Level }}</span></li>
+                            <li>Original Value<span>${{ houseInfos.Value | number : fractionSize }}</span></li>
+                            <li>Locked<span>{{ houseInfos.Locked }}</span></li>
+                            <li>Can rent rooms<span>{{ houseInfos.Rentable == true ? "Yes" : "No" }}</span></li>
+                            <li ng-if="houseInfos.Rentable == true">Rent Price<span>${{ houseInfos.RentPrice | number : fractionSize }}</span></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6" style="padding-right: 0;">
+                        <ul>
+                            <li>Furnished<span>{{ houseInfos.Furnished == true ? "Yes" : "No" }}</span></li>
+                            <li>Furniture Pieces<span>{{ houseInfos.FurniturePieces }}</span></li>
+                            <li>Health Upgrade<span>{{ houseInfos.HealthUpgrade == true ? "Yes" : "No" }}</span></li>
+                            <li>Armour Upgrade<span>{{ houseInfos.ArmourUpgrade == true ? "Yes" : "No" }}</span></li>
+                            <li>Garage<span>{{ houseInfos.HasGarage == true ? "Yes" : "No" }}</span></li>
+                            <li ng-if="houseInfos.HasGarage == true">Garage slots<span>{{ houseInfos.GarageSlots }}</span></li>
+                            <li>Date of Purchase<span>{{ houseInfos.DateOfPurchaseNice }}</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <br />
+        </div>
+        <div class="page-secondaryboard col-md-4">
+            <div class="content">
+                <h4 class="title">House Owner</h4>
+                <div class="owner-info">
+                    <br ng-if-start="ownerInfos != undefined" />
+                    <div ng-if-end class="avatar-holder">
+                        <img ng-src="UI/Images/skins/small-thumbnail/{{('000'+ownerInfos.Model).slice(-3)}}.png" />
+                    </div>
+                    <br/>
+                    <h5 class="armoury-finetitle"><a href="{{'/#!/player/' + ownerInfos.ID}}">{{ownerInfos != undefined ? ownerInfos.Name : "Unbought"}}</a></h5>
+                    <br />
+                    <ul>
+                        <li ng-if-start="ownerInfos != undefined">Level<span>{{ownerInfos.Level}}</span></li>
+                        <li>Money<span>${{ownerInfos.Cash+ownerInfos.Bank | number:fractionSize}}</span></li>
+                        <li ng-if-end>Faction<span>{{ownerInfos.Faction}}</span></li>
+                    </ul>
+                </div>
+                <br /><br />
+            </div>
+        </div>
+    </div>
+</div>
+<br /><br />

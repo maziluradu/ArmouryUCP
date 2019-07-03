@@ -39,14 +39,14 @@
                     <div class="loadingsplash separate" ng-hide="!switchingHousePage"><div class="loader triangle" style="top: {{loadingIconHeightOffset/1.5}}px;"><svg viewBox="0 0 86 80"><polygon points="43 8 79 72 7 72"></polygon></svg></div></div>
                     <table>
                         <tr ng-repeat="house in houseInfos.houses">
-                            <td><img src="UI/Images/houses/small/{{house.InteriorIndexNice}}_0.jpg" /></td>
+                            <td><img ng-src="UI/Images/houses/small/{{house.InteriorIndexNice}}_0.jpg" /></td>
                             <td style="width: 70%;">
                                 <span class="top-info"><i class="fas fa-star"></i>Level {{ house.Level }} house</span><br />
                                 <span class="middle-info">{{ house.NameNice }}</span><br />
                                 <span class="bottom-info">Purchased on {{ house.DateOfPurchaseNice }}</span>
                             </td>
                             <td style="width: 30%;">
-                                <a href="{{'/#!/house/' + house.Id}}">More info <i class="fas fa-angle-right"></i></a>
+                                <a href="{{'/#!/houses/' + house.Id}}">More info <i class="fas fa-angle-right"></i></a>
                             </td>
                         </tr>
                     </table>

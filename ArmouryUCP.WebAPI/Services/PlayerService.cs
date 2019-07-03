@@ -98,6 +98,65 @@ namespace ArmouryUCP.WebAPI.Services
             return player;
         }
 
+        public Player GetPlayer(string name)
+        {
+            Player player = null;
+            List<Skill> skills = new List<Skill>();
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                connection.Open();
+                MySqlCommand cmd = new MySqlCommand($"SELECT * FROM wp_users WHERE user_login = '{name}'", connection);
+
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        foreach (var skill in SharedResources.Skills)
+                        {
+                            if (Convert.ToInt32(reader[skill]) >= 100)
+                                skills.Add(new Skill
+                                {
+                                    Name = skill,
+                                    Progress = Convert.ToInt32(reader[skill]) > 500 ? 500 : Convert.ToInt32(reader[skill]),
+                                    NameNice = SharedResources.SkillNiceNames[SharedResources.Skills.IndexOf(skill)],
+                                    Icon = SharedResources.SkillIcons[SharedResources.Skills.IndexOf(skill)]
+                                });
+                        }
+
+                        player = new Player()
+                        {
+                            ID = Convert.ToInt32(reader["ID"]),
+                            Name = reader["user_login"].ToString(),
+                            Level = Convert.ToInt32(reader["Level"]),
+                            Member = Convert.ToInt32(reader["Faction"]),
+                            Member2 = Convert.ToInt32(reader["Member2"]),
+                            Cash = Convert.ToInt32(reader["Money"]),
+                            Bank = Convert.ToInt32(reader["Bank"]),
+                            DonateRank = Convert.ToInt32(reader["DonateRank"]),
+                            AdminLevel = Convert.ToInt32(reader["AdminLevel"]),
+                            Respect = Convert.ToInt32(reader["Respect"]),
+                            LastLogin = DateTime.Parse(reader["LastLogin"].ToString()),
+                            Model = Convert.ToInt32(reader["Model"]),
+                            ConnectedTime = Convert.ToInt32(reader["ConnectedTime"]),
+                            Age = Convert.ToInt32(reader["Age"]),
+                            Sex = Convert.ToInt32(reader["Sex"]),
+                            Warnings = Convert.ToInt32(reader["Warnings"]),
+                            Job = Convert.ToInt32(reader["Job"]),
+                            SecondaryJob = Convert.ToInt32(reader["Job1"]),
+                            FactionRank = Convert.ToInt32(reader["iRank"]),
+                            Leader = Convert.ToInt32(reader["iRank"]) >= 7 ? Convert.ToInt32(reader["Faction"]) : 0,
+                            FactionWarnings = Convert.ToInt32(reader["Fwarn"]),
+                            FactionPunish = Convert.ToInt32(reader["Punish"]),
+                            FactionActivity = 0,
+                            FactionMemberSince = DateTime.Parse(reader["LastLogin"].ToString()),
+                            Skills = skills
+                        };
+                    }
+                }
+            }
+            return player;
+        }
+
         public List<FactionHistory> GetFactionHistory(int id)
         {
             var factionHistory = new List<FactionHistory>();

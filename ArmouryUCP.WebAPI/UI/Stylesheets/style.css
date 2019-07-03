@@ -18,6 +18,16 @@
         text-decoration: none;
     }
 
+    .armoury-finetitle {
+        color: #fff;
+        font-family: Montserrat, sans-serif;
+        font-weight: 700;
+    }
+
+    .armoury-finetitle > a {
+        color: #fff;
+    }
+
     .navbar {
         background: #000014 !important; /* blue-dark-low */
         color: #fff !important;
@@ -455,12 +465,12 @@
     font-family: Montserrat, sans-serif;
 }
 
-.page-body.profile-stats ul {
+.page-body.profile-stats ul, .owner-info > ul {
     list-style: none;
     padding: 0; margin: 0;
 }
 
-.page-body.profile-stats ul > li {
+.page-body.profile-stats ul > li, .owner-info > ul li {
     font-size: 0.65em;
     font-family: Montserrat, sans-serif;
     font-weight: 700;
@@ -468,12 +478,12 @@
     color: #a5b2df;
 }
 
-.page-body.profile-stats ul > li > span {
+.page-body.profile-stats ul > li > span, .owner-info > ul > li > span {
     color: #fff;
     float: right;
 }
 
-.page-body.profile-stats ul li:nth-child(2n+1) {
+.page-body.profile-stats ul li:nth-child(2n+1), .owner-info ul li:nth-child(2n+1) {
     background: #0d0d25;
 }
 
@@ -1338,4 +1348,27 @@ html {
 .pagination .page-item.active .page-link {
     background: initial;
     border-color: #0f0f27;
+}
+
+/* Single House Page */
+.profile-info .house-image {
+    padding: 0;
+}
+
+.owner-info {
+    padding: 0 1.5em;
+    text-align: center;
+}
+
+.owner-info > ul li {
+    text-align: left;
+}
+
+.owner-info .avatar-holder {
+    border-radius: 50%;
+    overflow: hidden;
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    border: 2px solid #14142a;
 }
