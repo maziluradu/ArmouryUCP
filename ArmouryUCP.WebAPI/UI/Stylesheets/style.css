@@ -87,6 +87,48 @@
         color: #bd213f;
     }
 
+    .navbar .navbar-section {
+        float: left;
+    }
+
+    .navbar .top-buttons .p-2 {
+        font-weight: 800;
+        text-transform: uppercase;
+        font-size: 0.6em;
+        font-family: Montserrat, sans-serif;
+    }
+
+    .navbar .top-buttons .p-2 a {
+        color: inherit;
+        opacity: 0.6;
+
+        transition: opacity 0.25s;
+        -webkit-transition: opacity 0.25s;
+        -moz-transition: opacity 0.25s;
+    }
+
+    .navbar .top-buttons .p-2 a:hover {
+        opacity: 1;
+    }
+
+    .navbar .search {
+        border: 2px solid #0f0f27;
+        border-radius: 4px;
+    }
+
+    .navbar .search .input-group-text, .navbar .search input.form-control {
+        background: none;
+        border: 0;
+        font-size: 0.7em;
+        padding-bottom: 0.7em;
+    }
+
+    .navbar .separator {
+        width: 2px;
+        height: 100%;
+        background: #0b0b1b;
+    }
+
     #sidebar-mini {
         background: #00000d; /* blue-dark-high */
         padding: 0;
@@ -362,7 +404,7 @@
     padding: 1em 2em;
 }
 
-.profile-underheader .badge {
+.profile-underheader .badge, .navbar .badge {
     position: relative;
     background: #000015;
     border-radius: 7px;
@@ -377,7 +419,7 @@
     font-size: 0.65em;
 }
 
-.profile-underheader .badge > i {
+.profile-underheader .badge > i, .navbar .badge > i {
     background: #fff;
     background: -webkit-linear-gradient(#545699, #34366d);
     -webkit-background-clip: text;
