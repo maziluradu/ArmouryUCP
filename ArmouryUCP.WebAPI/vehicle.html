@@ -1,0 +1,101 @@
+﻿<div class="loadingsplash" ng-hide="vehicleInfos !== undefined"><div class="loader triangle" style="top: {{loadingIconHeightOffset/2}}px; margin-top: -80px;"><svg viewBox="0 0 86 80"><polygon points="43 8 79 72 7 72"></polygon></svg></div></div>
+<div class="col-md-12 profile-header">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Panel</a></li>
+                        <li class="breadcrumb-item active" aria-current="page"><a href="/#!/vehicles/">Vehicles</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">{{vehicleInfos.NameNice}} (ID: {{vehicleInfos.Id}})</li>
+                    </ol>
+                </nav>
+                <h3 class="large">Vehicle: "{{vehicleInfos.Name}}"</h3>
+                <div class="small-details">
+                    <span ng-if="ownerInfos != undefined">This vehicle has been owned by {{vehicleInfos.Owner}} for {{getDifferenceInDays(vehicleInfos.DateOfPurchase)}} days.</span>
+                    <span ng-if="ownerInfos == undefined">This vehicle is for sale!</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="profile-underheader general">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <span class="badge badge-secondary armoury-green"><i class="fas fa-dollar-sign"></i>${{vehicleInfos.Value | number : fractionSize}} Original Value</span>
+                <span class="badge badge-secondary armoury-green"><i class="fas fa-road"></i>{{vehicleInfos.KM | number : fractionSize}} Kilometers</span>
+                <span class="badge badge-secondary armoury-green"><i class="fas fa-address-card"></i>"{{vehicleInfos.Plate}}"</span>
+                
+            </div>
+        </div>
+    </div>
+</div>
+<br /><br />
+<div class="container-fluid" id="page" style="padding: 0 3em 0 3em;">
+    <div class="row">
+        <div class="page-secondaryboard col-md-7">
+            <div class="content">
+                <h4 class="title" id="pagetitle">Vehicle Preview</h4>
+                <br />
+                <div class="profile-info" style="padding: 0 2em; position: relative;">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-12 vehicle-image">
+                                <img style="width: 100%; height: auto;" ng-src="UI/Images/vehicles/{{vehicleInfos.Model}}.png" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="row page-body profile-stats" style="margin: 0;">
+                    <div class="col-md-6" style="padding-left: 0;">
+                        <ul>
+                            <li>Name<span>{{ vehicleInfos.Name }}</span></li>
+                            <li>Owner<span>{{ vehicleInfos.Owner }}</span></li>
+                            <li>Kilometers<span>{{ vehicleInfos.KM | number : fractionSize }}</span></li>
+                            <li>Plate<span>{{ vehicleInfos.Plate }}</span></li>
+                            <li>Engine<span>{{ vehicleInfos.BrokenEngine > 0 ? "Broken" : "Functional" }}</span></li>
+                            <li>Injection<span>{{ vehicleInfos.BrokenInjection > 0 ? "Broken" : "Functional" }}</span></li>
+                            <li>Battery<span>{{ vehicleInfos.BrokenBattery > 0 ? "Broken" : "Functional" }}</span></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6" style="padding-right: 0;">
+                        <ul>
+                            <li>Date of Purchase<span>{{ vehicleInfos.DateOfPurchaseNice }}</span></li>
+                            <li>Original Value<span>${{ vehicleInfos.Value | number : fractionSize }}</span></li>
+                            <li>Premium<span>{{ vehicleInfos.Premium > 0 ? "Yes" : "No" }}</span></li>
+                            <li>Colors<span>{{ vehicleInfos.Color1 + ", " + vehicleInfos.Color2 }} </span></li>
+                            <li>Injection<span>{{ vehicleInfos.BrokenInjection > 0 ? "Broken" : "Functional" }}</span></li>
+                            <li>Computer<span>{{ vehicleInfos.BrokenComputer > 0 ? "Broken" : "Functional" }}</span></li>
+                            <li>Direction<span>{{ vehicleInfos.BrokenDirection > 0 ? "Broken" : "Functional" }}</span></li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <br />
+        </div>
+        <div class="page-secondaryboard col-md-4">
+            <div class="content">
+                <h4 class="title">Vehicle Owner</h4>
+                <div class="owner-info">
+                    <br ng-if-start="ownerInfos != undefined" />
+                    <div ng-if-end class="avatar-holder">
+                        <img ng-src="UI/Images/skins/small-thumbnail/{{('000'+ownerInfos.Model).slice(-3)}}.png" />
+                    </div>
+                    <br />
+                    <h5 class="armoury-finetitle"><a href="{{'/#!/player/' + ownerInfos.ID}}">{{ownerInfos != undefined ? ownerInfos.Name : "Unbought"}}</a></h5>
+                    <br />
+                    <ul>
+                        <li ng-if-start="ownerInfos != undefined">Level<span>{{ownerInfos.Level}}</span></li>
+                        <li>Money<span>${{ownerInfos.Cash+ownerInfos.Bank | number:fractionSize}}</span></li>
+                        <li ng-if-end>Faction<span>{{ownerInfos.Faction}}</span></li>
+                    </ul>
+                </div>
+                <br /><br />
+            </div>
+        </div>
+    </div>
+</div>
+<br /><br />

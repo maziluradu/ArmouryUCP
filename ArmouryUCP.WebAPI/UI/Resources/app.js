@@ -23,9 +23,17 @@ app.config(function ($routeProvider) {
             templateUrl: 'vehicles.html',
             controller: 'vehiclesController'
         })
+        .when('/vehicles/:id', {
+            templateUrl: 'vehicle.html',
+            controller: 'vehicleController'
+        })
         .when('/businesses', {
             templateUrl: 'businesses.html',
             controller: 'businessesController'
+        })
+        .when('/businesses/:id', {
+            templateUrl: 'business.html',
+            controller: 'businessController'
         })
         .otherwise({
             templateUrl: '404.html',
@@ -61,6 +69,66 @@ app.controller('houseController', ['$scope', '$location', '$window', '$http', fu
         }
     }, function errorCallback() {
         });
+
+    $scope.getDifferenceInDays = function (date) {
+        var parsedDate = new Date(date);
+        return parseInt(Math.abs(parsedDate.getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24));
+    }
+}]);
+
+app.controller('vehicleController', ['$scope', '$location', '$window', '$http', function ($scope, $location, $window, $http) {
+    $scope.loadingIconHeightOffset = $window.innerHeight;
+    $scope.Math = $window.Math;
+
+    $http({
+        method: 'GET',
+        url: $location.protocol() + '://' + $location.host() + ':' + ($location.port() !== 80 ? $location.port() : '') + "/api/vehicle/" + $location.path().split('/').pop()
+    }).then(function successCallback(response) {
+        if (response.status == 200) {
+            $scope.vehicleInfos = response.data;
+
+            $http({
+                method: 'GET',
+                url: $location.protocol() + '://' + $location.host() + ':' + ($location.port() !== 80 ? $location.port() : '') + "/api/player/" + $scope.vehicleInfos['Owner'] + '/byname'
+            }).then(function successCallback(response) {
+                if (response.status == 200) {
+                    $scope.ownerInfos = response.data;
+                }
+            }, function errorCallback() {
+            });
+        }
+    }, function errorCallback() {
+    });
+
+    $scope.getDifferenceInDays = function (date) {
+        var parsedDate = new Date(date);
+        return parseInt(Math.abs(parsedDate.getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24));
+    }
+}]);
+
+app.controller('businessController', ['$scope', '$location', '$window', '$http', function ($scope, $location, $window, $http) {
+    $scope.loadingIconHeightOffset = $window.innerHeight;
+    $scope.Math = $window.Math;
+
+    $http({
+        method: 'GET',
+        url: $location.protocol() + '://' + $location.host() + ':' + ($location.port() !== 80 ? $location.port() : '') + "/api/business/" + $location.path().split('/').pop()
+    }).then(function successCallback(response) {
+        if (response.status == 200) {
+            $scope.businessInfos = response.data;
+
+            $http({
+                method: 'GET',
+                url: $location.protocol() + '://' + $location.host() + ':' + ($location.port() !== 80 ? $location.port() : '') + "/api/player/" + $scope.businessInfos['Owner'] + '/byname'
+            }).then(function successCallback(response) {
+                if (response.status == 200) {
+                    $scope.ownerInfos = response.data;
+                }
+            }, function errorCallback() {
+            });
+        }
+    }, function errorCallback() {
+    });
 
     $scope.getDifferenceInDays = function (date) {
         var parsedDate = new Date(date);
@@ -331,7 +399,7 @@ app.controller('playerController', ['$scope', '$location', '$window', '$http', f
 
             $http({
                 method: 'GET',
-                url: $location.protocol() + '://' + $location.host() + ':' + ($location.port() !== 80 ? $location.port() : '') + "/api/vehicle/" + $scope.playerInfos['Name']
+                url: $location.protocol() + '://' + $location.host() + ':' + ($location.port() !== 80 ? $location.port() : '') + "/api/vehicle/" + $scope.playerInfos['Name'] + "/multiple"
             }).then(function successCallback(response) {
                 if (response.status == 200) {
                     $scope.vehicleInfos = response.data;
@@ -347,7 +415,7 @@ app.controller('playerController', ['$scope', '$location', '$window', '$http', f
 
             $http({
                 method: 'GET',
-                url: $location.protocol() + '://' + $location.host() + ':' + ($location.port() !== 80 ? $location.port() : '') + "/api/business/" + $scope.playerInfos['Name']
+                url: $location.protocol() + '://' + $location.host() + ':' + ($location.port() !== 80 ? $location.port() : '') + "/api/business/" + $scope.playerInfos['Name'] + "/multiple"
             }).then(function successCallback(response) {
                 if (response.status == 200) {
                     $scope.businessInfos = response.data;

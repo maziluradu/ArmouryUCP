@@ -7,6 +7,7 @@ namespace ArmouryUCP.WebAPI.Services.Interfaces
     {
         List<Business> GetBusinesses(string owner);
         List<Business> GetBusinesses(int number = 0, int start = 0);
+        Business GetBusiness(int id);
         GlobalBusinessInformation GetGlobalInformationForBusinesses();
     }
 }

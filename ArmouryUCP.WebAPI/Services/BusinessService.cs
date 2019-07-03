@@ -16,6 +16,36 @@ namespace ArmouryUCP.WebAPI.Services
             //this.connectionString = connectionString;
         }
 
+        public Business GetBusiness(int id)
+        {
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                connection.Open(); 
+                MySqlCommand cmd = new MySqlCommand($"select * from biz where bID = '{id}' ", connection);
+
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        return new Business()
+                        {
+                            Id = Convert.ToInt32(reader["bID"]),
+                            Level = Convert.ToInt32(reader["bLevel"]),
+                            Name = reader["bMessage"].ToString(),
+                            Owner = reader["bOwner"].ToString(),
+                            Value = Convert.ToInt32(reader["bValue"]),
+                            Type = Convert.ToInt32(reader["bType"]),
+                            Extortion = reader["bExtortion"].ToString(),
+                            Prods = Convert.ToInt32(reader["bProds"]),
+                            ComercialAd = Convert.ToInt32(reader["bMultiplier"]),
+                            DateOfPurchase = DateTime.Parse(reader["DateOfPurchase"].ToString())
+                        };
+                    }
+                }
+            }
+            return null;
+        }
+
         public List<Business> GetBusinesses(string owner)
         {
             var businesses = new List<Business>();
