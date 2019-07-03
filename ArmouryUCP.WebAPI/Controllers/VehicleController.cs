@@ -29,13 +29,23 @@ namespace ArmouryUCP.WebAPI.Controllers
         /// </summary>
         /// <returns>JSON containing information about multiple players</returns>
         [HttpGet]
-        [Route("api/vehicle/{owner}")]
+        [Route("api/vehicle/{owner}/multiple")]
         public IHttpActionResult GetVehicleByOwner(string owner)
         {
             var vehicles = Mapper.Map<List<VehicleDto>>(vehicleService.GetVehicles(owner));
             return Ok(vehicles);
         }
-
+        /// <summary>
+        /// Gets vehicles information for a specific owner
+        /// </summary>
+        /// <returns>JSON containing information about vehicle for the specific owner</returns>
+        [HttpGet]
+        [Route("api/vehicle/{id}")]
+        public IHttpActionResult GetVehicleById(int id)
+        {
+            var vehicle = Mapper.Map<VehicleCompleteDto>(vehicleService.GetVehicle(id));
+            return Ok(vehicle);
+        }
         /// <summary>
         /// Gets partial information about vehicles on the server
         /// </summary>

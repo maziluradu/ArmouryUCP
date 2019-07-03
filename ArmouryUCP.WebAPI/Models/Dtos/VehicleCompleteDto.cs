@@ -6,7 +6,7 @@ using System.Web;
 
 namespace ArmouryUCP.WebAPI.Models.Dtos
 {
-    public class VehicleDto
+    public class VehicleCompleteDto
     {
         public int Id { get; set; }
         public string Owner { get; set; }
@@ -25,6 +25,42 @@ namespace ArmouryUCP.WebAPI.Models.Dtos
             get
             {
                 return DateOfPurchase.ToString(DateOfPurchase.Year < DateTime.Now.Year ? "dddd, dd MMMM \"'\"yy" : "dddd, dd MMMM");
+            }
+        }
+
+        public int BrokenEngine
+        {
+            get
+            {
+                return Convert.ToInt32(BrokenParts.Split('/')[0]);
+            }
+        }
+        public int BrokenInjection
+        {
+            get
+            {
+                return Convert.ToInt32(BrokenParts.Split('/')[1]);
+            }
+        }
+        public int BrokenBattery
+        {
+            get
+            {
+                return Convert.ToInt32(BrokenParts.Split('/')[2]);
+            }
+        }
+        public int BrokenComputer
+        {
+            get
+            {
+                return Convert.ToInt32(BrokenParts.Split('/')[3]);
+            }
+        }
+        public int BrokenDirection
+        {
+            get
+            {
+                return Convert.ToInt32(BrokenParts.Split('/')[4]);
             }
         }
 
