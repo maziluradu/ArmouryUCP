@@ -74,9 +74,23 @@
         <div class="page-secondaryboard col-md-4">
             <div class="content">
                 <h4 class="title">Featured Vehicle</h4>
-                <br /><br /><br />
+                <div class="owner-info">
+                    <br ng-if="featuredVehicle != undefined" />
+                    <div class="col-md-12 house-image">
+                        <a href="{{'/#!/vehicles/' + featuredVehicle.Id}}"><img style="width: 100%; height: auto;" ng-src="UI/Images/vehicles/{{featuredVehicle.Model}}.png" /></a>
+                    </div>
+                    <br />
+                    <ul>
+                        <li>Name<span>{{featuredVehicle.Name}}</span></li>
+                        <li>Owner<span>{{featuredVehicle.Owner != undefined ? featuredVehicle.Owner : "Unbought"}}</span></li>
+                        <li>ID<span>{{featuredVehicle.Id}}</span></li>
+                        <li>Plate<span>{{featuredVehicle.Plate}}</span></li>
+                        <li>KM<span>{{featuredVehicle.KM | number : fractionSize}}</span></li>
+                        <li>Date of Purchase<span>{{featuredVehicle.DateOfPurchaseNice}}</span></li>
+                    </ul>
+                    <br />
+                </div>
             </div>
-        </div>
     </div>
 </div>
 <br /><br />

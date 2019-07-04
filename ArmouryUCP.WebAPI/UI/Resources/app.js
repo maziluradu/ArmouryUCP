@@ -98,7 +98,8 @@ app.controller('vehicleController', ['$scope', '$location', '$window', '$http', 
             });
         }
     }, function errorCallback() {
-    });
+        });
+
 
     $scope.getDifferenceInDays = function (date) {
         var parsedDate = new Date(date);
@@ -185,6 +186,16 @@ app.controller('businessesController', ['$scope', '$location', '$window', '$http
         }
     }, function errorCallback() {
     });
+
+    $http({
+        method: 'GET',
+        url: $location.protocol() + '://' + $location.host() + ':' + ($location.port() !== 80 ? $location.port() : '') + "/api/business/featuredBusiness"
+    }).then(function successCallback(response) {
+        if (response.status == 200) {
+            $scope.featuredBusiness = response.data;
+        }
+    }, function errorCallback() {
+    });
 }]);
 
 app.controller('housesController', ['$scope', '$location', '$window', '$http', function ($scope, $location, $window, $http) {
@@ -227,6 +238,16 @@ app.controller('housesController', ['$scope', '$location', '$window', '$http', f
     }).then(function successCallback(response) {
         if (response.status == 200) {
             loadHouses(response.data);
+        }
+    }, function errorCallback() {
+        });
+
+    $http({
+        method: 'GET',
+        url: $location.protocol() + '://' + $location.host() + ':' + ($location.port() !== 80 ? $location.port() : '') + "/api/house/featuredHouse"
+    }).then(function successCallback(response) {
+        if (response.status == 200) {
+            $scope.featuredHouse = response.data;
         }
     }, function errorCallback() {
     });
@@ -272,6 +293,16 @@ app.controller('vehiclesController', ['$scope', '$location', '$window', '$http',
     }).then(function successCallback(response) {
         if (response.status == 200) {
             loadVehicles(response.data);
+        }
+    }, function errorCallback() {
+    });
+
+    $http({
+        method: 'GET',
+        url: $location.protocol() + '://' + $location.host() + ':' + ($location.port() !== 80 ? $location.port() : '') + "/api/vehicle/featuredVehicle"
+    }).then(function successCallback(response) {
+        if (response.status == 200) {
+            $scope.featuredVehicle = response.data;
         }
     }, function errorCallback() {
     });

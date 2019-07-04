@@ -17,7 +17,6 @@ namespace ArmouryUCP.WebAPI.Models.Dtos
         public int Color2 { get; set; }
         public string Plate { get; set; }
         public int Premium { get; set; }
-        public string BrokenParts { get; set; }
         public DateTime DateOfPurchase { get; set; }
 
         public string DateOfPurchaseNice

@@ -73,6 +73,35 @@ namespace ArmouryUCP.WebAPI.Services
             }
             return null;
         }
+        public Vehicle GetVehicleByKM()
+        {
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                connection.Open();
+                MySqlCommand cmd = new MySqlCommand($"SELECT * FROM vehicles ORDER BY KM DESC LIMIT 1", connection);
+
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        return new Vehicle()
+                        {
+                            Id = Convert.ToInt32(reader["id"]),
+                            Model = Convert.ToInt32(reader["Model"]),
+                            Owner = reader["Owner"].ToString(),
+                            Value = Convert.ToInt32(reader["Price"]),
+                            KM = Convert.ToInt32(reader["KM"]),
+                            Color1 = Convert.ToInt32(reader["Color1"]),
+                            Color2 = Convert.ToInt32(reader["Color2"]),
+                            Plate = reader["Plate"].ToString(),
+                            Premium = Convert.ToInt32(reader["vMaxer"]),
+                            DateOfPurchase = DateTime.Parse(reader["vLastBought"].ToString())
+                        };
+                    }
+                }
+            }
+            return null;
+        }
 
         public List<Vehicle> GetVehicles(int number = 0, int start = 0)
         {

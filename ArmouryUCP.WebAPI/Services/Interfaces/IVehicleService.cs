@@ -8,6 +8,7 @@ namespace ArmouryUCP.WebAPI.Services.Interfaces
         List<Vehicle> GetVehicles(string owner);
         List<Vehicle> GetVehicles(int number = 0, int start = 0);
         Vehicle GetVehicle(int id);
+        Vehicle GetVehicleByKM();
         GlobalVehicleInformation GetGlobalInformationForVehicles();
     }
 }

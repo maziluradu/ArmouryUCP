@@ -15,8 +15,6 @@ namespace ArmouryUCP.WebAPI.Models.Dtos
         public int Value { get; set; }
         public int Type { get; set; }
         public string Extortion { get; set; }
-        public int Prods { get; set; }
-        public int ComercialAd { get; set; }
         public DateTime DateOfPurchase { get; set; }
 
         public string DateOfPurchaseNice
