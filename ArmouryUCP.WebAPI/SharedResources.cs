@@ -6,6 +6,9 @@ namespace ArmouryUCP.WebAPI
 {
     public static class SharedResources
     {
+        public static int MaxUsernameLength = 32;
+        public static int MaxPasswordLength = 32;
+
         public static List<string> Skills = new List<string> {
             "DetSkill",
             "SexSkill",

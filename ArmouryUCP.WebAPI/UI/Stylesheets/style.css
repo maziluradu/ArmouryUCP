@@ -3,6 +3,10 @@
         background: radial-gradient(#00001e, #000013);
     }
 
+    body.noscroll {
+        overflow: hidden;
+    }
+
     ul {
         list-style: none;
         margin: 0; padding: 0;
@@ -1414,4 +1418,105 @@ html {
     width: 50px;
     height: 50px;
     border: 2px solid #14142a;
+}
+
+#loginbox {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+
+    transition: opacity 0.25s;
+    -webkit-transition: opacity 0.25s;
+    -moz-transition: opacity 0.25s;
+}
+
+#loginbox::before {
+    content: ' ';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: black;
+    opacity: 0.6;
+}
+
+#loginbox .row, #loginbox .container-fluid {
+    height: 100%;
+}
+
+#loginbox #form {
+    border: 2px solid #14142a;
+    border-radius: 4px;
+    background: #05051e;
+    padding: 0;
+    position: absolute;
+    left: 15%;
+    top: 50%;
+    right: 0;
+    width: 70%;
+    transform: translate(0,-70%);
+}
+
+#loginbox #form h5.title {
+    color: #fff;
+    font-size: 0.8em;
+    font-family: Montserrat, sans-serif;
+    font-weight: 800;
+    border-bottom: 2px solid #14142a;
+    padding: 1.5em 2em;
+}
+
+#loginbox #form .content {
+    padding: 0 1.5em 1em 1.5em;
+}
+
+#loginbox #form .login {
+    border: 2px solid #0f0f27;
+    border-radius: 4px;
+}
+
+#loginbox #form .input-group.login {
+    margin-top: 1em;
+}
+
+#loginbox #form .login .input-group-text, #loginbox #form .login input.form-control {
+    background: none;
+    border: 0;
+    font-size: 0.7em;
+    padding-bottom: 0.4em;
+}
+
+#loginbox #form .login .input-group-text {
+    background: rgba(0, 0, 0, 0.2);
+    border-right: 2px solid #0f0f27;
+}
+
+#loginbox #form .login.button {
+    position: relative;
+    background: #000015;
+    border-radius: 4px;
+    border: 2px solid #14142c;
+    vertical-align: middle;
+    font-weight: 700;
+    color: #fff;
+    text-transform: uppercase;
+    padding: 0.8em 1.2em;
+    font-size: 0.65em;
+    margin-top: 1.5em;
+    width: 100%;
+    text-align: center;
+    padding-right: 2em;
+    cursor: pointer;
+}
+
+#loginbox span.error {
+    opacity: 0.9;
+    text-align: center;
+    display: inline-block;
+    width: 100%;
+    color: red;
+    font-size: 0.6em;
+    font-family: Montserrat, sans-serif;
+    font-weight: 600;
+    padding-top: 0.6em;
 }

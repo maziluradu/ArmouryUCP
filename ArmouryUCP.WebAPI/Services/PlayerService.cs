@@ -1,6 +1,7 @@
 ﻿using ArmouryUCP.WebAPI.Models;
 using ArmouryUCP.WebAPI.Services.Interfaces;
 using MySql.Data.MySqlClient;
+using OC.Core.Crypto;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -33,6 +34,36 @@ namespace ArmouryUCP.WebAPI.Services
                         {
                             ID = Convert.ToInt32(reader["ID"]),
                             Name = reader["user_login"].ToString()
+                        });
+                    }
+                }
+            }
+            return players;
+        }
+
+        public List<Player> SearchPlayers(string name, bool incomplete = false)
+        {
+            var players = new List<Player>();
+
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                connection.Open();
+                var playersToReturn = incomplete ? 20 : 1;
+                MySqlCommand cmd = new MySqlCommand($"SELECT * FROM wp_users WHERE user_login {(incomplete ? "LIKE" : "=")} '{(incomplete ? "%" : "")}{name}{(incomplete ? "%" : "")}' ORDER BY `Level` DESC LIMIT {playersToReturn}", connection);
+
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        players.Add(new Player()
+                        {
+                            ID = Convert.ToInt32(reader["ID"]),
+                            Name = reader["user_login"].ToString(),
+                            Model = Convert.ToInt32(reader["Model"]),
+                            LastLogin = DateTime.Parse(reader["LastLogin"].ToString()),
+                            Level = Convert.ToInt32(reader["Level"]),
+                            Member = Convert.ToInt32(reader["Faction"]),
+                            Leader = Convert.ToInt32(reader["iRank"]) >= 7 ? Convert.ToInt32(reader["Faction"]) : 0,
                         });
                     }
                 }
@@ -188,22 +219,67 @@ namespace ArmouryUCP.WebAPI.Services
             return factionHistory;
         }
 
-        public Player LoginUser(string username, string password)
+        public Player LoginPlayer(string username, string password)
         {
+            var cleanUsername = username.Substring(0, username.Length >= SharedResources.MaxUsernameLength ? SharedResources.MaxUsernameLength : username.Length);
+            var cleanPassword = password.Substring(0, password.Length >= SharedResources.MaxPasswordLength ? SharedResources.MaxPasswordLength : password.Length);
+            Player player = null;
+            List<Skill> skills = new List<Skill>();
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
                 connection.Open();
-                MySqlCommand cmd = new MySqlCommand($"SELECT ID FROM wp_users WHERE user_login='{username}' AND user_pass='6E6D898C6392E28F4A03A93CC14A0D095FC46793B2D8FE03E14A711B3508249B401D0478AACAD6874D237B82F0D21310E3276F7327E18EE74677D71E164E7179' LIMIT 1", connection);
+                MySqlCommand cmd = new MySqlCommand($"SELECT * FROM wp_users WHERE user_login = @username AND user_pass = @password", connection);
+                cmd.Parameters.AddWithValue("@username", cleanUsername);
+                cmd.Parameters.AddWithValue("@password", new Hash().Whirlpool(cleanPassword));
+
                 using (var reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
                     {
-                        return GetPlayer(Convert.ToInt32(reader["ID"]));
+                        foreach (var skill in SharedResources.Skills)
+                        {
+                            if (Convert.ToInt32(reader[skill]) >= 100)
+                                skills.Add(new Skill
+                                {
+                                    Name = skill,
+                                    Progress = Convert.ToInt32(reader[skill]) > 500 ? 500 : Convert.ToInt32(reader[skill]),
+                                    NameNice = SharedResources.SkillNiceNames[SharedResources.Skills.IndexOf(skill)],
+                                    Icon = SharedResources.SkillIcons[SharedResources.Skills.IndexOf(skill)]
+                                });
+                        }
+
+                        player = new Player()
+                        {
+                            ID = Convert.ToInt32(reader["ID"]),
+                            Name = reader["user_login"].ToString(),
+                            Level = Convert.ToInt32(reader["Level"]),
+                            Member = Convert.ToInt32(reader["Faction"]),
+                            Member2 = Convert.ToInt32(reader["Member2"]),
+                            Cash = Convert.ToInt32(reader["Money"]),
+                            Bank = Convert.ToInt32(reader["Bank"]),
+                            DonateRank = Convert.ToInt32(reader["DonateRank"]),
+                            AdminLevel = Convert.ToInt32(reader["AdminLevel"]),
+                            Respect = Convert.ToInt32(reader["Respect"]),
+                            LastLogin = DateTime.Parse(reader["LastLogin"].ToString()),
+                            Model = Convert.ToInt32(reader["Model"]),
+                            ConnectedTime = Convert.ToInt32(reader["ConnectedTime"]),
+                            Age = Convert.ToInt32(reader["Age"]),
+                            Sex = Convert.ToInt32(reader["Sex"]),
+                            Warnings = Convert.ToInt32(reader["Warnings"]),
+                            Job = Convert.ToInt32(reader["Job"]),
+                            SecondaryJob = Convert.ToInt32(reader["Job1"]),
+                            FactionRank = Convert.ToInt32(reader["iRank"]),
+                            Leader = Convert.ToInt32(reader["iRank"]) >= 7 ? Convert.ToInt32(reader["Faction"]) : 0,
+                            FactionWarnings = Convert.ToInt32(reader["Fwarn"]),
+                            FactionPunish = Convert.ToInt32(reader["Punish"]),
+                            FactionActivity = 0,
+                            FactionMemberSince = DateTime.Parse(reader["LastLogin"].ToString()),
+                            Skills = skills
+                        };
                     }
                 }
             }
-
-            return null;
+            return player;
         }
 
         public List<Player> GetOnlinePlayers(bool showFull = false)

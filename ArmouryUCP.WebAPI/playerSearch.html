@@ -1,0 +1,48 @@
+﻿<div class="loadingsplash" ng-hide="playerInfos !== undefined"><div class="loader triangle" style="top: {{loadingIconHeightOffset/2}}px; margin-top: -80px;"><svg viewBox="0 0 86 80"><polygon points="43 8 79 72 7 72"></polygon></svg></div></div>
+<div class="col-md-12 profile-header">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Panel</a></li>
+                        <li class="breadcrumb-item"><a href="#">Search</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">"{{inputtedText}}"</li>
+                    </ol>
+                </nav>
+                <h3 class="large">Search results for "{{inputtedText}}"</h3>
+                <div class="small-details">
+                    <span>The search returned {{playerInfos.length}} results.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="profile-underheader general">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <span class="badge badge-secondary armoury-green"><i class="fas fa-search"></i>{{playerInfos.length}} Search results</span>
+            </div>
+        </div>
+    </div>
+</div>
+<br /><br />
+<div class="container-fluid" id="page" style="padding: 0 3em 0 3em;">
+    <div class="row">
+        <div class="page-secondaryboard col-md-12">
+            <ul class="faction-history list-normal">
+                <li class="item" ng-repeat="playerEntry in playerInfos">
+                    <table>
+                        <tr>
+                            <td><a href="{{'/#!/player/' + playerEntry.ID}}" style="display: inline-block;" class="avatar-holder"><img ng-src="UI/Images/skins/small-thumbnail/{{('000'+playerEntry['Model']).slice(-3)}}.png" /></a></td>
+                            <td style="width: 80%; font-size: 1.2em"><a style="color: inherit" href="{{'/#!/player/' + playerEntry.ID}}">{{ playerEntry.Name }}</a> / {{ playerEntry.Faction }} / Level {{ playerEntry.Level }}</td>
+                            <td style="width: 20%; text-align: right">Last login: {{ playerEntry.LastLoginNice }}</td>
+                        </tr>
+                    </table>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<br /><br />

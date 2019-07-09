@@ -1,7 +1,10 @@
-﻿using ArmouryUCP.WebAPI.Models.Dtos;
+﻿using ArmouryUCP.WebAPI.Models;
+using ArmouryUCP.WebAPI.Models.Dtos;
 using ArmouryUCP.WebAPI.Services.Interfaces;
 using AutoMapper;
 using System.Collections.Generic;
+using System.Linq;
+using System.Security.Claims;
 using System.Web.Http;
 using System.Web.Http.Cors;
 using System.Web.Http.Results;
@@ -37,6 +40,25 @@ namespace ArmouryUCP.WebAPI.Controllers
         }
 
         /// <summary>
+        /// Gets information about currently logged in user (based on its token)
+        /// </summary>
+        /// <returns>JSON containing information about the player</returns>
+        [HttpGet]
+        [Authorize]
+        [Route("api/my/player")]
+        public IHttpActionResult GetPlayerByToken()
+        {
+            var identity = User.Identity as ClaimsIdentity;
+            var dictionary = new Dictionary<string, string>();
+            foreach(var claim in identity.Claims)
+            {
+                dictionary.Add(claim.Type.Substring(ClaimTypes.Name.LastIndexOf('/') + 1), claim.Value);
+            }
+
+            return Ok(dictionary);
+        }
+
+        /// <summary>
         /// Gets whole information about certain player. Only use this in critical cases - it outputs
         /// a lot of data.
         /// </summary>
@@ -47,6 +69,24 @@ namespace ArmouryUCP.WebAPI.Controllers
         public IHttpActionResult GetPlayer(string name)
         {
             var player = Mapper.Map<PlayerDto>(playerService.GetPlayer(name));
+
+            if (player != null)
+                return Ok(player);
+
+            return NotFound();
+        }
+
+        /// <summary>
+        /// Gets whole information about certain player. Only use this in critical cases - it outputs
+        /// a lot of data.
+        /// </summary>
+        /// <param name="id">Username</param>
+        /// <returns>JSON containing information about the player</returns>
+        [HttpGet]
+        [Route("api/player/{name}/search")]
+        public IHttpActionResult SearchPlayer(string name)
+        {
+            var player = Mapper.Map<List<PlayerDto>>(playerService.SearchPlayers(name, true));
 
             if (player != null)
                 return Ok(player);

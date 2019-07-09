@@ -1,4 +1,4 @@
-﻿var app = angular.module('armouryPanel', ['ngRoute', 'ngSanitize', 'ngAnimate']);
+﻿var app = angular.module('armouryPanel', ['ngRoute', 'ngSanitize', 'ngAnimate', 'ngCookies']);
 
 app.config(function ($routeProvider) {
 
@@ -10,6 +10,10 @@ app.config(function ($routeProvider) {
         .when('/player/:id', {
             templateUrl: 'profile.html',
             controller: 'playerController'
+        })
+        .when('/player/search/:name', {
+            templateUrl: 'playerSearch.html',
+            controller: 'playerSearchController'
         })
         .when('/houses', {
             templateUrl: 'houses.html',
@@ -42,8 +46,89 @@ app.config(function ($routeProvider) {
 
 });
 
-app.controller('mainController', ['$scope', function ($scope) {
+app.controller('mainController', ['$scope', '$window', '$cookies', '$http', '$location', function ($scope, $window, $cookies, $http, $location) {
+    $scope.searchPlayerText = "";
+    $scope.loginRequested = false;
+    $scope.enteredUsername = "";
+    $scope.enteredPassword = "";
+    $scope.loginError = "";
 
+    $scope.searchForPlayer = function () {
+        if ($scope.searchPlayerText.length > 2) {
+            $window.location.href = '/#!/player/search/' + $scope.searchPlayerText;
+        }
+    };
+
+    $scope.getCurrentToken = function () {
+        return $cookies.get('armoury_token');
+    }
+
+    $scope.loginUser = function () {
+        $http({
+            method: 'POST',
+            url: $location.protocol() + '://' + $location.host() + ':' + ($location.port() !== 80 ? $location.port() : '') + "/api/Token",
+            transformRequest: function (obj) {
+                var str = [];
+                for (var p in obj)
+                    str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                return str.join("&");
+            },
+            data: { 'grant_type': 'password', 'username': $scope.enteredUsername, 'password': $scope.enteredPassword },
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+        }).then(function successCallback(response) {
+            if (response.status == 200) {
+                $cookies.put('armoury_token', response.data['access_token'], {'expires': response.data['.expires']});
+                $scope.currentUser = response.data;
+
+                $scope.enteredUsername = "";
+                $scope.enteredPassword = "";
+                $scope.loginRequested = false;
+            }
+        }, function errorCallback() {
+            $scope.loginError = "The username and password combination was incorrect.";
+        });
+    }
+
+    if ($scope.currentUser == undefined && $cookies.get('armoury_token') != undefined) {
+        $http({
+            method: 'GET',
+            url: $location.protocol() + '://' + $location.host() + ':' + ($location.port() !== 80 ? $location.port() : '') + "/api/my/player",
+            headers: { 'Authorization': 'Bearer ' + $cookies.get('armoury_token') }
+        }).then(function successCallback(response) {
+            if (response.status == 200) {
+                $scope.currentUser = response.data;
+            }
+        }, function errorCallback() {
+            
+        });
+    }
+
+    $scope.navbarNameClick = function () {
+        if ($scope.getCurrentToken() == undefined)
+            $scope.loginRequested = $scope.getCurrentToken() == undefined;
+        else
+            $window.location.href = '/#!/player/' + $scope.currentUser['PlayerID'];
+    }
+}]);
+
+app.controller('playerSearchController', ['$scope', '$location', '$window', '$http', function ($scope, $location, $window, $http) {
+    $scope.loadingIconHeightOffset = $window.innerHeight;
+    $scope.Math = $window.Math;
+
+    $scope.inputtedText = $location.path().split('/').pop();
+
+    $http({
+        method: 'GET',
+        url: $location.protocol() + '://' + $location.host() + ':' + ($location.port() !== 80 ? $location.port() : '') + "/api/player/" + $location.path().split('/').pop() + "/search"
+    }).then(function successCallback(response) {
+        if (response.status == 200) {
+            if (response.data.length == 1)
+                $window.location.href = '/#!/player/' + response.data[0].ID;
+            else
+                $scope.playerInfos = response.data;
+        }
+    }, function errorCallback() {
+    });
 }]);
 
 app.controller('houseController', ['$scope', '$location', '$window', '$http', function ($scope, $location, $window, $http) {
@@ -68,7 +153,7 @@ app.controller('houseController', ['$scope', '$location', '$window', '$http', fu
             });
         }
     }, function errorCallback() {
-        });
+    });
 
     $scope.getDifferenceInDays = function (date) {
         var parsedDate = new Date(date);

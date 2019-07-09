@@ -6,7 +6,8 @@
     <script src="UI/Resources/angular.js"></script>
     <script src="https://code.angularjs.org/snapshot/angular-sanitize.min.js"></script>
     <script src="https://code.angularjs.org/snapshot/angular-route.min.js"></script>
-    <script src="https://code.angularjs.org/snapshot/angular-animate.js"></script>
+    <script src="https://code.angularjs.org/snapshot/angular-animate.min.js"></script>
+    <script src="https://code.angularjs.org/snapshot/angular-cookies.min.js"></script>
     <script src="UI/Resources/app.js"></script>
     <link href="UI/Resources/bootstrap.min.css" rel="stylesheet" />
     <link href="UI/Stylesheets/style.css" rel="stylesheet" />
@@ -55,8 +56,38 @@
         }
     </script>
 </head>
-<body>
-    <div ng-app="armouryPanel" ng-controller="mainController">
+<body ng-app="armouryPanel" ng-controller="mainController" ng-class="{true: 'noscroll'}[loginRequested == true]">
+    <div>
+        <div id="loginbox" ng-show="loginRequested">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-4 offset-md-4">
+                        <div id="form">
+                            <h5 class="title">Login</h5>
+                            <div class="content">
+                                <form ng-submit="searchForPlayer()" class="form-inline" style="width: 100%">
+                                    <span class="error" ng-if="loginError.length > 0">{{ loginError }}</span>
+                                    <div class="input-group login" style="width: 100%">
+                                        <a class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1"><i class="fas fa-user-circle"></i></span>
+                                        </a>
+                                        <input type="text" ng-model="enteredUsername" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" maxlength="32">
+                                    </div>
+                                    <div class="input-group login" style="width: 100%">
+                                        <a class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1"><i class="fas fa-key"></i></span>
+                                        </a>
+                                        <input type="password" ng-model="enteredPassword" class="form-control" placeholder="Password" aria-label="Username" aria-describedby="basic-addon1" maxlength="32">
+                                    </div>
+                                    <span class="button login" ng-click="loginUser()"><i class="fas fa-sign-in-alt"></i>&nbsp;&nbsp;&nbsp;Login</span>
+                                    <input type="submit" style="position: absolute; left: -9999px; width: 1px; height: 1px;" />
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="container-fluid">
             <div class="row">
                 <nav class="navbar navbar-expand-lg navbar-dark bg-dark col-md-12">
@@ -80,28 +111,27 @@
                         </div>
                     </div>
                     <div class="col-md-3" style="padding-right: 2em;">
-                        <form class="form-inline" style="width: 100%">
+                        <form ng-submit="searchForPlayer()" class="form-inline" style="width: 100%">
                             <div class="input-group search player" style="width: 100%">
-                                <div class="input-group-prepend">
+                                <a class="input-group-prepend" href="{{'/#!/player/search/' + searchPlayerText}}">
                                     <span class="input-group-text" id="basic-addon1"><i class="fas fa-search"></i></span>
-                                </div>
-                                <input type="text" class="form-control" placeholder="Search for a player.." aria-label="Username" aria-describedby="basic-addon1" maxlength="32">
+                                </a>
+                                <input type="text" ng-model="searchPlayerText" class="form-control" placeholder="Search for a player.." aria-label="Username" aria-describedby="basic-addon1" maxlength="32">
+                                <input type="submit" style="position: absolute; left: -9999px; width: 1px; height: 1px;" />
                             </div>
                         </form>
                     </div>
                     <div class="separator"></div>
                     <div class="col-md-2">
                         <div class="top-buttons d-flex align-items-center">
-                            <div class="p-2"><a href="http://armoury.ro"><span class="badge" style="font-size: 1.15em; border: 2px solid #0f0f27;"><i class="fas fa-user-circle"></i>Log in</span></a></div>
+                            <div class="p-2"><a style="cursor: pointer !important;" ng-click="navbarNameClick()"><span class="badge" style="font-size: 1.15em; border: 2px solid #0f0f27;"><i class="fas fa-user-circle"></i>{{ currentUser != undefined ? currentUser.Username : "Login" }}</span></a></div>
                         </div>
                     </div>
                 </nav>
                 <nav class="col-md-2 d-none d-md-block bg-light sidebar">
                     <div class="sidebar-sticky" style="height: 100%">
                         <div class="row" style="height: 100%">
-                            <nav id="sidebar-mini" class="col-md-3" ng-controller="mainNavController as mainItems" align="center">
-                                <br />
-                                <img src="UI/Images/avatar.png" style="width:85%; height: auto; margin-left: auto; margin-right: auto;" /><br /><br />
+                            <nav id="sidebar-mini" class="col-md-3" style="padding-top: 2em;" ng-controller="mainNavController as mainItems" align="center">
                                 <ul>
                                     <li ng-repeat="item in mainItems.items" style="font-size: 1.33em">
                                         <a href="{{ item.link }}">

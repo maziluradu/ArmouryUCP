@@ -1,4 +1,7 @@
-﻿using ArmouryUCP.WebAPI.Services;
+﻿using ArmouryUCP.WebAPI.Models;
+using ArmouryUCP.WebAPI.Models.Dtos;
+using ArmouryUCP.WebAPI.Services;
+using AutoMapper;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
@@ -60,7 +63,7 @@ namespace ArmouryUCP.WebAPI.Helpers.OAuth2
             // Initialization.  
             string usernameVal = context.UserName;
             string passwordVal = context.Password;
-            var user = playerService.LoginUser(usernameVal, passwordVal);
+            var user = playerService.LoginPlayer(usernameVal, passwordVal);
 
             // Verification.  
             if (user == null)
@@ -74,17 +77,24 @@ namespace ArmouryUCP.WebAPI.Helpers.OAuth2
 
             // Initialization.  
             var claims = new List<Claim>();
+            var additionalClaims = CreateProperties(user);
 
             // Setting  
             claims.Add(new Claim(ClaimTypes.Name, user.Name));
+
+            foreach (var property in additionalClaims.Dictionary)
+            {
+                claims.Add(new Claim(ClaimTypes.Name.Substring(0, ClaimTypes.Name.LastIndexOf('/') + 1) + property.Key, property.Value, ClaimValueTypes.String));
+            }
 
             // Setting Claim Identities for OAUTH 2 protocol.  
             ClaimsIdentity oAuthClaimIdentity = new ClaimsIdentity(claims, OAuthDefaults.AuthenticationType);
             ClaimsIdentity cookiesClaimIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationType);
 
             // Setting user authentication.  
-            AuthenticationProperties properties = CreateProperties(user.Name);
+            AuthenticationProperties properties = additionalClaims;
             AuthenticationTicket ticket = new AuthenticationTicket(oAuthClaimIdentity, properties);
+
 
             // Grant access to authorize user.  
             context.Validated(ticket);
@@ -172,13 +182,18 @@ namespace ArmouryUCP.WebAPI.Helpers.OAuth2
         /// </summary>  
         /// <param name="userName">User name parameter</param>  
         /// <returns>Returns authenticated properties.</returns>  
-        public static AuthenticationProperties CreateProperties(string userName)
+        public static AuthenticationProperties CreateProperties(Player player)
         {
+            var playerDto = Mapper.Map<PlayerDto>(player);
             // Settings.  
             IDictionary<string, string> data = new Dictionary<string, string>
-                                               {
-                                                   { "userName", userName }
-                                               };
+            {
+                { "PlayerID", playerDto.ID.ToString() },
+                { "Username", playerDto.Name },
+                { "Model", playerDto.Model.ToString() },
+                { "Level", playerDto.Level.ToString() },
+                { "LevelProgress", playerDto.LevelProgress.ToString() }
+            };
 
             // Return info.  
             return new AuthenticationProperties(data);

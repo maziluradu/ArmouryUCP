@@ -9,7 +9,9 @@ namespace ArmouryUCP.WebAPI.Services.Interfaces
 {
     public interface IPlayerService
     {
+        Player LoginPlayer(string username, string password);
         List<Player> GetPlayers(int playersToReturn = 10);
+        List<Player> SearchPlayers(string name, bool incomplete = false);
         Player GetPlayer(int id);
         Player GetPlayer(string name);
         List<Player> GetOnlinePlayers(bool showFull = false);

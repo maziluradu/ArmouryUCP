@@ -14,16 +14,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/22/2019 00:42:37</publishTime>
     </File>
     <File Include="bin/App_global.asax.compiled">
-      <publishTime>06/24/2019 02:38:19</publishTime>
+      <publishTime>07/04/2019 00:35:51</publishTime>
     </File>
     <File Include="bin/App_global.asax.dll">
-      <publishTime>06/24/2019 02:38:19</publishTime>
+      <publishTime>07/04/2019 00:35:51</publishTime>
     </File>
     <File Include="bin/ArmouryUCP.WebAPI.dll">
-      <publishTime>06/24/2019 02:38:08</publishTime>
+      <publishTime>07/04/2019 00:35:41</publishTime>
     </File>
     <File Include="bin/ArmouryUCP.WebAPI.pdb">
-      <publishTime>06/24/2019 02:38:08</publishTime>
+      <publishTime>07/04/2019 00:35:41</publishTime>
     </File>
     <File Include="bin/AutoMapper.dll">
       <publishTime>11/17/2018 09:14:56</publishTime>
@@ -247,8 +247,11 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="bin/Unity.Container.pdb">
       <publishTime>03/23/2019 21:03:54</publishTime>
     </File>
+    <File Include="business.html">
+      <publishTime>07/04/2019 00:29:52</publishTime>
+    </File>
     <File Include="businesses.html">
-      <publishTime>06/24/2019 00:42:38</publishTime>
+      <publishTime>07/04/2019 00:29:52</publishTime>
     </File>
     <File Include="Global.asax">
       <publishTime>03/29/2019 10:51:40</publishTime>
@@ -260,16 +263,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/24/2019 00:42:38</publishTime>
     </File>
     <File Include="index.html">
-      <publishTime>06/22/2019 04:14:49</publishTime>
+      <publishTime>07/04/2019 00:23:50</publishTime>
     </File>
     <File Include="main.html">
       <publishTime>06/24/2019 00:42:38</publishTime>
     </File>
     <File Include="PrecompiledApp.config">
-      <publishTime>06/24/2019 02:38:12</publishTime>
+      <publishTime>07/04/2019 00:35:45</publishTime>
     </File>
     <File Include="profile.html">
-      <publishTime>06/24/2019 00:42:38</publishTime>
+      <publishTime>07/04/2019 00:29:52</publishTime>
     </File>
     <File Include="UI/Images/avatar.png">
       <publishTime>03/29/2019 12:39:23</publishTime>
@@ -4103,7 +4106,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/29/2019 09:51:46</publishTime>
     </File>
     <File Include="UI/Resources/app.js">
-      <publishTime>06/24/2019 02:22:43</publishTime>
+      <publishTime>07/04/2019 00:29:52</publishTime>
     </File>
     <File Include="UI/Resources/bootstrap.min.css">
       <publishTime>03/29/2019 09:51:46</publishTime>
@@ -4115,10 +4118,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/07/2019 00:13:06</publishTime>
     </File>
     <File Include="UI/Stylesheets/style.css">
-      <publishTime>06/24/2019 01:59:53</publishTime>
+      <publishTime>07/04/2019 00:15:42</publishTime>
+    </File>
+    <File Include="vehicle.html">
+      <publishTime>07/04/2019 00:29:52</publishTime>
     </File>
     <File Include="vehicles.html">
-      <publishTime>06/24/2019 00:42:38</publishTime>
+      <publishTime>07/04/2019 00:29:52</publishTime>
     </File>
     <File Include="Web.config">
       <publishTime>06/17/2019 02:33:29</publishTime>
