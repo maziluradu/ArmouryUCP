@@ -52,7 +52,7 @@ namespace ArmouryUCP.WebAPI.Controllers
         /// </summary>
         /// <returns>JSON containing information about house</returns>
         [HttpGet]
-        [Route("api/house/featurehouse")]
+        [Route("api/house/featuredHouse")]
         public IHttpActionResult GetHouseWithTenants()
         {
             var house = Mapper.Map<HouseCompleteDto>(houseService.GetHouseWithTenants());

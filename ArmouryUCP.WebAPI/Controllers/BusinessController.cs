@@ -53,7 +53,7 @@ namespace ArmouryUCP.WebAPI.Controllers
         /// </summary>
         /// <returns>JSON containing information about business for featured business panel</returns>
         [HttpGet]
-        [Route("api/business/featuredbusiness")]
+        [Route("api/business/featuredBusiness")]
         public IHttpActionResult GetBusinessByTill()
         {
             var business = Mapper.Map<BusinessDto>(businessService.GetBusinessByTill());
