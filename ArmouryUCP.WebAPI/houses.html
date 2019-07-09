@@ -76,7 +76,23 @@
         <div class="page-secondaryboard col-md-4">
             <div class="content">
                 <h4 class="title">Featured House</h4>
-                <br /><br /><br />
+                <div class="owner-info">
+                    <br ng-if="featuredHouse != undefined" />
+                    <div class="col-md-12 house-image">
+                        <a href="{{'/#!/houses/' + featuredHouse.Id}}"><img style="width: 100%; height: auto;" ng-src="UI/Images/houses/{{featuredHouse.InteriorIndexNice}}_0.jpg"/></a>
+                    </div>
+                    <br />
+                    <ul>
+                        <li>Name<span>{{featuredHouse.NameNice}}</span></li>
+                        <li>Owner<span>{{featuredHouse.Owner != undefined ? featuredHouse.Owner : "Unbought"}}</span></li>
+                        <li>ID<span>{{featuredHouse.Id}}</span></li>
+                        <li>Level<span>{{featuredHouse.Level}}</span></li>
+                        <li>Date of Purchase<span>{{featuredHouse.DateOfPurchaseNice}}</span></li>
+                        <li>Tenants<span>{{featuredHouse.TenantsNumber}}</span></li>
+                        <li>Rent Price<span>${{featuredHouse.RentPrice | number : fractionSize}}</span></li>
+                    </ul>
+                    <br />
+                </div>
             </div>
         </div>
     </div>

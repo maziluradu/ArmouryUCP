@@ -47,6 +47,17 @@ namespace ArmouryUCP.WebAPI.Controllers
             return Ok(vehicle);
         }
         /// <summary>
+        /// Gets vehicles information for featured vehicle panel
+        /// </summary>
+        /// <returns>JSON containing information about vehicle for featured vehicle panel</returns>
+        [HttpGet]
+        [Route("api/vehicle/featuredVehicle")]
+        public IHttpActionResult GetVehicleByKM()
+        {
+            var vehicle = Mapper.Map<VehicleDto>(vehicleService.GetVehicleByKM());
+            return Ok(vehicle);
+        }
+        /// <summary>
         /// Gets partial information about vehicles on the server
         /// </summary>
         /// <returns>JSON containing information about multiple vehicles</returns>

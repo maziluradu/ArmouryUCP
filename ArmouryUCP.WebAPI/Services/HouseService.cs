@@ -51,6 +51,24 @@ namespace ArmouryUCP.WebAPI.Services
             return null;
         }
 
+        public House GetHouseWithTenants()
+        {
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                connection.Open();
+                MySqlCommand cmd = new MySqlCommand($"SELECT House FROM wp_users GROUP by House ORDER BY count(CASE WHEN House != 255 then 1 ELSE NULL END) DESC LIMIT 1", connection);
+
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        return GetHouse(Convert.ToInt32(reader["House"]));
+                    }
+                }
+            }
+            return null;
+        }
+
         public List<House> GetHouses(string owner)
         {
             var houses = new List<House>();

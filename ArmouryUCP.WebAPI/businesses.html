@@ -75,7 +75,21 @@
         <div class="page-secondaryboard col-md-4">
             <div class="content">
                 <h4 class="title">Featured Business</h4>
-                <br /><br /><br />
+                <div class="owner-info">
+                    <br ng-if="featuredBusiness != undefined" />
+                    <div class="col-md-12 house-image">
+                        <a href="{{'/#!/businesses/' + featuredBusiness.Id}}"><img style="width: 100%; height: auto;" ng-src="UI/Images/businesses/{{featuredBusiness.Type}}.jpg" /></a>
+                    </div>
+                    <br />
+                    <ul>
+                        <li>Name<span>{{featuredBusiness.Name}}</span></li>
+                        <li>Owner<span>{{featuredBusiness.Owner != undefined ? featuredBusiness.Owner : "Unbought"}}</span></li>
+                        <li>ID<span>{{featuredBusiness.Id}}</span></li>
+                        <li>Level<span>{{featuredBusiness.Level}}</span></li>
+                        <li>Date of Purchase<span>{{featuredBusiness.DateOfPurchaseNice}}</span></li>
+                    </ul>
+                    <br />
+                </div>
             </div>
         </div>
     </div>

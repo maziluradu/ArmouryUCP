@@ -49,6 +49,18 @@ namespace ArmouryUCP.WebAPI.Controllers
         }
 
         /// <summary>
+        /// Gets business information for a specific owner
+        /// </summary>
+        /// <returns>JSON containing information about business for featured business panel</returns>
+        [HttpGet]
+        [Route("api/business/featuredbusiness")]
+        public IHttpActionResult GetBusinessByTill()
+        {
+            var business = Mapper.Map<BusinessDto>(businessService.GetBusinessByTill());
+            return Ok(business);
+        }
+
+        /// <summary>
         /// Gets partial information about businesses on the server
         /// </summary>
         /// <returns>JSON containing information about multiple businesses</returns>

@@ -46,6 +46,33 @@ namespace ArmouryUCP.WebAPI.Services
             return null;
         }
 
+        public Business GetBusinessByTill()
+        {
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                connection.Open();
+                MySqlCommand cmd = new MySqlCommand($"SELECT * FROM biz ORDER BY bTill DESC LIMIT 1", connection);
+
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        return new Business()
+                        {
+                            Id = Convert.ToInt32(reader["bID"]),
+                            Level = Convert.ToInt32(reader["bLevel"]),
+                            Name = reader["bMessage"].ToString(),
+                            Owner = reader["bOwner"].ToString(),
+                            Value = Convert.ToInt32(reader["bValue"]),
+                            Type = Convert.ToInt32(reader["bType"]),
+                            Extortion = reader["bExtortion"].ToString()
+                        };
+                    }
+                }
+            }
+            return null;
+        }
+
         public List<Business> GetBusinesses(string owner)
         {
             var businesses = new List<Business>();

@@ -48,6 +48,17 @@ namespace ArmouryUCP.WebAPI.Controllers
         }
 
         /// <summary>
+        /// Gets house with tenants
+        /// </summary>
+        /// <returns>JSON containing information about house</returns>
+        [HttpGet]
+        [Route("api/house/featurehouse")]
+        public IHttpActionResult GetHouseWithTenants()
+        {
+            var house = Mapper.Map<HouseCompleteDto>(houseService.GetHouseWithTenants());
+            return Ok(house);
+        }
+        /// <summary>
         /// Gets partial information about houses on the server
         /// </summary>
         /// <returns>JSON containing information about multiple houses</returns>
