@@ -192,7 +192,9 @@ namespace ArmouryUCP.WebAPI.Helpers.OAuth2
                 { "Username", playerDto.Name },
                 { "Model", playerDto.Model.ToString() },
                 { "Level", playerDto.Level.ToString() },
-                { "LevelProgress", playerDto.LevelProgress.ToString() }
+                { "LevelProgress", playerDto.LevelProgress.ToString() },
+                { "Connected", playerDto.Connected.ToString() },
+                { "LastLogin", playerDto.LastLoginNice  }
             };
 
             // Return info.  

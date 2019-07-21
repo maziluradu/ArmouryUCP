@@ -512,12 +512,12 @@
     font-family: Montserrat, sans-serif;
 }
 
-.page-body.profile-stats ul, .owner-info > ul {
+.page-body.profile-stats ul, .owner-info > ul, .player.brief ul {
     list-style: none;
     padding: 0; margin: 0;
 }
 
-.page-body.profile-stats ul > li, .owner-info > ul li {
+.page-body.profile-stats ul > li, .owner-info > ul li, .player.brief ul li {
     font-size: 0.65em;
     font-family: Montserrat, sans-serif;
     font-weight: 700;
@@ -525,12 +525,12 @@
     color: #a5b2df;
 }
 
-.page-body.profile-stats ul > li > span, .owner-info > ul > li > span {
+.page-body.profile-stats ul > li > span, .owner-info > ul > li > span, .player.brief ul > li > span  {
     color: #fff;
     float: right;
 }
 
-.page-body.profile-stats ul li:nth-child(2n+1), .owner-info ul li:nth-child(2n+1) {
+.page-body.profile-stats ul li:nth-child(2n+1), .owner-info ul li:nth-child(2n+1), .player.brief ul li:nth-child(2n+1) {
     background: #0d0d25;
 }
 
@@ -869,7 +869,7 @@ ul.list-normal td.time::after {
     content: "\f017";
 }
 
-.list-normal .avatar-holder {
+.list-normal .avatar-holder, .content.complaints li .avatar-holder {
     width: 40px;
     height: 40px;
     border-radius: 50%;
@@ -878,7 +878,7 @@ ul.list-normal td.time::after {
     margin-right: 1em;
 }
 
-.list-normal .avatar-holder img {
+.list-normal .avatar-holder img, .content.complaints li .avatar-holder img {
     width: 100%;
     height: auto;
 }
@@ -1519,4 +1519,217 @@ html {
     font-family: Montserrat, sans-serif;
     font-weight: 600;
     padding-top: 0.6em;
+}
+
+/* Complaints Page*/
+.complaint-spotlight .player.brief {
+    width: 100%;
+    text-align: center;
+    color: #fff;
+    font-family: Montserrat, sans-serif;
+}
+
+.complaint-spotlight .player.brief > h5 {
+    font-weight: 800;
+    display: inline-block;
+    position: relative;
+    font-size: 1.35em;
+    padding: 0; margin: 0;
+}
+
+.complaint-spotlight .player.brief > h5::after {
+    content: ' ';
+    position: absolute;
+    right: -11px;
+    top: 46%;
+    width: 5px; height: 5px; border-radius: 50%;
+    background: red;
+}
+
+.complaint-spotlight .player.brief.online > h5::after {
+    background: green;
+}
+
+.complaint-spotlight .player.brief > h5 + span {
+    display: block;
+    font-weight: 600;
+    color: #8c8c91;
+    text-transform: uppercase;
+    font-size: 0.5em;
+}
+
+.complaint-spotlight .player.brief ul li {
+    text-align: left;
+}
+
+.content.complaints > ul li {
+    padding: 0;
+    border-bottom: 2px solid #17172e;
+}
+
+.content.complaints > ul li > .container-fluid > .row > div {
+    padding: 1em 1.2em;
+    border-right: 1px solid #17172e;
+    font-family: Montserrat, sans-serif;
+}
+
+.content.complaints > ul li > .container-fluid > .row > div:last-child {
+    border-right: none;
+}
+
+.content.complaints > ul li:last-child {
+    border-bottom: none;
+}
+
+.content.complaints li .avatar-holder {
+    border: 0;
+    margin-right: 0.5em;
+    float: left;
+}
+
+.content.complaints li .avatar-holder + .info {
+    float: left;
+}
+
+.content.complaints li .avatar-holder + .info a {
+    color: #fff;
+    font-weight: 800;
+    font-size: 0.7em;
+}
+
+.content.complaints li .avatar-holder + .info span {
+    text-transform: uppercase;
+    font-size: 0.5em;
+    color: #8c8c91;
+    font-weight: 700;
+    display: block;
+}
+
+.content.complaints li .complaint-information {
+    padding-top: 1.6em !important;
+    padding-bottom: 0.8em !important;
+}
+
+.content.complaints li .complaint-information > span {
+    color: #8c8c91;
+    font-size: 0.48em;
+    text-transform: uppercase;
+    text-align: center;
+    display: block;
+    width: 100%;
+}
+
+.content.complaints li .complaint-information > h5 {
+    color: #fff;
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: 0.8em;
+    text-align: center;
+}
+
+.content.complaints li a.view {
+    background-image: linear-gradient(#811b21, #cd2342);
+    width: 100%;
+    display: inline-block;
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 0.45em;
+    text-align: center;
+    padding: 0.7em;
+    border-radius: 4px;
+    font-weight: 700;
+}
+
+.content .complaint-body {
+    font-family: Montserrat, sans-serif;
+    padding: 1em 2.3em;
+    color: #a8accb;
+    font-size: 0.65em;
+    font-weight: 600;
+}
+
+.content .complaint-body span.label {
+    color: #fff;
+    font-weight: 700;
+}
+
+.content.comment .complaint-body .avatar-holder {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    overflow: hidden;
+    display: inline-block;
+    margin-right: 0.5em;
+}
+
+.content.comment .complaint-body .avatar-holder img {
+    width: 100%; height: auto;
+}
+
+.content.comment .complaint-body .avatar-holder + .tags {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.content.comment {
+    margin-bottom: 1em;
+}
+
+.content.comment .tags .badge {
+    font-size: 0.6em;
+    vertical-align: middle;
+    margin-left: 0.75em;
+    font-weight: 600;
+    text-transform: uppercase;
+    padding: 0.7em 1.3em 0.7em 1.3em;
+    opacity: 0.8;
+    -webkit-transition: opacity 0.25s;
+    -moz-transition: opacity 0.25s;
+    transition: opacity 0.25s;
+}
+
+.content.comment .tags .badge.complaint-creator {
+    background: #041f1f;
+    color: #3cbd4e;
+    -moz-box-shadow: inset 0 0 10px rgba(60, 189, 78, 0.1);
+    -webkit-box-shadow: inset 0 0 10px rgba(60, 189, 78, 0.1);
+    box-shadow: inset 0 0 10px rgba(60, 189, 78, 0.1)
+}
+
+.content.comment .tags .badge.complaint-reported {
+    background: #7b1515;
+    color: #fff0f0;
+    -moz-box-shadow: inset 0 0 10px rgba(60, 189, 78, 0.1);
+    -webkit-box-shadow: inset 0 0 10px rgba(60, 189, 78, 0.1);
+    box-shadow: inset 0 0 10px rgba(60, 189, 78, 0.1)
+}
+
+.content.comment .tags .badge.creator-admin {
+    background: #29157b;
+    color: #f3f9ff;
+    -moz-box-shadow: inset 0 0 10px rgba(60, 189, 78, 0.1);
+    -webkit-box-shadow: inset 0 0 10px rgba(60, 189, 78, 0.1);
+    box-shadow: inset 0 0 10px rgba(60, 189, 78, 0.1)
+}
+
+.content.comment .tags .creator {
+    font-weight: 800;
+    font-size: 1.2em;
+    color: #d6d6d6;
+    padding-top: 0.4em;
+    padding-left: 0.3em;
+    display: inline-block;
+}
+
+.content.comment .comment-content {
+    display: block;
+    padding: 0 0 0 0;
+    margin: 0;
+    padding-left: 52px;
+}
+
+.content.comment .tags span.date {
+    float: right;
+    font-size: 0.75em;
+    padding-top: 0.5em;
 }

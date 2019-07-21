@@ -30,6 +30,20 @@ namespace ArmouryUCP.WebAPI.Models
         public DateTime FactionMemberSince { get; set; }
         public DateTime LastLogin { get; set; }
         public List<Skill> Skills { get; set; }
+        public bool Connected { get; set; }
+        public int TotalShots { get; set; }
+        public int TotalHits { get; set; }
+        public int TorsoHits { get; set; }
+        public int GroinHits { get; set; }
+        public int LeftArmHits { get; set; }
+        public int RightArmHits { get; set; }
+        public int LeftLegHits { get; set; }
+        public int RightLegHits { get; set; }
+        public int HeadHits { get; set; }
+        public int TotalKills { get; set; }
+        public List<WeaponData> WeaponHitInformation { get; set; }
+        public List<WeaponData> WeaponKillInformation { get; set; }
+        public List<WeaponData> WeaponShotInformation { get; set; }
 
         public int TotalPlayers { get; set; }
     }

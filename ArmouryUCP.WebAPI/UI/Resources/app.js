@@ -39,6 +39,14 @@ app.config(function ($routeProvider) {
             templateUrl: 'business.html',
             controller: 'businessController'
         })
+        .when('/complaints', {
+            templateUrl: 'complaints.html',
+            controller: 'complaintsController'
+        })
+        .when('/complaints/:id', {
+            templateUrl: 'complaint.html',
+            controller: 'complaintController'
+        })
         .otherwise({
             templateUrl: '404.html',
             controller: '404Controller'
@@ -52,6 +60,14 @@ app.controller('mainController', ['$scope', '$window', '$cookies', '$http', '$lo
     $scope.enteredUsername = "";
     $scope.enteredPassword = "";
     $scope.loginError = "";
+
+    $scope.mainItems = [
+        { name: 'Profile', faItem: 'user', link: '#' },
+        { name: 'Staff', faItem: 'crown', link: 'test' },
+        { name: 'Economy', faItem: 'comment-dollar', link: 'test' },
+        { name: 'Complaints', faItem: 'exclamation-triangle', link: '/#!/complaints' },
+        { name: 'Unban Requests', faItem: 'user-lock', link: 'test' }
+    ];
 
     $scope.searchForPlayer = function () {
         if ($scope.searchPlayerText.length > 2) {
@@ -97,9 +113,11 @@ app.controller('mainController', ['$scope', '$window', '$cookies', '$http', '$lo
         }).then(function successCallback(response) {
             if (response.status == 200) {
                 $scope.currentUser = response.data;
+
+                $scope.mainItems[0].link = "/#!/player/" + $scope.currentUser['PlayerID'];
             }
         }, function errorCallback() {
-            
+            $cookies.remove('armoury_token');
         });
     }
 
@@ -437,18 +455,6 @@ app.controller('frontPageController', ['$scope', '$location', '$window', '$http'
     });
 }]);
 
-app.controller('mainNavController', ['$scope', function ($scope) {
-    var mainItems = this;
-
-    mainItems.items = [
-        { name: 'Profile', faItem: 'user', link: 'test' },
-        { name: 'Staff', faItem: 'crown', link: 'test' },
-        { name: 'Economy', faItem: 'comment-dollar', link: 'test' },
-        { name: 'Complaints', faItem: 'exclamation-triangle', link: 'test' },
-        { name: 'Unban Requests', faItem: 'user-lock', link: 'test' }
-    ];
-}]);
-
 app.controller('secondaryNavController', ['$scope', '$location', function ($scope, $location) {
     var secondaryItems = this;
 
@@ -554,6 +560,37 @@ app.controller('playerController', ['$scope', '$location', '$window', '$http', f
                 }
             }, function errorCallback() {
             });
+        }
+    }, function errorCallback() {
+    });
+}]);
+
+app.controller('complaintsController', ['$scope', '$location', '$window', '$http', function ($scope, $location, $window, $http) {
+    $scope.loadingIconHeightOffset = $window.innerHeight;
+    $scope.Math = $window.Math;
+
+    $http({
+        method: 'GET',
+        url: $location.protocol() + '://' + $location.host() + ':' + ($location.port() !== 80 ? $location.port() : '') + "/api/complaint",
+        params: { player: $scope.currentUser != undefined ? $scope.currentUser['PlayerID'] : -1 }
+    }).then(function successCallback(response) {
+        if (response.status == 200) {
+            $scope.complaintInfos = response.data;
+        }
+    }, function errorCallback() {
+    });
+}]);
+
+app.controller('complaintController', ['$scope', '$location', '$window', '$http', function ($scope, $location, $window, $http) {
+    $scope.loadingIconHeightOffset = $window.innerHeight;
+    $scope.Math = $window.Math;
+
+    $http({
+        method: 'GET',
+        url: $location.protocol() + '://' + $location.host() + ':' + ($location.port() !== 80 ? $location.port() : '') + "/api/complaint/" + $location.path().split('/').pop()
+    }).then(function successCallback(response) {
+        if (response.status == 200) {
+            $scope.complaintInfos = response.data;
         }
     }, function errorCallback() {
     });

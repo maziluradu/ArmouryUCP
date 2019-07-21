@@ -33,6 +33,17 @@ namespace ArmouryUCP.WebAPI.Models.Dtos
         public int FactionActivity { get; set; }
         public DateTime FactionMemberSince { get; set; }
         public List<Skill> Skills { get; set; }
+        public bool Connected { get; set; }
+        public int TotalShots { get; set; }
+        public int TotalHits { get; set; }
+        public int TorsoHits { get; set; }
+        public int GroinHits { get; set; }
+        public int LeftArmHits { get; set; }
+        public int RightArmHits { get; set; }
+        public int LeftLegHits { get; set; }
+        public int RightLegHits { get; set; }
+        public int HeadHits { get; set; }
+        public int TotalKills { get; set; }
 
         public int TotalPlayers { get; set; }
 
@@ -81,6 +92,17 @@ namespace ArmouryUCP.WebAPI.Models.Dtos
             get
             {
                 return LastLogin.ToString(LastLogin.Year < DateTime.Now.Year ? "dddd, dd MMMM \"'\"yy" : "dddd, dd MMMM");
+            }
+        }
+        
+        public Weapon MostPrefferedWeapon
+        {
+            get
+            {
+                return new Weapon()
+                {
+                    //Name = SharedResources.WeaponNames.ElementAtOrDefault();
+                };
             }
         }
     }

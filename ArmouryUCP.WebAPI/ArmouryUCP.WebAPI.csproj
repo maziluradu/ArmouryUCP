@@ -155,6 +155,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="404.html" />
+    <Content Include="complaint.html" />
+    <Content Include="complaints.html" />
     <Content Include="vehicle.html" />
     <Content Include="Global.asax" />
     <Content Include="business.html" />
@@ -1453,6 +1455,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\BusinessController.cs" />
+    <Compile Include="Controllers\ComplaintController.cs" />
     <Compile Include="Controllers\ServerController.cs" />
     <Compile Include="Controllers\VehicleController.cs" />
     <Compile Include="Controllers\HouseController.cs" />
@@ -1461,6 +1464,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\OAuth2\AppOAuthProvider.cs" />
+    <Compile Include="Models\Comment.cs" />
+    <Compile Include="Models\Complaint.cs" />
     <Compile Include="Models\Dtos\BusinessDto.cs" />
     <Compile Include="Models\Dtos\BusinessCompleteDto.cs" />
     <Compile Include="Models\Dtos\HouseCompleteDto.cs" />
@@ -1472,18 +1477,24 @@
     <Compile Include="Models\Business.cs" />
     <Compile Include="Models\Dtos\FactionHistoryDto.cs" />
     <Compile Include="Models\FactionHistory.cs" />
+    <Compile Include="Models\GlobalComplaintInformation.cs" />
     <Compile Include="Models\GlobalVehicleInformation.cs" />
     <Compile Include="Models\GlobalBusinessInformation.cs" />
     <Compile Include="Models\GlobalHouseInformation.cs" />
     <Compile Include="Models\LogEntry.cs" />
+    <Compile Include="Models\PlayerComplaintInformation.cs" />
     <Compile Include="Models\ServerInformation.cs" />
     <Compile Include="Models\Skill.cs" />
     <Compile Include="Models\UserCredentials.cs" />
     <Compile Include="Models\Vehicle.cs" />
     <Compile Include="Models\House.cs" />
     <Compile Include="Models\Player.cs" />
+    <Compile Include="Models\Weapon.cs" />
+    <Compile Include="Models\WeaponData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\BusinessService.cs" />
+    <Compile Include="Services\ComplaintService.cs" />
+    <Compile Include="Services\Interfaces\IComplaintService.cs" />
     <Compile Include="Services\ServerService.cs" />
     <Compile Include="Services\Interfaces\IBusinessService.cs" />
     <Compile Include="Services\Interfaces\IServerService.cs" />

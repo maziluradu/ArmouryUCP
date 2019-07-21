@@ -10,7 +10,7 @@ namespace ArmouryUCP.WebAPI.Services
 {
     public class ServerService : IServerService
     {
-        private readonly string connectionString = "Data Source=89.44.120.165;Initial Catalog=acevixco_samp;User ID=acevixco_sampusr;Password=xsN3m9d8UT0sK";
+        private readonly string connectionString = "Data Source = 193.203.39.226; Initial Catalog = armoury_samp; User ID = armoury_sampuser; Password=)s}35@e]8J-2eST[";
 
         public ServerService()
         {

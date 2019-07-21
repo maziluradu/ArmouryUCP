@@ -9,7 +9,7 @@ namespace ArmouryUCP.WebAPI.Services
 {
     public class HouseService : IHouseService
     {
-        private readonly string connectionString = "Data Source=89.44.120.165;Initial Catalog=acevixco_samp;User ID=acevixco_sampusr;Password=xsN3m9d8UT0sK";
+        private readonly string connectionString = "Data Source = 193.203.39.226; Initial Catalog = armoury_samp; User ID = armoury_sampuser; Password=)s}35@e]8J-2eST[";
 
         public HouseService()
         {
@@ -72,11 +72,13 @@ namespace ArmouryUCP.WebAPI.Services
         public List<House> GetHouses(string owner)
         {
             var houses = new List<House>();
+            var cleanUsername = owner.Substring(0, SharedResources.MaxUsernameLength > owner.Length ? owner.Length : SharedResources.MaxUsernameLength);
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
                 connection.Open();
-                MySqlCommand cmd = new MySqlCommand($"select * from houses where Owner = '{owner}' limit 3", connection);
+                MySqlCommand cmd = new MySqlCommand($"select * from houses where Owner = @owner limit 3", connection);
+                cmd.Parameters.AddWithValue("@owner", cleanUsername);
 
                 using (var reader = cmd.ExecuteReader())
                 {

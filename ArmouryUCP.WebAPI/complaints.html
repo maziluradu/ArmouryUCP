@@ -1,0 +1,96 @@
+﻿<div class="loadingsplash" ng-hide="complaintInfos !== undefined"><div class="loader triangle" style="top: {{loadingIconHeightOffset/2}}px; margin-top: -80px;"><svg viewBox="0 0 86 80"><polygon points="43 8 79 72 7 72"></polygon></svg></div></div>
+<div class="col-md-12 profile-header">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Panel</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Complaints</li>
+                    </ol>
+                </nav>
+                <h3 class="large">Complaints</h3>
+                <div class="small-details">
+                    <span>This page contains a list of all the open complaints on the server.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="profile-underheader general">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <span class="badge badge-secondary armoury-green"><i class="fas fa-gavel"></i>{{complaintInfos.information.Total | number:fractionSize}} Total complaints</span>
+                <span class="badge badge-secondary armoury-green"><i class="fas fa-gavel"></i>{{complaintInfos.information.TotalOpen | number:fractionSize}} Open complaints</span>
+                <span class="badge badge-secondary armoury-green"><i class="fas fa-gavel"></i>{{complaintInfos.information.TotalClosed | number:fractionSize}} Closed complaints</span>
+            </div>
+        </div>
+    </div>
+</div>
+<br /><br />
+<div class="container-fluid" id="page" style="padding: 0 3em 0 3em;">
+    <div class="row">
+        <div class="page-secondaryboard col-md-3">
+            <div class="content complaint-spotlight">
+                <h4 class="title">Your complaint spotlight</h4>
+                <div>
+                    <div class="c100 p{{ currentUser.LevelProgress }} skin{{ currentUser.Model }} avatar-wrapper" style="left: 50%; margin-left: -60px; -webkit-transform: rotate(-150deg) scale(0.75, 0.75);-moz-transform: rotate(-150deg) scale(0.75, 0.75);-ms-transform: rotate(-150deg) scale(0.75, 0.75);-o-transform: rotate(-150deg) scale(0.75, 0.75);transform: rotate(-150deg) scale(0.75, 0.75);">
+                        <div class="avatar-level"><span>{{ currentUser.Level }}</span></div>
+                        <span></span>
+                        <div class="slice">
+                            <div class="bar"></div>
+                            <div class="fill"></div>
+                        </div>
+                    </div>
+                    <div style="clear:both; content: ' '; display: block;"></div>
+                </div>
+                <div class="player brief">
+                    <h5>{{ currentUser.Username }}</h5>
+                    <span>Last login on {{ currentUser.LastLogin }}</span>
+                    <br />
+                    <div class="row">
+                        <div class="col-md-10 offset-md-1">
+                            <ul>
+                                <li>Complaints created<span>{{complaintInfos.information.PlayerComplaintInformation.ComplaintsCreated}}</span></li>
+                                <li>Complaints against you<span>{{complaintInfos.information.PlayerComplaintInformation.ComplaintsAgainst}}</span></li>
+                                <li>Successful complaints<span>{{complaintInfos.information.PlayerComplaintInformation.SuccessfulComplaints}}</span></li>
+                                <li>Sanctions received<span>{{complaintInfos.information.PlayerComplaintInformation.SanctionsReceived}}</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <br />
+            </div>
+        </div>
+        <div class="page-secondaryboard col-md-8">
+            <div class="content complaints">
+                <h4 class="title" style="margin-bottom: 0;">Open complaints</h4>
+                <ul>
+                    <li ng-repeat="complaint in complaintInfos.complaints">
+                        <div class="container-fluid">
+                            <div class="row align-items-center">
+                                <div class="col-md-3">
+                                    <div class="avatar-holder"><img ng-src="UI/Images/skins/small-thumbnail/{{('000'+complaint.ReporterSkin).slice(-3)}}.png" /></div>
+                                    <div class="info"><a href="/#!/player/{{complaint.ReporterID}}">{{ complaint.ReporterName }}</a><span>Reporter</span></div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="avatar-holder"><img ng-src="UI/Images/skins/small-thumbnail/{{('000'+complaint.ReportedSkin).slice(-3)}}.png" /></div>
+                                    <div class="info"><a style="color: #ee5555" href="/#!/player/{{complaint.ReportedID}}">{{ complaint.ReportedName }}</a><span>Reported</span></div>
+                                </div>
+                                <div class="col-md-3 complaint-information">
+                                    <span>Complaint information</span>
+                                    <h5>{{ complaint.Status }} / {{ complaint.Reason }}</h5>
+                                </div>
+                                <div class="col-md-3">
+                                    <a class="view" href="/#!/complaints/{{ complaint.ID }}">View complaint &nbsp;&nbsp;<i class="fas fa-chevron-circle-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<br /><br />

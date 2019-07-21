@@ -5,12 +5,13 @@ using OC.Core.Crypto;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 
 namespace ArmouryUCP.WebAPI.Services
 {
     public class PlayerService : IPlayerService
     {
-        private readonly string connectionString = "Data Source=89.44.120.165;Initial Catalog=acevixco_samp;User ID=acevixco_sampusr;Password=xsN3m9d8UT0sK";
+        private readonly string connectionString = "Data Source = 193.203.39.226; Initial Catalog = armoury_samp; User ID = armoury_sampuser; Password=)s}35@e]8J-2eST[";
 
         public PlayerService()
         {
@@ -44,12 +45,14 @@ namespace ArmouryUCP.WebAPI.Services
         public List<Player> SearchPlayers(string name, bool incomplete = false)
         {
             var players = new List<Player>();
+            var cleanUsername = name.Substring(0, SharedResources.MaxUsernameLength > name.Length ? name.Length : SharedResources.MaxUsernameLength);
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
                 connection.Open();
                 var playersToReturn = incomplete ? 20 : 1;
-                MySqlCommand cmd = new MySqlCommand($"SELECT * FROM wp_users WHERE user_login {(incomplete ? "LIKE" : "=")} '{(incomplete ? "%" : "")}{name}{(incomplete ? "%" : "")}' ORDER BY `Level` DESC LIMIT {playersToReturn}", connection);
+                MySqlCommand cmd = new MySqlCommand($"SELECT * FROM wp_users WHERE user_login {(incomplete ? "LIKE" : "=")} '{(incomplete ? "%" : "")}@username{(incomplete ? "%" : "")}' ORDER BY `Level` DESC LIMIT {playersToReturn}", connection);
+                cmd.Parameters.AddWithValue("@username", cleanUsername);
 
                 using (var reader = cmd.ExecuteReader())
                 {
@@ -78,7 +81,8 @@ namespace ArmouryUCP.WebAPI.Services
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
                 connection.Open();
-                MySqlCommand cmd = new MySqlCommand($"SELECT * FROM wp_users WHERE ID = {id}", connection);
+                MySqlCommand cmd = new MySqlCommand($"SELECT * FROM wp_users WHERE ID = @id", connection);
+                cmd.Parameters.AddWithValue("@id", id);
 
                 using (var reader = cmd.ExecuteReader())
                 {
@@ -121,7 +125,21 @@ namespace ArmouryUCP.WebAPI.Services
                             FactionPunish = Convert.ToInt32(reader["Punish"]),
                             FactionActivity = 0,
                             FactionMemberSince = DateTime.Parse(reader["LastLogin"].ToString()),
-                            Skills = skills
+                            Skills = skills,
+                            Connected = Convert.ToInt32(reader["Connected"]) == 1,
+                            TotalShots = Convert.ToInt32(reader["totalShots"]),
+                            TotalHits = Convert.ToInt32(reader["totalHits"]),
+                            TorsoHits = Convert.ToInt32(reader["hitsTorso"]),
+                            GroinHits = Convert.ToInt32(reader["hitsGroin"]),
+                            LeftArmHits = Convert.ToInt32(reader["hitsLeftArm"]),
+                            RightArmHits = Convert.ToInt32(reader["hitsRightArm"]),
+                            LeftLegHits = Convert.ToInt32(reader["hitsLeftLeg"]),
+                            RightLegHits = Convert.ToInt32(reader["hitsRightLeg"]),
+                            HeadHits = Convert.ToInt32(reader["hitsHead"]),
+                            TotalKills = Convert.ToInt32(reader["totalKills"]),
+                            WeaponHitInformation = reader["weaponHits"].ToString().Split('/').Select((item, index) => new WeaponData() { Weapon = index, Amount = !string.IsNullOrWhiteSpace(item) ? Convert.ToInt32(item) : 0 }).ToList(),
+                            WeaponShotInformation = reader["weaponShots"].ToString().Split('/').Select((item, index) => new WeaponData() { Weapon = index, Amount = !string.IsNullOrWhiteSpace(item) ? Convert.ToInt32(item) : 0 }).ToList(),
+                            WeaponKillInformation = reader["weaponKills"].ToString().Split('/').Select((item, index) => new WeaponData() { Weapon = index, Amount = !string.IsNullOrWhiteSpace(item) ? Convert.ToInt32(item) : 0 }).ToList()
                         };
                     }
                 }
@@ -133,10 +151,12 @@ namespace ArmouryUCP.WebAPI.Services
         {
             Player player = null;
             List<Skill> skills = new List<Skill>();
+            var cleanUsername = name.Substring(0, SharedResources.MaxUsernameLength > name.Length ? name.Length : SharedResources.MaxUsernameLength);
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
                 connection.Open();
-                MySqlCommand cmd = new MySqlCommand($"SELECT * FROM wp_users WHERE user_login = '{name}'", connection);
+                MySqlCommand cmd = new MySqlCommand($"SELECT * FROM wp_users WHERE user_login = @username", connection);
+                cmd.Parameters.AddWithValue("@username", cleanUsername);
 
                 using (var reader = cmd.ExecuteReader())
                 {
@@ -180,7 +200,8 @@ namespace ArmouryUCP.WebAPI.Services
                             FactionPunish = Convert.ToInt32(reader["Punish"]),
                             FactionActivity = 0,
                             FactionMemberSince = DateTime.Parse(reader["LastLogin"].ToString()),
-                            Skills = skills
+                            Skills = skills,
+                            Connected = Convert.ToInt32(reader["Connected"]) == 1
                         };
                     }
                 }
